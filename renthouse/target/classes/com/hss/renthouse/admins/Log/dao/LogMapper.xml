@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hss.renthouse.admins.Log.dao.LogMapper">
+
+	<!-- 获取总数 -->
+	<select id="queryTotalLogs" resultType="integer">
+		select count(*) from t_log
+	</select>
+	<!-- 查询日志 -->
+	<select id="querySysLog" resultType="log" parameterType="bQueryVo">
+		select l.*, a.aname from
+		t_log l
+		left join t_admin a
+		on l.aid = a.aid
+		order by #{sort} #{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
+	<!-- 插入日志 -->
+	<insert id="insertLog" parameterType="log">
+		insert into t_log
+		values
+		(
+		#{lid},
+		#{ltype},
+		#{ltitle},
+		#{lremoteAddr},
+		#{lrequestUri},
+		#{lmethod},
+		#{lparams},
+		#{lexception},
+		#{loperateDate},
+		#{ltimeout},
+		#{aid}
+		)
+	</insert>
+	<!-- 更新日志 -->
+	<update id="updateLog" parameterType="log">
+		update t_log
+		set
+		lid =
+		#{lid},
+		ltype = #{ltype},
+		ltitle = #{ltitle},
+		lremoteAddr =
+		#{lremoteAddr},
+		lrequestUri = #{lrequestUri},
+		lmethod = #{lmethod},
+		lparams = #{lparams},
+		lexception = #{lexception},
+		loperateDate =
+		#{loperateDate},
+		ltimeout = #{ltimeout},
+		aid = #{aid}
+	</update>
+</mapper>
