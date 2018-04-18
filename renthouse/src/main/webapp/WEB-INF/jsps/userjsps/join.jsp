@@ -26,7 +26,7 @@
 <jsp:include page="/WEB-INF/jsps/userjsps/ttop.jsp"/>
 <!--头部-->
 <jsp:include page="/WEB-INF/jsps/userjsps/top.jsp"/>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="joinimg">
                 <div class="jointitle">

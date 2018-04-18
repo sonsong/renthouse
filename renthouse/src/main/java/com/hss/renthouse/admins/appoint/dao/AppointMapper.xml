@@ -2,6 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.admins.appoint.dao.AppointMapper">
 
+	<!-- 查询预约单 -->
+	<select id="getAppointByAid" parameterType="string" resultType="appoint">
+		select * from t_appoint where aid = #{aid}
+	</select>
+	<!-- 查询所有预约结果 -->
+	<resultMap type="appointResult" id="getAllAppointResultMap">
+		<id column="rid" property="rid" />
+		<result column="reason" property="reason" />
+		<result column="isConnect" property="isConnect" />
+		<result column="isSuccess" property="isSuccess" />
+		<result column="name" property="name" />
+		<result column="atele" property="atele" />
+		<result column="antime" property="antime" />
+		<result column="ctime" property="ctime" />
+		<association property="admin" javaType="admin">
+			<id column="aid" property="aid" />
+			<result column="aname" property="aname" />
+		</association>
+	</resultMap>
+	<select id="queryAllAppointResults" parameterType="bQueryVo"
+		resultMap="getAllAppointResultMap">
+		select r.rid, r.reason,
+		CASE r.state
+		WHEN 0 THEN
+		"未联系"
+		ELSE
+		"已联系"
+		END as isConnect,
+		CASE r.result
+		WHEN 0 THEN
+		"未签约"
+		ELSE
+		"已签约"
+		END as
+		isSuccess,
+		r.name, r.atele, r.antime, r.ctime, a.aid, a.aname
+		from
+		t_appoint_result r inner join t_admin a on a.aid = r.adid
+		order by
+		#{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
+	<!-- 查询预约结果 -->
+	<select id="queryAppointResultsTotal" resultType="integer">
+		select count(*)
+		from t_appoint_result
+	</select>
 	<!-- 删除预约单 -->
 	<delete id="delAppointByAid" parameterType="string">
 		delete from t_appoint
@@ -13,7 +61,8 @@
 		t_appoint_result
 		values
 		(
-		#{rid}, #{resaon}, #{isConnect}, #{adid}, #{aid}, #{result}
+		#{rid}, #{state}, #{result}, #{reason},
+		#{name}, #{atele}, #{antime},#{adid},#{ctime}
 		)
 	</insert>
 	<!-- 查询所有预约总数 -->
@@ -38,6 +87,7 @@
 		<association property="house" javaType="house">
 			<id column="hid" property="hid" />
 			<result column="hposition" property="hposition" />
+			<result column="hprice" property="hprice" />
 		</association>
 		<association property="user" javaType="user">
 			<id column="uid" property="uid" />
@@ -52,7 +102,8 @@
 		when 0 then '等待联系'
 		else '已联系' END as isConnect,
 		h.hid,
-		h.hposition, u.uid, u.uname
+		h.hposition, h.hprice,
+		u.uid, u.uname
 		from
 		t_appoint a
 		INNER JOIN t_house h

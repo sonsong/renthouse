@@ -26,7 +26,7 @@ public class House implements Serializable {
 	// 户型
 	private String hmodel;
 	// 付款方式
-	private String hpaytype;
+	private Integer hpaytype;
 	// 朝向
 	private String htoward;
 	// 楼层
@@ -102,11 +102,11 @@ public class House implements Serializable {
 		this.hmodel = hmodel;
 	}
 
-	public String getHpaytype() {
+	public Integer getHpaytype() {
 		return hpaytype;
 	}
 
-	public void setHpaytype(String hpaytype) {
+	public void setHpaytype(Integer hpaytype) {
 		this.hpaytype = hpaytype;
 	}
 

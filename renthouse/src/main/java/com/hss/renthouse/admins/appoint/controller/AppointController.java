@@ -19,6 +19,7 @@ import com.hss.renthouse.admins.appoint.entity.Join;
 import com.hss.renthouse.admins.appoint.service.interfaces.AppointService;
 import com.hss.renthouse.util.BPageBean;
 import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.util.DateUtil;
 
 /**
  * 预约管理控制层
@@ -37,15 +38,18 @@ public class AppointController {
 	
 	/**
 	 * 取消预约
+	 * @param aid 正在取消的预约
 	 * @param appointResult
+	 * @param session
+	 * @param model
 	 * @return
 	 */
 	@RequestMapping( value = "/cancelAppoint.action")
 	@SystemControllerAnnotation(value = "取消预约")
-	public String cancelAppoint(AppointResult appointResult, HttpSession session,
+	public String cancelAppoint(String aid, AppointResult appointResult, HttpSession session,
 			RedirectAttributesModelMap model){
 		
-		Admin admin = (Admin) session.getAttribute("session");
+		Admin admin = (Admin) session.getAttribute("admin");
 		String msg = "";
 		String returnUrl = "";
 		
@@ -53,8 +57,11 @@ public class AppointController {
 		try {
 			//设置操作人
 			appointResult.setAdid(admin.getAid());
-			appointService.cancelByAid(appointResult);
-			msg = "取消预约[" + appointResult.getAid() + "]成功";
+			//设置操作时间
+			String date = DateUtil.getNowTime();
+			appointResult.setCtime(date);
+			appointService.cancelByAid(appointResult, aid);
+			msg = "取消预约[" + aid + "]成功";
 			//跳转到预约结果页面
 			returnUrl = "redirect:/admin/skipAppointResultPage.action";
 		} catch (Exception e) {
@@ -67,6 +74,16 @@ public class AppointController {
 		return returnUrl;
 	}
 	
+	/**
+	 * 查询所有的预约结果
+	 * @param vo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping( value = "/queryAllAppointResults.action")
+	public BPageBean<AppointResult> queryAllAppointResults(BQueryVo vo) {
+		return appointService.queryAllAppointResults(vo);
+	}
 	/**
 	 * 查询所有的业主加盟
 	 * @param vo
@@ -114,7 +131,7 @@ public class AppointController {
 	}
 	
 	/**
-	 * 跳转到预约管理页面
+	 * 跳转到看房预约页面
 	 * @return
 	 */
 	@RequestMapping( value = "/skipAppointPage.action")

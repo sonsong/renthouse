@@ -254,6 +254,8 @@ public class HouseManageController {
 		// 获得请求url
 		String url = PageUtil.getUrl(request);
 
+		//设置为后台访问
+		vo.setMethod(0);
 		// 查询数据
 		PageBean<House> pb = houseService.queryHousesByCondition(vo, pc);
 

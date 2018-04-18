@@ -9,11 +9,12 @@
 <meta name="viewport"
 	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>松子直租 | 房源详细</title>
+<title>松子直租 | 房源详细</title>
 
+<link href="/renthouse/js/jquery.datetimepicker.css" rel="stylesheet">
 <!--bootstrap css-->
-<link href="/renthouse/js/bootstrap/dist/css/bootstrap.css"
-	rel="stylesheet">
+<link href="/renthouse/js/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+	
 <!--自定义样式-->
 <link href="/renthouse/css/user/common.css" rel="stylesheet">
 <link href="/renthouse/css/user/houseDetail.css" rel="stylesheet">
@@ -32,7 +33,7 @@
 	<!--头部-->
 	<jsp:include page="/WEB-INF/jsps/userjsps/top.jsp" />
 
-	<div class="container-fluid">
+	<div class="container">
 
 		<br>
 		<div class="row">
@@ -62,7 +63,7 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
 						<div class="item active slide_div">
-							<img src="${h.himg}" alt="..." style="width: 100%;">
+							<img src="${h.himg}" alt="..." style="width: 110%;">
 							<div class="carousel-caption"></div>
 						</div>
 						<c:forEach var="img" items="${imgs }">
@@ -113,7 +114,7 @@
 						<span id="harea">面积：${h.harea }（以现场勘察为准）</span>
 					</p>
 					<p>
-						<span id="hmodel">户型：${h.hmodel }</span><span id="hpaytype">付款：${h.hpaytype }[不收中介费]</span><span
+						<span id="hmodel">户型：${h.hmodel }</span><span id="hpaytype">付款方式：<c:if test="${h.hpaytype eq 0}">月付</c:if><c:if test="${h.hpaytype eq 1}">年付</c:if>[不收中介费]</span><span
 							id="hfloor">楼层：${h.hfloor }</span>
 					</p>
 					<p>
@@ -167,8 +168,8 @@
 					<div class="col-sm-2"></div>
 					<div class="col-sm-8">
 
-						<form method="post" action="/addAppoint.action" id="form">
-							<input type="hidden" name="uid" value="${sessionScope.user.uid }">
+						<form method="get" action="/user/addAppoint.action" id="form">
+							<input type="hidden" name="uid" value="${user.uid }">
 							<input type="hidden" name="hid" value="${h.hid }">
 							<div class="form-group" id="aname_form">
 								<div class="input-group">
@@ -194,11 +195,12 @@
 							</div>
 							<div class="form-group" id="atime_form">
 								<div class="input-group">
-									<span class="input-group-addon">看房时间:</span> <input
+									<span class="input-group-addon">看房时间:</span> 
+									<input
 										style="height: 50px" type="text" name="atime"
 										class="form-control" id="atime" value="${appoint.atime }"
 										aria-describedby="helpBlock1"
-										placeholder="请输入正确的时间，如2018-11-23 14:00">
+										>
 								</div>
 								<span style="top: 8px" class="" id="atime_span"
 									aria-hidden="true"></span> <span id="atime_error"
@@ -224,6 +226,19 @@
 <script src="/renthouse/js/jquery-1.8.3.min.js"></script>
 <!-- bootstrap js-->
 <script src="/renthouse/js/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/renthouse/js/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript" src="/renthouse/js/modalMsg.js"></script>
 <script src="/renthouse/js/user/appoint.js"></script>
+<script>
+	$(function(){
+		$("#aname").val("");
+		$("#atele").val("");
+		$("#atime").val("");
+		
+		$.datetimepicker.setLocale('ch');
+		$("#atime").datetimepicker({
+			format: "Y-m-d h:i",
+		});
+	})
+</script>
 </html>

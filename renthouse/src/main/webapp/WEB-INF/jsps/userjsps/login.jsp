@@ -31,7 +31,7 @@
 <jsp:include page="/WEB-INF/jsps/userjsps/top.jsp"/>
 
 <!--内容区-->
-<div class="container-fluid content">
+<div class="container content">
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-4">
@@ -96,9 +96,11 @@
                        type="submit" class="btn" value="登陆"/>
             </form>
             <span>没有账号？<a href="skipRegistPage.action">立即注册</a></span>
+
         </div>
     </div>
     <div class="col-sm-2"></div>
+                <br><br>
 </div>
 
 <!--底部-->

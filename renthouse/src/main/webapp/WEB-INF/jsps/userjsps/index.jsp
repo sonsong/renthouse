@@ -33,7 +33,7 @@
 <!--头部-->
 <jsp:include page="/WEB-INF/jsps/userjsps/top.jsp"/>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <!--轮播图片-->
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">

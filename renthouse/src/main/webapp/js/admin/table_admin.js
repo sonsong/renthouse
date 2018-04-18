@@ -47,13 +47,13 @@ $("#table").bootstrapTable({
 		title : '用户名',
 		align : 'center',
 		valign : 'middle',
-		width: 300
+		width: 200
 	}, {
 		field : 'arole',
 		title : '角色',
 		align : 'center',
 		valign : 'middle',
-		width: 300
+		width: 200
 	}
 	],
 	onLoadSuccess : function() { // 加载成功时执行

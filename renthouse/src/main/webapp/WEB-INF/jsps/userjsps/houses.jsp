@@ -31,7 +31,7 @@
 <jsp:include page="/WEB-INF/jsps/userjsps/ttop.jsp"/>
 <!--头部-->
 <jsp:include page="/WEB-INF/jsps/userjsps/top.jsp"/>
-    <div class="container-fluid">
+    <div class="container">
         <br>
         <div class="row">
             <div class="col-sm-1"></div>

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -103,6 +102,7 @@ public class HouseController {
 			}
 		}
 		
+		vo.setMethod(1);
 		//查询数据
 		PageBean<House> pb = houseService.queryHousesByCondition(vo, pc); 
 		
@@ -139,7 +139,7 @@ public class HouseController {
 	 * @param app
 	 * @return
 	 */
-	@PostMapping( value="/addAppoint.action" )
+	@RequestMapping( value="/user/addAppoint.action" )
 	public String appoint(HAppoint app, RedirectAttributesModelMap model){
 		
 		String msg = "";

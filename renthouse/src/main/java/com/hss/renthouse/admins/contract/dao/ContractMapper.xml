@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hss.renthouse.admins.contract.dao.ContractMapper">
+
+	<!-- 生成合同 -->
+	<insert id="addContract" parameterType="contract">
+	insert into t_contract
+	values
+	(
+	#{cid}, #{cname}, #{ctele}, #{ccompany}, #{ccompanytele},
+	#{cstime}, #{cetime}, #{cpaytype}, #{ccash}, #{cmoney},
+	#{crtime}, #{hid}, #{cpaytime}, #{ccashtype}, #{adid}, #{uid}
+	)
+	</insert>
+</mapper> 

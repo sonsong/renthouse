@@ -97,4 +97,10 @@ public interface HouseMapper {
 	 */
 	int addHouse(House house);
 
+	/**
+	 * 修改房源状态
+	 * @param hid
+	 */
+	void updateHouseStateByHid(String hid);
+
 }

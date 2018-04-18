@@ -56,16 +56,16 @@ public class AppointServiceImpl implements AppointService {
 
 	@Override
 	@Transactional
-	public void cancelByAid(AppointResult appointResult) {
+	public void cancelByAid(AppointResult appointResult, String aid) {
 		//设置编码
 		appointResult.setRid(UUIDUtil.getUuid());
 		//设置结果
-		appointResult.setResult(1);
+		appointResult.setResult(0);
 		
 		//删除预约单
-		int count = appointMapper.delAppointByAid(appointResult.getAid());
+		int count = appointMapper.delAppointByAid(aid);
 		if(count != 1){
-			throw new RuntimeException("删除预约单[" + appointResult.getAid() + "]失败");
+			throw new RuntimeException("删除预约单[" + aid + "]失败");
 		}
 		
 		//新增预约结果
@@ -75,4 +75,16 @@ public class AppointServiceImpl implements AppointService {
 		}
 	}
 
+	@Override
+	public BPageBean<AppointResult> queryAllAppointResults(BQueryVo vo) {
+		// 得到用户的总记录数
+		Integer total = appointMapper.queryAppointResultsTotal();
+		// 按条件查询用户
+		List<AppointResult> appointResult = appointMapper.queryAllAppointResults(vo);
+
+		BPageBean<AppointResult> pb = new BPageBean<>();
+		pb.setTotal(total);
+		pb.setRows(appointResult);
+		return pb;
+	}
 }

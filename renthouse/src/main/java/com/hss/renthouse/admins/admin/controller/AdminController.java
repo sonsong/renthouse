@@ -145,7 +145,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin/exit.action")
 	@SystemControllerAnnotation(value = "退出系统")
 	public String exit(HttpSession session) {
-		ModelAndView md = new ModelAndView();
 
 		Admin admin = (Admin) session.getAttribute("admin");
 		if (admin != null) {

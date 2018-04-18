@@ -2,12 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<div class="container-fluid" style="background-color: #f2f2f2">
+<div class="container" style="background-color: #f2f2f2">
     <div class="row">
     	<c:if test="${empty sessionScope.user }">
 	        <!--未登录显示-->
 	        <div class="col-sm-3 text-center">
+	        	<br>
 	            <span style="font-size:18px;">欢迎来到松子直租，请<a href="/skipLoginPage.action">登陆</a></span>
+	        	<br>
+	        	<br>
 	        </div>
         </c:if>
         <c:if test="${sessionScope.user != null}">

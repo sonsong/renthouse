@@ -51,7 +51,7 @@ public class HouseServiceImpl implements HouseService {
 		//预约编码
 		String aid = UUIDUtil.getUuid();
 		//预约状态
-		app.setState(1);
+		app.setState(0);
 		app.setAid(aid);
 		
 		int count = houseMapper.addAppoint(app);

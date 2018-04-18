@@ -141,7 +141,7 @@
 									<span class="h_price"><span class="price">${h.hprice }</span>元/月</span>
 									<br> <br><span class="h_position"><span>${h.hposition }</span>&nbsp;&nbsp;<span>${h.hmodel }</span></span>
 									<br> <br><span class="h_tran"><span>${h.hsubway}</span>/<span>${h.harea }</span>/<span
-										style="color: red">${h.hpaytype }</span></span>
+										style="color: red"><c:if test="${h.hpaytype eq 0}">月付</c:if><c:if test="${h.hpaytype eq 1}">年付</c:if></span></span>
 										<br><br>
 										<c:choose>
 											<c:when test="${h.hstate eq 0 }"><span id="ustate">未出租</span></c:when>

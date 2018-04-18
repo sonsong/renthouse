@@ -55,4 +55,24 @@ public interface AppointMapper {
 	 */
 	int addAppointResult(AppointResult appointResult);
 
+	/**
+	 * 查询预约结果总数
+	 * @return
+	 */
+	Integer queryAppointResultsTotal();
+
+	/**
+	 * 查询所有预约结果
+	 * @param vo
+	 * @return
+	 */
+	List<AppointResult> queryAllAppointResults(BQueryVo vo);
+
+	/**
+	 * 查询指定预约单
+	 * @param aid 预约单编码
+	 * @return
+	 */
+	Appoint getAppointByAid(String aid);
+
 }

@@ -17,18 +17,26 @@ public class AppointResult implements Serializable {
 	// 编码
 	private String rid;
 	// 是否联系
-	private Integer isConnect;
+	private Integer state;
 	// 结果
 	private Integer result;
 	// 理由
 	private String reason;
 	// 操作人
 	private String adid;
-	// 预约编码
-	private String aid;
+	// 预约人
+	private String name;
+	// 联系方式
+	private String atele;
+	// 预约时间
+	private String antime;
+	// 操作时间
+	private String ctime;
+
+	private String isConnect;
+	private String isSuccess;
 
 	private Admin admin;
-	private Appoint appoint;
 
 	public String getRid() {
 		return rid;
@@ -38,12 +46,12 @@ public class AppointResult implements Serializable {
 		this.rid = rid;
 	}
 
-	public Integer getIsConnect() {
-		return isConnect;
+	public Integer getState() {
+		return state;
 	}
 
-	public void setIsConnect(Integer isConnect) {
-		this.isConnect = isConnect;
+	public void setState(Integer state) {
+		this.state = state;
 	}
 
 	public Integer getResult() {
@@ -70,12 +78,44 @@ public class AppointResult implements Serializable {
 		this.adid = adid;
 	}
 
-	public String getAid() {
-		return aid;
+	public String getName() {
+		return name;
 	}
 
-	public void setAid(String aid) {
-		this.aid = aid;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAtele() {
+		return atele;
+	}
+
+	public void setAtele(String atele) {
+		this.atele = atele;
+	}
+
+	public String getAntime() {
+		return antime;
+	}
+
+	public void setAntime(String antime) {
+		this.antime = antime;
+	}
+
+	public String getIsConnect() {
+		return isConnect;
+	}
+
+	public void setIsConnect(String isConnect) {
+		this.isConnect = isConnect;
+	}
+
+	public String getIsSuccess() {
+		return isSuccess;
+	}
+
+	public void setIsSuccess(String isSuccess) {
+		this.isSuccess = isSuccess;
 	}
 
 	public Admin getAdmin() {
@@ -86,18 +126,18 @@ public class AppointResult implements Serializable {
 		this.admin = admin;
 	}
 
-	public Appoint getAppoint() {
-		return appoint;
+	public String getCtime() {
+		return ctime;
 	}
 
-	public void setAppoint(Appoint appoint) {
-		this.appoint = appoint;
+	public void setCtime(String ctime) {
+		this.ctime = ctime;
 	}
 
 	@Override
 	public String toString() {
-		return "AppointResult [rid=" + rid + ", isConnect=" + isConnect + ", result=" + result + ", reason=" + reason
-				+ ", adid=" + adid + ", aid=" + aid + ", admin=" + admin + ", appoint=" + appoint + "]";
+		return "AppointResult [rid=" + rid + ", state=" + state + ", result=" + result + ", reason=" + reason
+				+ ", adid=" + adid + ", name=" + name + ", atele=" + atele + ", antime=" + antime + "]";
 	}
 
 }

@@ -28,10 +28,6 @@
 	margin-right: 300px;
 	font-size: 18px;
 }
-
-#page-inner {
-	height: 0px;
-}
 </style>
 </head>
 

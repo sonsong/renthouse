@@ -34,7 +34,7 @@
 	<jsp:include page="/WEB-INF/jsps/userjsps/top.jsp" />
 
 	<!--内容区-->
-	<div class="container-fluid" style="background-color: #f8f8f8">
+	<div class="container" style="background-color: #f8f8f8">
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8 text-center" style="background-color: white">
@@ -69,9 +69,9 @@
 			<div class="col-sm-2"></div>
 		</div>
 	</div>
-
+	
 	<!--底部-->
-	<jsp:include page="/WEB-INF/jsps/userjsps/bottom.jsp" />
+	<jsp:include page="/WEB-INF/jsps/userjsps/bottom.jsp"/>
 
 	<!--弹出框-->
 	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"

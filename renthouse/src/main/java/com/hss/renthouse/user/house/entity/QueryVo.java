@@ -29,6 +29,8 @@ public class QueryVo {
 	private Integer x;
 	//limit , y
 	private Integer y;
+	//区分前台还是后台访问 
+	private Integer method;
 	
 	//搜索框不定查询
 	private String searchVal;
@@ -106,6 +108,13 @@ public class QueryVo {
 	}
 	public void setSearchVal(String searchVal) {
 		this.searchVal = searchVal;
+	}
+	
+	public Integer getMethod() {
+		return method;
+	}
+	public void setMethod(Integer method) {
+		this.method = method;
 	}
 	@Override
 	public String toString() {

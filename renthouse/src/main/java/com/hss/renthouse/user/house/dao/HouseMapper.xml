@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.user.house.dao.HouseMapper">
 
+<!-- 修改房源状态 -->
+<update id="updateHouseStateByHid" parameterType="string">
+	update t_house
+	set
+		hstate = 1
+	where hid = #{hid}
+</update>
 <!-- 新增房源信息 -->
 <insert id="addHouse" parameterType="house">
 	insert into t_house
@@ -98,6 +105,9 @@
 				|| htype LIKE '%浦东%' || hmethod LIKE
 				'%浦东%' || hposition LIKE '%浦东%'
 			</if>
+			<if test="method != null and method == 1">
+				and hstate = '0'
+			</if>
 		</where>
 		ORDER BY hprice asc
 		limit #{x}, #{y}
@@ -141,6 +151,9 @@
 				|| htype LIKE '%浦东%' || hmethod LIKE
 				'%浦东%' || hposition LIKE '%浦东%'
 			</if>
+			<if test="method != null and method == 1">
+				and hstate = '0'
+			</if>
 		</where>
 		ORDER BY hprice asc
 	</select>
@@ -150,7 +163,7 @@
 		set
 		aid = #{aid}, aname= #{aname},
 		atele = #{atele}, antime = #{antime},
-		atime = #{atime}, state = #{state}
+		atime = #{atime}, state = #{state},
 		hid = #{hid},uid = #{uid}
 	</insert>
 	<!-- 查找指定房子的图片 -->
@@ -164,5 +177,7 @@
 	<!-- 查询房源房源，首页展示 -->
 	<select id="queryHouses" resultType="house">
 		select * from t_house
+		where hstate = 0
+		limit 0, 6
 	</select>
 </mapper> 

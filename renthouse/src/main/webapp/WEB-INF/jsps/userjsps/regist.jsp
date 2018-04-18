@@ -30,7 +30,7 @@
 <!--头部-->
 <jsp:include page="/WEB-INF/jsps/userjsps/top.jsp"/>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-sm-3 col-xs-3"></div>
         <div class="col-sm-6 col-xs-6">
