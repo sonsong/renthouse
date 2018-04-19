@@ -23,7 +23,7 @@
 <style>
 .curtime {
 	color: white;
-	margin-right: 300px;
+	margin-right: 50px;
 	font-size: 18px;
 }
 

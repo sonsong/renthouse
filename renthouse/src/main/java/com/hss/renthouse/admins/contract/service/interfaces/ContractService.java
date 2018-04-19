@@ -1,6 +1,8 @@
 package com.hss.renthouse.admins.contract.service.interfaces;
 
 import com.hss.renthouse.admins.contract.entity.Contract;
+import com.hss.renthouse.util.BPageBean;
+import com.hss.renthouse.util.BQueryVo;
 
 /**
  * 合同service层接口
@@ -15,5 +17,12 @@ public interface ContractService {
 	 * @param aid 预约编码
 	 */
 	void addContract(Contract con, String aid);
+
+	/**
+	 * 查询所有的合同
+	 * @param vo
+	 * @return
+	 */
+	BPageBean<Contract> queryAllContract(BQueryVo vo);
 
 }

@@ -47,7 +47,10 @@
 											,com.hss.renthouse.admins.admin.dao,
 											,com.hss.renthouse.admins.Log.dao
 											,com.hss.renthouse.admins.appoint.dao
-											,com.hss.renthouse.admins.contract.dao" />
+											,com.hss.renthouse.admins.contract.dao
+											,com.hss.renthouse.admins.renter.dao
+											,com.hss.renthouse.admins.rental.dao
+											,com.hss.renthouse.admins.bill.dao" />
 	</bean>
 
 	<!-- 配置事务管理器 -->

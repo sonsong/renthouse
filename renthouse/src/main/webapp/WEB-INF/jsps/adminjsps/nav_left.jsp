@@ -7,24 +7,38 @@
 			<li><a class="active-menu"
 				href="/admin/skipAdminIndexPage.action"><i
 					class="fa fa-dashboard"></i> 仪表盘</a></li>
-			<li><a href="">
-				<i class="glyphicon glyphicon-leaf"></i> 房客管理</a>
+			<li>
+			<li><a href=""><i class="glyphicon glyphicon-yen"></i> 财务管理<span
+					class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li><a href="/admin/skipRMoneyPage.action">租金管理</a></li>
+					<li><a href="/admin/skipBillManagePage.action">发票管理</a></li>
+				</ul>
 			</li>
-			<li><a href=""><i
-					class="glyphicon glyphicon-yen"></i> 租金管理</a></li>
-			<li><a href=""><i
-					class="glyphicon glyphicon-list-alt"></i> 合同管理</a></li>
+			<li><a href="">
+				<i class="glyphicon glyphicon-fire"></i> 房东管理</a>
+			</li>
+			<li><a href="">
+				<i class="glyphicon glyphicon-leaf"></i> 租客管理</a>
+			</li>
+			<li><a href=""><i class="glyphicon glyphicon-list-alt"></i> 合同管理<span
+					class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+					<li><a href="/admin/skipCustomPage.action">租客合同</a></li>
+					<li><a href="/admin/skipPage.action">房东合同</a></li>
+				</ul>
+			</li>
 			<li><a href="#"><i class="glyphicon glyphicon-tag"></i> 预约管理<span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li><a href="/admin/skipJoinAppointPage">业主加盟</a></li>
+					<li><a href="/admin/skipJoinAppointPage.action">业主加盟</a></li>
 					<li><a href="/admin/skipAppointPage.action">看房预约</a></li>
 					<li><a href="/admin/skipAppointResultPage.action">预约结果</a></li>
 				</ul>
 			</li>
 			<li><a href="/admin/skipHouseManagePage.action"><i
 					class="glyphicon glyphicon-home"></i> 房源管理</a></li>
-			<li><a href="#"><i class="glyphicon glyphicon-cog"></i> 系统设置<span
+			<li><a href=""><i class="glyphicon glyphicon-cog"></i> 系统设置<span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li><a href="/admin/skipSysLogPage.action">日志管理</a></li>

@@ -160,7 +160,10 @@
 	                    <br>
 	                    <span class="h_position"><span>${h.hposition }</span>&nbsp;&nbsp;<span>${h.hmodel }</span></span>
 	                    <br>
-	                    <span class="h_tran"><span>${h.hsubway}</span>/<span>${h.harea }</span>/<span style="color:red">${h.hpaytype }</span></span>
+	                    <span class="h_tran"><span>${h.hsubway}</span>/<span>${h.harea }</span>/<span style="color:red">
+	                    <c:if test="${h.hpaytype eq 0}">月付</c:if>
+	                    <c:if test="${h.hpaytype eq 1}">年付</c:if>
+	                    </span></span>
 	                </div>
                 </c:forEach> 
             </div>

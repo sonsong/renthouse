@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
@@ -14,6 +15,8 @@ import com.hss.renthouse.admins.Log.annotation.SystemControllerAnnotation;
 import com.hss.renthouse.admins.admin.entity.Admin;
 import com.hss.renthouse.admins.contract.entity.Contract;
 import com.hss.renthouse.admins.contract.service.interfaces.ContractService;
+import com.hss.renthouse.util.BPageBean;
+import com.hss.renthouse.util.BQueryVo;
 
 /**
  * 合同controller层
@@ -28,6 +31,17 @@ public class ContractController {
 	
 	@Autowired
 	private ContractService contractService;
+	
+	/**
+	 * 查询所有的合同
+	 * @param vo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping( value = "/queryAllContract.action")
+	public BPageBean<Contract> queryAllContract(BQueryVo vo) {
+		return contractService.queryAllContract(vo);
+	}
 	
 	/**
 	 * 生成合同
@@ -52,7 +66,7 @@ public class ContractController {
 			con.setAdid(admin.getAid());
 			contractService.addContract(con, aid);
 			msg = "签约成功";
-			returnUrl = "redirect:/admin/skipContractPage.action";
+			returnUrl = "redirect:/admin/skipCustomPage.action";
 		} catch (Exception e) {
 			msg = e.getMessage();
 			model.addFlashAttribute("msg", msg);
@@ -66,10 +80,11 @@ public class ContractController {
 	}
 	
 	/**
-	 * 跳转到合同管理页面
+	 * 跳转到房客合同管理页面
 	 * @return
 	 */
-	public ModelAndView skipContractPage(){
+	@RequestMapping( value="/skipCustomPage.action" )
+	public ModelAndView skipCustomPage(){
 		ModelAndView md = new ModelAndView();
 		
 		md.setViewName("adminjsps/contract");

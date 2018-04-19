@@ -41,12 +41,12 @@
 			<div class="header">
 				<ol class="breadcrumb">
 					<li><a href="/admin/skipAdminIndexPage.action">首页</a></li>
-					<li><a class="active">预约管理</a></li>
+					<li><a class="active">租客合同管理</a></li>
 				</ol>
 
 			</div>
 			<div id="page-inner">
-				<div id="table" style=""></div>
+				<div id="table"></div>
 				<jsp:include page="/WEB-INF/jsps/adminjsps/footer.jsp" />
 			</div>
 			<!-- /. PAGE INNER  -->
@@ -244,6 +244,7 @@
 	</div>
 
 	<jsp:include page="/WEB-INF/jsps/modal.jsp" />
+	
 	<!-- JS Scripts-->
 	<!-- jQuery Js -->
 	<script src="/renthouse/ht/assets/js/jquery-1.10.2.js"></script>
@@ -258,7 +259,7 @@
 	<script type="text/javascript" src="/renthouse/js/jquery.datetimepicker.full.min.js"></script>
 	<script src="/renthouse/js/admin/bootstrap-table.min.js"></script>
 	<script src="/renthouse/js/admin/bootstrap-table-zh-CN.min.js"></script>
-	<script src="/renthouse/js/admin/table_appoint.js"></script>
+	<script src="/renthouse/js/admin/table_contract.js"></script>
 	<script type="text/javascript" src="/renthouse/js/modalMsg.js"></script>
 
 	<script>

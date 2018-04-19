@@ -2,14 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.admins.contract.dao.ContractMapper">
 
+	<!-- 查询所有合同 -->
+	<resultMap type="contract" id="getContractsResultMap">
+		<id column="cid" property="cid" />
+		<result column="uid" property="uid" />
+		<result column="cname" property="cname" />
+		<result column="ctele" property="ctele" />
+		<result column="cstime" property="cstime" />
+		<result column="cetime" property="cetime" />
+		<result column="payType" property="payType" />
+		<result column="cashType" property="cashType" />
+		<result column="ccash" property="ccash" />
+		<result column="crtime" property="crtime" />
+		<result column="cpaytime" property="cpaytime" />
+		<association property="admin" javaType="admin">
+			<id column="aid" property="aid" />
+			<result column="aname" property="aname" />
+		</association>
+		<association property="house" javaType="house">
+			<id column="hid" property="hid" />
+			<result column="hposition" property="hposition" />
+			<result column="hprice" property="hprice" />
+		</association>
+	</resultMap>
+	<select id="queryAllContracts" parameterType="bQueryVo"
+		resultMap="getContractsResultMap">
+		select c.cid, c.uid,c.cname, c.ctele, c.cstime, c.cetime,
+		CASE c.cpaytype
+		WHEN 0 THEN
+		'月付'
+		ELSE
+		'年付'
+		END as payType,
+		CASE c.ccashtype
+		WHEN 0 THEN
+		'押一付一'
+		ELSE
+		'押一付三'
+		END as cashType,
+		c.ccash, c.crtime,
+		cpaytime, h.hid, h.hposition, h.hprice, ad.aid, ad.aname
+		from
+		t_contract c inner join t_house h on h.hid = c.hid inner join t_admin
+		ad on ad.aid = c.adid
+		order by
+		#{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
+	<!-- 查询合同总数 -->
+	<select id="queryContractsTotal" resultType="integer">
+		select count(*) from
+		t_contract
+	</select>
 	<!-- 生成合同 -->
 	<insert id="addContract" parameterType="contract">
-	insert into t_contract
-	values
-	(
-	#{cid}, #{cname}, #{ctele}, #{ccompany}, #{ccompanytele},
-	#{cstime}, #{cetime}, #{cpaytype}, #{ccash}, #{cmoney},
-	#{crtime}, #{hid}, #{cpaytime}, #{ccashtype}, #{adid}, #{uid}
-	)
+		insert into t_contract
+		values
+		(
+		#{cid}, #{cname}, #{ctele}, #{ccompany}, #{ccompanytele},
+		#{cstime}, #{cetime}, #{cpaytype}, #{ccash}, #{cmoney},
+		#{crtime},
+		#{hid}, #{cpaytime}, #{ccashtype}, #{adid}, #{uid}
+		)
 	</insert>
 </mapper> 

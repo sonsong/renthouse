@@ -2,6 +2,7 @@ package com.hss.renthouse.admins.contract.entity;
 
 import java.io.Serializable;
 
+import com.hss.renthouse.admins.admin.entity.Admin;
 import com.hss.renthouse.user.house.entity.House;
 
 /**
@@ -47,7 +48,34 @@ public class Contract implements Serializable {
 	// 签约者编码
 	private String uid;
 
+	private String payType;
+	private String cashType;
 	private House house;
+	private Admin admin;
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+
+	public String getPayType() {
+		return payType;
+	}
+
+	public void setPayType(String payType) {
+		this.payType = payType;
+	}
+
+	public String getCashType() {
+		return cashType;
+	}
+
+	public void setCashType(String cashType) {
+		this.cashType = cashType;
+	}
 
 	public String getCid() {
 		return cid;
