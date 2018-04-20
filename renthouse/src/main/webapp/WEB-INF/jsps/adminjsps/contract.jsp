@@ -179,7 +179,6 @@
 									<select id="select1" class="form-control" name="cpaytype">
 										<option value="2">请选择付款方式</option>
 										<option value="0">月付</option>
-										<option value="1">年付</option>
 									</select>
 									<span id="cpaytype_tip" style="color: red"></span>
 								</div>
@@ -268,10 +267,10 @@
 			//时间选择器
 			$.datetimepicker.setLocale('ch');
 			$("#cstime").datetimepicker({
-				format: "Y-m-d h:i",
+				format: "Y-m-d H:i",
 			});
 			$("#cetime").datetimepicker({
-				format: "Y-m-d h:i",
+				format: "Y-m-d H:i",
 			});
 			//时间
 			setInterval(

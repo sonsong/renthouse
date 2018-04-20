@@ -3,6 +3,7 @@ package com.hss.renthouse.user.house.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import com.hss.renthouse.user.house.entity.Imgs;
 import com.hss.renthouse.user.house.entity.HJoin;
 import com.hss.renthouse.user.house.entity.QueryVo;
 import com.hss.renthouse.user.house.service.interfaces.HouseService;
+import com.hss.renthouse.user.user.entity.User;
 import com.hss.renthouse.util.DateUtil;
 import com.hss.renthouse.util.PageBean;
 import com.hss.renthouse.util.PageUtil;
@@ -140,9 +142,13 @@ public class HouseController {
 	 * @return
 	 */
 	@RequestMapping( value="/user/addAppoint.action" )
-	public String appoint(HAppoint app, RedirectAttributesModelMap model){
+	public String appoint(HAppoint app, HttpSession session, RedirectAttributesModelMap model){
 		
 		String msg = "";
+		
+		//设置用户编码
+		User u = (User) session.getAttribute("user");
+		app.setUid(u.getUid());
 		
 		//生成预约时间
 		String antime = DateUtil.getNowTime();

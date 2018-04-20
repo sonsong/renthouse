@@ -1,6 +1,7 @@
 package com.hss.renthouse.util;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -17,6 +18,13 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 		"yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
 		"yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
 
+	public static String addMonth(int num){
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		c.add(Calendar.MONTH, num);
+		
+		return formatDate(c.getTime(), "yyyy-MM-dd");
+	}
 	/**
 	 * 得到当前日期字符串 格式（yyyy-MM-dd）
 	 */
@@ -172,9 +180,10 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 * @throws ParseException
 	 */
 	public static void main(String[] args) throws ParseException {
-//		System.out.println(formatDate(parseDate("2010/3/6")));
-//		System.out.println(getDate("yyyy年MM月dd日 E"));
-//		long time = new Date().getTime()-parseDate("2012-11-19").getTime();
-//		System.out.println(time/(24*60*60*1000));
+		/*Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		//c.set(Calendar.MONTH, Calendar.MONTH);
+		c.add(Calendar.MONTH, 10);*/
+		System.out.println(addMonth(1));
 	}
 }

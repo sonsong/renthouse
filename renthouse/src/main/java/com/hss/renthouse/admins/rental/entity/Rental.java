@@ -26,7 +26,7 @@ public class Rental implements Serializable {
 	private String mstime;
 	// 本月交租时间
 	private String mtime;
-	// 下次应交租时间
+	// 下次交租时间
 	private String mntime;
 	// 租金
 	private Double mprice;

@@ -25,12 +25,21 @@
 			<result column="hprice" property="hprice" />
 		</association>
 	</resultMap>
-	<select id="queryAllRentals" parameterType="bQueryVo"
-		resultMap="getRentalsResultMap">
+	<select id="queryAllRentals" parameterType="bQueryVo" resultMap="getRentalsResultMap">
 	</select>
 	<!-- 查询租客总数 -->
 	<select id="queryRentalsTotal" resultType="integer">
 		select count(*) from
 		t_rental
 	</select>
+
+	<!-- 新增租金记录 -->
+	<insert id="addRental" parameterType="rental">
+		insert into t_rental
+		values
+		(
+		#{mid}, #{mname}, #{mtele}, #{mptime}, #{mstime}, #{mtime}, #{mntime},
+		#{mprice}, #{uid}
+		)
+	</insert>
 </mapper> 

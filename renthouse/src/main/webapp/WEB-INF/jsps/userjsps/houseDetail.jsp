@@ -169,7 +169,7 @@
 					<div class="col-sm-8">
 
 						<form method="get" action="/user/addAppoint.action" id="form">
-							<input type="hidden" name="uid" value="${user.uid }">
+							<%-- <input type="hidden" name="uid" value="${user.uid }"> --%>
 							<input type="hidden" name="hid" value="${h.hid }">
 							<div class="form-group" id="aname_form">
 								<div class="input-group">
@@ -237,7 +237,7 @@
 		
 		$.datetimepicker.setLocale('ch');
 		$("#atime").datetimepicker({
-			format: "Y-m-d h:i",
+			format: "Y-m-d H:i",
 		});
 	})
 </script>

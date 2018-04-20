@@ -86,5 +86,4 @@ public interface HouseService {
 	 * @param house
 	 */
 	void addHouse(House house);
-
 }

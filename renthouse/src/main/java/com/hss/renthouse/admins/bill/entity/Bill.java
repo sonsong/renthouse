@@ -19,15 +19,16 @@ public class Bill implements Serializable {
 	// 生成时间
 	private String btime;
 	// 账单金额
-	private String bprice;
+	private Double bprice;
 	// 事由
 	private String bdue;
-	// 账户状态
-	private String bstate;
+	// 账单状态
+	private Integer bstate;
 	// 用户编码
 	private String uid;
 
 	private User user;
+	private String isPay;
 
 	public String getBid() {
 		return bid;
@@ -45,11 +46,11 @@ public class Bill implements Serializable {
 		this.btime = btime;
 	}
 
-	public String getBprice() {
+	public Double getBprice() {
 		return bprice;
 	}
 
-	public void setBprice(String bprice) {
+	public void setBprice(Double bprice) {
 		this.bprice = bprice;
 	}
 
@@ -61,11 +62,11 @@ public class Bill implements Serializable {
 		this.bdue = bdue;
 	}
 
-	public String getBstate() {
+	public Integer getBstate() {
 		return bstate;
 	}
 
-	public void setBstate(String bstate) {
+	public void setBstate(Integer bstate) {
 		this.bstate = bstate;
 	}
 
@@ -83,6 +84,14 @@ public class Bill implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getIsPay() {
+		return isPay;
+	}
+
+	public void setIsPay(String isPay) {
+		this.isPay = isPay;
 	}
 
 	@Override
