@@ -1,4 +1,4 @@
-package com.hss.renthouse.util;
+package com.hss.renthouse.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

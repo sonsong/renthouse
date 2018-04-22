@@ -24,6 +24,8 @@ public class Bill implements Serializable {
 	private String bdue;
 	// 账单状态
 	private Integer bstate;
+	// 支付时间
+	private String bpaytime;
 	// 用户编码
 	private String uid;
 
@@ -94,10 +96,17 @@ public class Bill implements Serializable {
 		this.isPay = isPay;
 	}
 
+	public String getBpaytime() {
+		return bpaytime;
+	}
+
+	public void setBpaytime(String bpaytime) {
+		this.bpaytime = bpaytime;
+	}
+
 	@Override
 	public String toString() {
 		return "Bill [bid=" + bid + ", btime=" + btime + ", bprice=" + bprice + ", bdue=" + bdue + ", bstate=" + bstate
-				+ ", uid=" + uid + ", user=" + user + "]";
+				+ ", bpaytime=" + bpaytime + ", uid=" + uid + ", user=" + user + ", isPay=" + isPay + "]";
 	}
-
 }

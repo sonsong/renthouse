@@ -142,28 +142,3 @@ $("#table")
 						console.info("加载数据失败");
 					}
 				});
-
-// 签约
-function sign(aid) {
-	$(".sign").attr("data-toggle", "modal").attr("data-target", "#myModal2");
-	var params = aid.split(",");
-	$("#appid").val(params[0]);
-	//预约人
-	$("#cname").val(params[1]);
-	//登录用户编码
-	$("#uid").val(params[2]);
-	//联系方式
-	$("#ctele").val(params[3]);
-	//房源信息
-	$("#hid").val(params[4]);
-	$("#cmoney").val(params[5]);
-}
-// 取消预约
-function cancel(aid) {
-	$(".cancel").attr("data-toggle", "modal").attr("data-target", "#myModal1");
-	var params = aid.split(",");
-	$("#aid").val(params[0]);
-	$("#name").val(params[1]);
-	$("#atele").val(params[2]);
-	$("#antime").val(params[3]);
-}

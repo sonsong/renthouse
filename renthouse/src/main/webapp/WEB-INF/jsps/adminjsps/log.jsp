@@ -20,6 +20,7 @@
     
     <link href="/renthouse/css/admin/bootstrap-table.min.css" rel="stylesheet" />
     <link rel="icon" href="/renthouse/img/songzi.png" type="image/x-icon"/>
+    <link href="/renthouse/js/jquery.datetimepicker.css" rel="stylesheet">
     <style>
     	.curtime{
     		color:white;
@@ -44,6 +45,56 @@
 									
 			</div>
             <div id="page-inner">
+            	<div id="search">
+            		<div class="row">
+            			<form class="form-horizontal" style="border: 1px solid #5bc0de;border-radius: 10px">
+            				<div style="background:#5bc0de; color:white; font-size: 18px; padding: 10px 0; border-radius: 10px"">
+            					<span style="margin-left:10px">查询条件</span>
+            				</div>
+            				<br>
+							<div class="form-group">
+								<label for="loperateDate" class="col-sm-2 control-label">开始时间:</label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" id="loperateDate" name="loperateDate" value=""> 
+								</div>
+								
+								<label for="ltimeout" class="col-sm-2 control-label">结束时间:</label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" id="ltimeout" name="ltimeout" value=""> 
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="aname" class="col-sm-2 control-label">操作人:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="aname" name="aname" value=""> 
+								</div>
+								
+								<label for="ltype" class="col-sm-1 control-label">类型:</label>
+								<div class="col-sm-2">
+									<select name="ltype" id="ltype" class="form-control">
+										<option value="">请选择日志类型</option>
+										<option value="info">info</option>
+										<option value="error">error</option>
+									</select> 
+								</div>
+								
+								<label for="lmethod" class="col-sm-1 control-label">方式:</label>
+								<div class="col-sm-2">
+									<select name="lmethod" id="lmethod" class="form-control">
+										<option value="">请选择请求方式</option>
+										<option value="GET">get</option>
+										<option value="POST">post</option>
+									</select>  
+								</div>
+								
+								<div class="col-sm-1 text-right">
+									<input type="button" class="btn btn-info" id="query" value="查询" style="width:100px"> 
+								</div>
+							</div>
+						</form>
+            		</div>
+            	</div>
+            	<br>
             	<div id="table"></div> 
 				<jsp:include page="/WEB-INF/jsps/adminjsps/footer.jsp"/>
             </div>
@@ -67,10 +118,22 @@
     <script src="/renthouse/js/admin/bootstrap-table.min.js"></script>
     <script src="/renthouse/js/admin/bootstrap-table-zh-CN.min.js"></script>
     <script src="/renthouse/js/admin/table_log.js"></script>
+    <script type="text/javascript" src="/renthouse/js/jquery.datetimepicker.full.min.js"></script>
     
     <script>
     	$(function(){
     		setInterval("curtime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay());",1000);
+    		//时间选择器
+			$.datetimepicker.setLocale('ch');
+			$("#loperateDate").datetimepicker({
+				format: "Y-m-d H:i:s",
+			});
+			$("#ltimeout").datetimepicker({
+				format: "Y-m-d H:i:s",
+			});
+			$("#query").bind("click", function(){
+				$("#table").bootstrapTable('refresh');
+			});
     	})
     </script>
 </body>

@@ -9,6 +9,7 @@ $("#table")
 					cache : false,
 					// 表格显示条纹，默认为false
 					striped : true,
+					search: true,
 					// 在表格底部显示分页组件，默认false
 					pagination : true,
 					// 设置页面可以显示的数据条数
@@ -22,7 +23,6 @@ $("#table")
 					sidePagination : 'server',
 					// 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
 					queryParams : function(params) {
-
 						return {
 							// 每页要显示的数据条数
 							ps : params.limit,
@@ -75,18 +75,24 @@ $("#table")
 								width: 200
 							},
 							{
+								field : 'bpaytime',
+								title : '支付时间',
+								align : 'center',
+								valign : 'middle',
+								width: 200
+							}/*,
+							{
 								title : "操作",
 								align : 'center',
 								valign : 'middle',
 								width: 200,
 								formatter : function(value, row, index) {
-									/*return '<button class="btn btn-warning btn-sm sign" onclick="sign(\''
 											+ row.aid + ',' + row.aname + ',' + row.user.uid + ',' + row.atele + ',' + row.house.hid + "," + row.house.hprice 
 											+ '\')">生成合同</button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm cancel" onclick="cancel(\''
-											+ row.aid + ',' + row.aname + ',' + row.atele + ','+ row.antime + '\')">取消预约</button>';*/
+											+ row.aid + ',' + row.aname + ',' + row.atele + ','+ row.antime + '\')">取消预约</button>';
 									return "";
 								}
-							} ],
+							}*/ ],
 					onLoadSuccess : function() { // 加载成功时执行
 						console.info("加载成功");
 					},
@@ -94,28 +100,3 @@ $("#table")
 						console.info("加载数据失败");
 					}
 				});
-
-// 签约
-function sign(aid) {
-	$(".sign").attr("data-toggle", "modal").attr("data-target", "#myModal2");
-	var params = aid.split(",");
-	$("#appid").val(params[0]);
-	//预约人
-	$("#cname").val(params[1]);
-	//登录用户编码
-	$("#uid").val(params[2]);
-	//联系方式
-	$("#ctele").val(params[3]);
-	//房源信息
-	$("#hid").val(params[4]);
-	$("#cmoney").val(params[5]);
-}
-// 取消预约
-function cancel(aid) {
-	$(".cancel").attr("data-toggle", "modal").attr("data-target", "#myModal1");
-	var params = aid.split(",");
-	$("#aid").val(params[0]);
-	$("#name").val(params[1]);
-	$("#atele").val(params[2]);
-	$("#antime").val(params[3]);
-}

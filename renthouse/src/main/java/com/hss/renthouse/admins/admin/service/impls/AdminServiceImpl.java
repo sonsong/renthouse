@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hss.renthouse.admins.admin.dao.AdminMapper;
 import com.hss.renthouse.admins.admin.entity.Admin;
 import com.hss.renthouse.admins.admin.service.interfaces.AdminService;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
-import com.hss.renthouse.util.UUIDUtil;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
+import com.hss.renthouse.utils.UUIDUtil;
 
 /**
  * 管理员模块service层实现

@@ -17,8 +17,8 @@ import com.hss.renthouse.admins.contract.entity.Contract;
 import com.hss.renthouse.admins.contract.service.interfaces.ContractService;
 import com.hss.renthouse.user.house.entity.House;
 import com.hss.renthouse.user.house.service.interfaces.HouseService;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 合同controller层

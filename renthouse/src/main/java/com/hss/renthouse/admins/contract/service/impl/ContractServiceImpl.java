@@ -1,6 +1,5 @@
 package com.hss.renthouse.admins.contract.service.impl;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,11 +20,11 @@ import com.hss.renthouse.admins.rental.entity.Rental;
 import com.hss.renthouse.admins.renter.dao.RenterMapper;
 import com.hss.renthouse.admins.renter.entity.Renter;
 import com.hss.renthouse.user.house.dao.HouseMapper;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
-import com.hss.renthouse.util.DateUtil;
-import com.hss.renthouse.util.DateUtils;
-import com.hss.renthouse.util.UUIDUtil;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
+import com.hss.renthouse.utils.DateUtil;
+import com.hss.renthouse.utils.DateUtils;
+import com.hss.renthouse.utils.UUIDUtil;
 
 /**
  * 合同service层实现
@@ -123,6 +122,7 @@ public class ContractServiceImpl implements ContractService {
 			b.setBtime(DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
 			b.setBdue("本月房组和押金");
 			b.setBstate(0);
+			b.setBpaytime("");
 			b.setUid(con.getUid());
 			billMapper.addBill(b);
 			
@@ -149,5 +149,10 @@ public class ContractServiceImpl implements ContractService {
 		pb.setTotal(total);
 		pb.setRows(contracts);
 		return pb;
+	}
+
+	@Override
+	public List<Contract> queryContractByUid(String uid) {
+		return contractMapper.queryContractByUid(uid);
 	}
 }

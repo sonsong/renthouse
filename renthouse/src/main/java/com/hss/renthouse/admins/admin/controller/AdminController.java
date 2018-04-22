@@ -16,10 +16,10 @@ import com.hss.renthouse.admins.Log.entity.Log;
 import com.hss.renthouse.admins.Log.service.interfaces.LogService;
 import com.hss.renthouse.admins.admin.entity.Admin;
 import com.hss.renthouse.admins.admin.service.interfaces.AdminService;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
-import com.hss.renthouse.util.Message;
-import com.hss.renthouse.util.StringUtils;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
+import com.hss.renthouse.utils.Message;
+import com.hss.renthouse.utils.StringUtils;
 
 /**
  * 管理员模块controller层

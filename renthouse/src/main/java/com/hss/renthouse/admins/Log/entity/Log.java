@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import java.util.Map;
 
-import com.hss.renthouse.util.StringUtils;
+import com.hss.renthouse.utils.StringUtils;
 
 /**
  * 日志类-记录用户操作行为
  * 
- * @author lin.r.x
+ * @author hss
  *
  */
 public class Log implements Serializable {

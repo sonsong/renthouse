@@ -3,7 +3,7 @@ package com.hss.renthouse.admins.Log.dao;
 import java.util.List;
 
 import com.hss.renthouse.admins.Log.entity.Log;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BQueryVo;
 
 public interface LogMapper {
 
@@ -21,9 +21,10 @@ public interface LogMapper {
 
 	/**
 	 * 获取日志的总数
+	 * @param vo 
 	 * @return
 	 */
-	Integer queryTotalLogs();
+	Integer queryTotalLogs(BQueryVo vo);
 
 	/**
 	 * 查询日志

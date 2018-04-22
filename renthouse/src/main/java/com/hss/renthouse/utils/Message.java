@@ -1,4 +1,4 @@
-package com.hss.renthouse.util;
+package com.hss.renthouse.utils;
 
 /**
  * 负责给前端页面传递信息

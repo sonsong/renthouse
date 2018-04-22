@@ -13,9 +13,9 @@ import com.hss.renthouse.user.house.entity.Imgs;
 import com.hss.renthouse.user.house.entity.HJoin;
 import com.hss.renthouse.user.house.entity.QueryVo;
 import com.hss.renthouse.user.house.service.interfaces.HouseService;
-import com.hss.renthouse.util.PageBean;
-import com.hss.renthouse.util.PageEnum;
-import com.hss.renthouse.util.UUIDUtil;
+import com.hss.renthouse.utils.PageBean;
+import com.hss.renthouse.utils.PageEnum;
+import com.hss.renthouse.utils.UUIDUtil;
 
 /**
  * 房源service实现层

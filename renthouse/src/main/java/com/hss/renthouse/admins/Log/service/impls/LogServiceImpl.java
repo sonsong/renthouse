@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hss.renthouse.admins.Log.dao.LogMapper;
 import com.hss.renthouse.admins.Log.entity.Log;
 import com.hss.renthouse.admins.Log.service.interfaces.LogService;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 日志管理service层实现
@@ -40,7 +40,7 @@ public class LogServiceImpl implements LogService{
 	public BPageBean<Log> querySysLog(BQueryVo vo) {
 		
 		//得到日志的总记录数
-		Integer total = logMapper.queryTotalLogs();
+		Integer total = logMapper.queryTotalLogs(vo);
 		//按条件查询日志
 		List<Log> logs = logMapper.querySysLog(vo);
 		

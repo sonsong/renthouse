@@ -21,9 +21,9 @@ import com.hss.renthouse.user.house.entity.HJoin;
 import com.hss.renthouse.user.house.entity.QueryVo;
 import com.hss.renthouse.user.house.service.interfaces.HouseService;
 import com.hss.renthouse.user.user.entity.User;
-import com.hss.renthouse.util.DateUtil;
-import com.hss.renthouse.util.PageBean;
-import com.hss.renthouse.util.PageUtil;
+import com.hss.renthouse.utils.DateUtil;
+import com.hss.renthouse.utils.PageBean;
+import com.hss.renthouse.utils.PageUtil;
 
 /**
  * 房源controller层

@@ -3,7 +3,7 @@ package com.hss.renthouse.admins.renter.dao;
 import java.util.List;
 
 import com.hss.renthouse.admins.renter.entity.Renter;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 租客模块dao层

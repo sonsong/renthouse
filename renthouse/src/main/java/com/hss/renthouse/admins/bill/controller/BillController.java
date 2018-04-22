@@ -8,8 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hss.renthouse.admins.bill.entity.Bill;
 import com.hss.renthouse.admins.bill.service.interfaces.BillService;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 账单controller

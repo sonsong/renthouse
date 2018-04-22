@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import com.hss.renthouse.admins.renter.dao.RenterMapper;
 import com.hss.renthouse.admins.renter.entity.Renter;
 import com.hss.renthouse.admins.renter.service.interfaces.RenterService;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 租客service实现层
@@ -25,7 +25,7 @@ public class RenterServiceImpl implements RenterService {
 
 	@Override
 	public BPageBean<Renter> queryAllRenters(BQueryVo vo) {
-		// 得到合同的总记录数
+		// 得到租客的总记录数
 		Integer total = renterMapper.queryRentersTotal();
 		// 按条件查询用户
 		List<Renter> renters = renterMapper.queryAllRenters(vo);

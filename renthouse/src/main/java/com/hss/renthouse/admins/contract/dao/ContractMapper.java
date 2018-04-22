@@ -3,7 +3,7 @@ package com.hss.renthouse.admins.contract.dao;
 import java.util.List;
 
 import com.hss.renthouse.admins.contract.entity.Contract;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 合同dao层接口
@@ -31,5 +31,12 @@ public interface ContractMapper {
 	 * @return
 	 */
 	public List<Contract> queryAllContracts(BQueryVo vo);
+
+	/**
+	 * 查询指定用户的合同
+	 * @param uid
+	 * @return
+	 */
+	public List<Contract> queryContractByUid(String uid);
 
 }

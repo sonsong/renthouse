@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.admins.bill.dao.BillMapper">
 
+	<!-- 更新账单状态 -->
+	<update id="updateStatus" parameterType="bill">
+		update t_bill set
+		bstate = #{bstate}, bpaytime = #{bpaytime}
+		where bid = #{bid}
+	</update>
+	<!-- 查询用户本月账单 -->
+	<select id="queryBillByUid" parameterType="string" resultType="bill">
+		select * from t_bill where DATE_FORMAT(btime, '%Y-%m') =
+		DATE_FORMAT(NOW(),
+		'%Y-%m') and bstate = '0'
+	</select>
 	<!-- 查询所有租金 -->
 	<resultMap type="bill" id="getbillsResultMap">
 		<id column="bid" property="bid" />
@@ -9,6 +21,7 @@
 		<result column="bdue" property="bdue" />
 		<result column="bprice" property="bprice" />
 		<result column="isPay" property="isPay" />
+		<result column="bpaytime" property="bpaytime" />
 		<association property="user" javaType="user">
 			<id column="uid" property="uid" />
 			<result column="uname" property="uname" />
@@ -16,18 +29,21 @@
 		</association>
 	</resultMap>
 	<select id="queryAllBills" parameterType="bQueryVo" resultMap="getbillsResultMap">
-		SELECT 
+		SELECT
 		b.bid, b.btime, b.bdue, b.bprice,
 		case b.bstate
 		when 0 then '未支付'
-		else '已支付' end as isPay,
+		else '已支付'
+		end as isPay, b.bpaytime,
 		u.uid, u.uname, u.uemail
-		from t_bill b 
+		from t_bill
+		b
 		inner join t_user u on b.uid = u.uid
 		order by
 		#{sort}
 		#{sortOrder}
-		limit #{offset}, #{ps}
+		limit
+		#{offset}, #{ps}
 	</select>
 	<!-- 查询账单总数 -->
 	<select id="queryBillsTotal" resultType="integer">
@@ -40,7 +56,7 @@
 		insert into t_bill
 		values
 		(
-		#{bid}, #{btime}, #{bprice}, #{bdue}, #{uid}, #{bstate} 
+		#{bid}, #{btime}, #{bprice}, #{bdue}, #{uid}, #{bstate}, #{bpaytime}
 		)
 	</insert>
 </mapper> 

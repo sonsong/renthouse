@@ -1,8 +1,10 @@
 package com.hss.renthouse.admins.contract.service.interfaces;
 
+import java.util.List;
+
 import com.hss.renthouse.admins.contract.entity.Contract;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 合同service层接口
@@ -24,5 +26,12 @@ public interface ContractService {
 	 * @return
 	 */
 	BPageBean<Contract> queryAllContract(BQueryVo vo);
+
+	/**
+	 * 查询指定用户的合同
+	 * @param uid
+	 * @return
+	 */
+	List<Contract> queryContractByUid(String uid);
 
 }

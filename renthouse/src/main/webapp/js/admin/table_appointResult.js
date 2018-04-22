@@ -110,13 +110,3 @@ $("#table")
 						console.info("加载数据失败");
 					}
 				});
-
-// 签约
-function sign(aid) {
-	alert(aid);
-}
-// 取消预约
-function cancel(aid) {
-	$(".cancel").attr("data-toggle", "modal").attr("data-target", "#myModal1");
-	$("#aid").val(aid);
-}

@@ -4,30 +4,31 @@
 
 	<!-- 查询所有租金 -->
 	<resultMap type="rental" id="getRentalsResultMap">
-		<id column="cid" property="cid" />
+		<id column="mid" property="mid" />
 		<result column="uid" property="uid" />
-		<result column="cname" property="cname" />
-		<result column="ctele" property="ctele" />
-		<result column="cstime" property="cstime" />
-		<result column="cetime" property="cetime" />
-		<result column="payType" property="payType" />
-		<result column="cashType" property="cashType" />
-		<result column="ccash" property="ccash" />
-		<result column="crtime" property="crtime" />
-		<result column="cpaytime" property="cpaytime" />
-		<association property="admin" javaType="admin">
-			<id column="aid" property="aid" />
-			<result column="aname" property="aname" />
-		</association>
-		<association property="house" javaType="house">
-			<id column="hid" property="hid" />
-			<result column="hposition" property="hposition" />
-			<result column="hprice" property="hprice" />
+		<result column="mname" property="mname" />
+		<result column="mtele" property="mtele" />
+		<result column="mptime" property="mptime" />
+		<result column="mstime" property="mstime" />
+		<result column="mtime" property="mtime" />
+		<result column="mntime" property="mntime" />
+		<result column="mprice" property="mprice" />
+		<association property="user" javaType="user">
+			<id column="uid" property="uid" />
+			<result column="uname" property="uname" />
 		</association>
 	</resultMap>
 	<select id="queryAllRentals" parameterType="bQueryVo" resultMap="getRentalsResultMap">
+		select r.mid, r.mname, r.mtele, 
+		r.mptime, r.mstime, r.mtime, r.mntime,
+		r.mprice, u.uid, u.uname from t_rental r 
+		inner join t_user u on r.uid = u.uid
+		order by
+		#{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
 	</select>
-	<!-- 查询租客总数 -->
+	<!-- 查询租金总数 -->
 	<select id="queryRentalsTotal" resultType="integer">
 		select count(*) from
 		t_rental
@@ -38,7 +39,8 @@
 		insert into t_rental
 		values
 		(
-		#{mid}, #{mname}, #{mtele}, #{mptime}, #{mstime}, #{mtime}, #{mntime},
+		#{mid}, #{mname}, #{mtele}, #{mptime}, #{mstime}, #{mtime},
+		#{mntime},
 		#{mprice}, #{uid}
 		)
 	</insert>

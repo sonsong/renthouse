@@ -1,8 +1,8 @@
 package com.hss.renthouse.admins.admin.service.interfaces;
 
 import com.hss.renthouse.admins.admin.entity.Admin;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 管理员模块service层接口

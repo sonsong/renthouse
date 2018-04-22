@@ -3,8 +3,8 @@ package com.hss.renthouse.admins.appoint.service.interfaces;
 import com.hss.renthouse.admins.appoint.entity.Appoint;
 import com.hss.renthouse.admins.appoint.entity.AppointResult;
 import com.hss.renthouse.admins.appoint.entity.Join;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 预约管理service层接口

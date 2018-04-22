@@ -1,4 +1,4 @@
-package com.hss.renthouse.util;
+package com.hss.renthouse.utils;
 
 import java.text.ParseException;
 import java.util.Calendar;

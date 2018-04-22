@@ -1,8 +1,8 @@
 package com.hss.renthouse.admins.Log.service.interfaces;
 
 import com.hss.renthouse.admins.Log.entity.Log;
-import com.hss.renthouse.util.BPageBean;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 日志管理service层接口

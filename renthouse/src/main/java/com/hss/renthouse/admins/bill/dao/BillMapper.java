@@ -3,7 +3,7 @@ package com.hss.renthouse.admins.bill.dao;
 import java.util.List;
 
 import com.hss.renthouse.admins.bill.entity.Bill;
-import com.hss.renthouse.util.BQueryVo;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 账单dao
@@ -30,5 +30,18 @@ public interface BillMapper {
 	 * @return
 	 */
 	List<Bill> queryAllBills(BQueryVo vo);
+
+	/**
+	 * 查询用户的账单
+	 * @param uid
+	 * @return
+	 */
+	List<Bill> queryBillByUid(String uid);
+
+	/**
+	 * 更新账单
+	 * @param bill
+	 */
+	void updateStatus(Bill bill);
 
 }

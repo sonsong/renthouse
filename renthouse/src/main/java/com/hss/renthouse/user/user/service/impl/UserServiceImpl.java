@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hss.renthouse.user.user.dao.UserMapper;
 import com.hss.renthouse.user.user.entity.User;
 import com.hss.renthouse.user.user.service.interfaces.UserService;
-import com.hss.renthouse.util.UUIDUtil;
+import com.hss.renthouse.utils.UUIDUtil;
 
 /**
  * 用户模块service实现类

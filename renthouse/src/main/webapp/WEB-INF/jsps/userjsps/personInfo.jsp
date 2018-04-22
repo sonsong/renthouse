@@ -51,25 +51,69 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8" style="background-color: white">
 				<h3>我的合同</h3>
-				<div class="appiont-no text-center sr-only">
-					<h4>您还没有履行中的合同，快去签约吧~</h4>
-					<br> <a href="#" class="btn btn-info btn-lg">去找房</a>
-				</div>
-				<div class="appiont">
-					<div class="col-sm-8">
-						<h3>
-							<a href="">李二狗2017年12月23日租房合同</a>
-						</h3>
-					</div>
-					<div class="col-sm-2">
-						<h3>已生效</h3>
-					</div>
-				</div>
+				<c:choose>
+					<c:when test="${cons eq null } || ${cons eq '' }">
+						<div class="contract-no text-center">
+							<h4>您还没有生效的合同，快去预约吧~</h4>
+							<br>
+							<a href="#" class="btn btn-info btn-lg">去找房</a>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="c" items="${cons }">
+							<div class="contract">
+								<div class="col-sm-8">
+									${c.cstime }租房合同
+								</div>
+								<div class="col-sm-2 text-center">
+									<a>查看详情</a>
+								</div>
+							</div>
+							<br>
+							<br>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+		
+		<div class="row" style="margin-top:10px">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8" style="background-color: white">
+				<h3>未支付账单</h3>
+				<c:choose>
+					<c:when test="${bills eq null } || ${bills eq '' }">
+						<div class="contract-no text-center">
+							<h4>您还没有未支付的账单</h4>
+							<br>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="b" items="${bills }">
+							<div class="contract">
+								<div class="col-sm-3">
+									<span>${b.btime }</span>
+								</div>
+								<div class="col-sm-3">
+									<span>${b.bdue }</span>
+								</div>
+								<div class="col-sm-2">
+									<span>${b.bprice }</span>
+								</div>
+								<div class="col-sm-2 text-center">
+									<a id="${b.bid }" class="pay">立即支付</a>
+								</div>
+							</div>
+							<br>
+							<br>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="col-sm-2"></div>
 		</div>
 	</div>
-	
 	<!--底部-->
 	<jsp:include page="/WEB-INF/jsps/userjsps/bottom.jsp"/>
 
@@ -171,6 +215,98 @@
 	</div>
 	
 	<jsp:include page="/WEB-INF/jsps/modal.jsp"/>
+	
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 id="" class="modal-title" id="myModalLabel">选择银行</h4>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-10">
+						<form
+				action="/user/payment.action"
+				method="post" target="_top" id="topayform">
+				<input type="hidden" name="bid" id="bid"/>
+				<div class="row pay_yh">
+					<div class="col-md-6 col-xs-6 text-center">
+						<input id="CCB-NET-B2C" type="radio" name="yh" value="CCB-NET-B2C" checked="checked"/>
+						<img name="CCB-NET-B2C" align="middle"
+							src="/renthouse/img/user/bank_img/ccb.bmp" />
+					</div>
+					<div class="col-md-6 col-xs-6 text-center">
+						<input id="CMBCHINA-NET-B2C" type="radio" name="yh"
+							value="CMBCHINA-NET-B2C" /> <img name="CMBCHINA-NET-B2C"
+							align="middle" src="/renthouse/img/user/bank_img/cmb.bmp"/>
+					</div>
+				</div>
+				<br>
+				<div class="row pay_yh">
+					<div class="col-md-6 col-xs-6 text-center" style="margin-bottom: 20px">
+						<input id="BCCB-NET-B2C" type="radio" name="yh"
+							value="BCCB-NET-B2C" /> <img name="BCCB-NET-B2C" align="middle"
+							src="/renthouse/img/user/bank_img/bj.bmp" />
+					</div>
+					<div class="col-md-6 col-xs-6 text-center">
+						<input id="BOCO-NET-B2C" type="radio" name="yh"
+							value="BOCO-NET-B2C" /> <img name="BOCO-NET-B2C" align="middle"
+							src="/renthouse/img/user/bank_img/bcc.bmp" />
+					</div>
+				</div>
+				<div class="row pay_yh">
+					<div class="col-md-6 col-xs-6 text-center" style="margin-bottom: 20px">
+						<input id="CMBC-NET-B2C" type="radio" name="yh"
+							value="CMBC-NET-B2C" /> <img name="CMBC-NET-B2C" align="middle"
+							src="/renthouse/img/user/bank_img/cmbc.bmp" />
+					</div>
+					<div class="col-md-6 col-xs-6 text-center">
+						<input id="CEB-NET-B2C" type="radio" name="yh" value="CEB-NET-B2C" />
+						<img name="CEB-NET-B2C" align="middle"
+							src="/renthouse/img/user/bank_img/guangda.bmp" />
+					</div>
+				</div>
+				<div class="row pay_yh">
+					<div class="col-md-6 col-xs-6 text-center" style="margin-bottom: 20px">
+						<input id="CBHB-NET-B2C" type="radio" name="yh"
+							value="CBHB-NET-B2C" /> <img name="CBHB-NET-B2C" align="middle"
+							src="/renthouse/img/user/bank_img/bh.bmp" />
+					</div>
+					<div class="col-md-6 col-xs-6 text-center">
+						<input id="HKBEA-NET-B2C" type="radio" name="yh"
+							value="HKBEA-NET-B2C" /> <img name="HKBEA-NET-B2C"
+							align="middle" src="/renthouse/img/user/bank_img/dy.bmp" />
+					</div>
+				</div>
+				<div class="row pay_yh">
+					<div class="col-md-6 col-xs-6 text-center" style="margin-bottom: 20px">
+						<input id="SDB-NET-B2C" type="radio" name="yh" value="SDB-NET-B2C" />
+						<img name="SDB-NET-B2C" align="middle"
+							src="/renthouse/img/user/bank_img/sfz.bmp" />
+					</div>
+					<div class="col-md-6 col-xs-6 text-center">
+						<input id="GDB-NET-B2C" type="radio" name="yh" value="GDB-NET-B2C" />
+						<img name="GDB-NET-B2C" align="middle"
+							src="/renthouse/img/user/bank_img/gf.bmp" />
+					</div>
+				</div>
+				<div class="row text-right">
+					<input type="submit" class="btn payorder" value="支付订单" />
+				</div>
+				<br>
+			</form>
+					</div>
+					<div class="col-sm-1"></div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
 
 </body>
 
@@ -180,4 +316,16 @@
 <script src="/renthouse/js/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/renthouse/js/modalMsg.js"></script>
 <script type="text/javascript" src="/renthouse/js/user/updateUser.js"></script>
+<script>
+$(function(){
+	$(".pay").bind("click", function(){
+		$(this).attr("data-toggle", "modal").attr("data-target", "#myModal2");
+		$("#bid").val($(this).attr("id"));
+	});
+});
+
+$("img").click(function() {
+	$("#" + $(this).attr("name")).attr("checked", true);
+});
+</script>
 </html>

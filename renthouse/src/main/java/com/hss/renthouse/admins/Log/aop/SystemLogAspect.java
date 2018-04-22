@@ -26,8 +26,8 @@ import com.hss.renthouse.admins.Log.annotation.SystemControllerAnnotation;
 import com.hss.renthouse.admins.Log.entity.Log;
 import com.hss.renthouse.admins.Log.service.interfaces.LogService;
 import com.hss.renthouse.admins.admin.entity.Admin;
-import com.hss.renthouse.util.DateUtils;
-import com.hss.renthouse.util.UUIDUtil;
+import com.hss.renthouse.utils.DateUtils;
+import com.hss.renthouse.utils.UUIDUtil;
 
 /**
  * 系统日志切点类

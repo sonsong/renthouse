@@ -7,7 +7,7 @@ import com.hss.renthouse.user.house.entity.House;
 import com.hss.renthouse.user.house.entity.Imgs;
 import com.hss.renthouse.user.house.entity.HJoin;
 import com.hss.renthouse.user.house.entity.QueryVo;
-import com.hss.renthouse.util.PageBean;
+import com.hss.renthouse.utils.PageBean;
 
 /**
  * 房源service层接口
