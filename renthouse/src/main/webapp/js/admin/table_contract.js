@@ -32,6 +32,11 @@ $("#table")
 							sort : params.sort,
 							// 排序规则
 							sortOrder : params.order,
+							cstime : $.trim($("#cstime").val()),
+							cname : $.trim($("#cname").val()),
+							ctele : $.trim($("#ctele").val()),
+							uid : $.trim($("#uid").val()),
+							hid : $.trim($("#hid").val()),
 						}
 					},
 					// 要排序的字段
@@ -123,18 +128,17 @@ $("#table")
 								valign : 'middle',
 								width: 200
 							},
-							/*{
+							{
 								title : "操作",
 								align : 'center',
 								valign : 'middle',
 								width: 200,
 								formatter : function(value, row, index) {
-									return '<button class="btn btn-warning btn-sm sign" onclick="sign(\''
-											+ row.aid + ',' + row.aname + ',' + row.user.uid + ',' + row.atele + ',' + row.house.hid + "," + row.house.hprice 
-											+ '\')">生成合同</button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm cancel" onclick="cancel(\''
-											+ row.aid + ',' + row.aname + ',' + row.atele + ','+ row.antime + '\')">取消预约</button>';
+									return '<button class="btn btn-warning btn-sm update glyphicon glyphicon-list" onclick="update(\''
+											+ row.cid + ',' + row.cname + ',' + row.ctele + ',' + row.cstime + ',' + row.cetime + ',' + row.payType + ',' + row.cpaytime + ',' + row.cashType + ',' + row.ccash + ',' + row.house.hprice + ',' + row.crtime + ',' + row.uid + '\')"></button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm glyphicon glyphicon-remove del" onclick="del(\''
+											+ row.cid + '\')"></button>';
 								}
-							}*/ ],
+							} ],
 					onLoadSuccess : function() { // 加载成功时执行
 						console.info("加载成功");
 					},
@@ -142,3 +146,33 @@ $("#table")
 						console.info("加载数据失败");
 					}
 				});
+//删除合同
+function del(cid){
+	
+}
+
+//修改合同
+function update(row){
+	$(".update").attr("data-toggle", "modal").attr("data-target", "#myModal2");
+	var obj = row.split(",");
+	$("#cid").val(obj[0]);
+	$("#name").val(obj[1]);
+	$("#tele").val(obj[2]);
+	$("#time").val(obj[3]);
+	$("#cetime").val(obj[4]);
+	if(obj[5] === '月付'){
+		$("#select1 option[value = '" + 0 + "']").attr("selected", "selected");
+	}else{
+		$("#select1 option[value = '" + 1 + "']").attr("selected", "selected");
+	}
+	$("#cpaytime").val(obj[6]);
+	if(obj[7] === '押一付一'){
+		$("#select2 option[value = '" + 0 + "']").attr("selected", "selected");
+	}else{
+		$("#select2 option[value = '" + 1 + "']").attr("selected", "selected");
+	}
+	$("#ccash").val(obj[8]);
+	$("#cmoney").val(obj[9]);
+	$("#crtime").val(obj[10]);
+	$("#id").val(obj[11]);
+}

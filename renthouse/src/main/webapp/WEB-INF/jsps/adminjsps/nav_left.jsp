@@ -25,7 +25,7 @@
 			<li><a href=""><i class="glyphicon glyphicon-list-alt"></i> 合同管理<span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li><a href="/admin/skipRenterPage.action">租客合同</a></li>
+					<li><a href="/admin/skipRenterContractPage.action">租客合同</a></li>
 					<li><a href="">房东合同</a></li>
 				</ul>
 			</li>

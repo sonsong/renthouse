@@ -32,6 +32,13 @@ $("#table")
 							sort : params.sort,
 							// 排序规则
 							sortOrder : params.order,
+							antime : $.trim($("#antime").val()),
+							atime : $.trim($("#atime").val()),
+							hid : $.trim($("#hid").val()),
+							uid : $.trim($("#uid").val()),
+							aname : $.trim($("#aname").val()),
+							atele : $.trim($("#atele").val()),
+							uname : $.trim($("#uname").val()),
 						}
 					},
 					// 要排序的字段

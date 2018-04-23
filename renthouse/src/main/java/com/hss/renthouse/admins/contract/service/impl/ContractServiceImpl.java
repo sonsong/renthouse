@@ -115,6 +115,7 @@ public class ContractServiceImpl implements ContractService {
 			//租金
 			rental.setMprice(con.getCmoney());
 			rental.setUid(con.getUid());
+			rental.setCid(con.getCid());
 			rentalMapper.addRental(rental);
 			
 			//发送账单给用户
@@ -141,7 +142,7 @@ public class ContractServiceImpl implements ContractService {
 	@Override
 	public BPageBean<Contract> queryAllContract(BQueryVo vo) {
 		// 得到合同的总记录数
-		Integer total = contractMapper.queryContractsTotal();
+		Integer total = contractMapper.queryContractsTotal(vo);
 		// 按条件查询用户
 		List<Contract> contracts = contractMapper.queryAllContracts(vo);
 
@@ -154,5 +155,27 @@ public class ContractServiceImpl implements ContractService {
 	@Override
 	public List<Contract> queryContractByUid(String uid) {
 		return contractMapper.queryContractByUid(uid);
+	}
+
+	@Override
+	@Transactional
+	public void updateContract(Contract contract) {
+		int count = contractMapper.updateContract(contract);
+		
+		if(count != 1){
+			throw new RuntimeException("修改合同失败");
+		}else{
+			//修改租金
+			Rental rental = new Rental();
+			rental.setMprice(contract.getCmoney());
+			rental.setMstime(contract.getCpaytime());
+			rental.setMname(contract.getCname());
+			rental.setMtele(contract.getCtele());
+			rental.setCid(contract.getCid());
+			count = rentalMapper.updateRental(rental);
+			if(count != 1){
+				throw new RuntimeException("修改合同失败");
+			}
+		}
 	}
 }

@@ -21,9 +21,10 @@ public interface ContractMapper {
 
 	/**
 	 * 查询合同的总数
+	 * @param vo 
 	 * @return
 	 */
-	public Integer queryContractsTotal();
+	public Integer queryContractsTotal(BQueryVo vo);
 
 	/**
 	 * 查询所有合同
@@ -38,5 +39,12 @@ public interface ContractMapper {
 	 * @return
 	 */
 	public List<Contract> queryContractByUid(String uid);
+
+	/**
+	 * 修改合同
+	 * @param contract
+	 * @return
+	 */
+	public int updateContract(Contract contract);
 
 }

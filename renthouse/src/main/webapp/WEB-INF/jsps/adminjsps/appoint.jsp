@@ -46,6 +46,57 @@
 
 			</div>
 			<div id="page-inner">
+			<div id="search">
+            		<div class="row">
+            		
+            			<form class="form-horizontal" style="border: 1px solid #5bc0de;border-radius: 10px">
+            				<div style="background:#5bc0de; color:white; font-size: 18px; padding: 10px 0; border-radius: 10px"">
+            					<span style="margin-left:10px">查询条件</span>
+            				</div>
+            				<br>
+							<div class="form-group">
+								<label for="antime" class="col-sm-1 control-label">预约时间:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="antime" name="antime" value="">
+								</div>
+								
+								<label for="atime" class="col-sm-1 control-label">看房时间:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="atime" name="atime" value="">
+								</div>
+								
+								<label for="aname" class="col-sm-1 control-label">预约人:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="aname" name="aname" value=""> 
+								</div>
+								
+								<label for="atele" class="col-sm-1 control-label">手机号:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="atele" name="atele" value=""> 
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="hid" class="col-sm-1 control-label">房源编码:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="hid" name="hid" value=""> 
+								</div>
+								<label for="uid" class="col-sm-1 control-label">用户编码:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="uid" name="uid" value=""> 
+								</div>
+								<label for="uname" class="col-sm-1 control-label">登录名:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="uname" name="uname" value=""> 
+								</div>
+								<div class="col-sm-2 text-right">
+									<input type="button" class="btn btn-info" id="query" value="查询" style="width:100px"> 
+								</div>
+							</div>
+						</form>
+            		</div>
+            	</div>
+            	<br>
 				<div id="table" style=""></div>
 				<jsp:include page="/WEB-INF/jsps/adminjsps/footer.jsp" />
 			</div>
@@ -272,6 +323,9 @@
 			$("#cetime").datetimepicker({
 				format: "Y-m-d h:i",
 			});
+			$("#antime").datetimepicker({
+				format: "Y-m-d h:i",
+			});
 			//时间
 			setInterval(
 					"curtime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay());",
@@ -296,6 +350,9 @@
 			//生成合同
 			$("#addContract").bind("click", function(){
 				$("#form1").submit();
+			});
+			$("#query").bind("click", function(){
+				$("#table").bootstrapTable('refresh');
 			});
 		})
 	</script>

@@ -22,6 +22,7 @@
 <link href="/renthouse/css/admin/bootstrap-table.min.css"
 	rel="stylesheet" />
 <link rel="icon" href="/renthouse/img/songzi.png" type="image/x-icon" />
+<link href="/renthouse/js/jquery.datetimepicker.css" rel="stylesheet">
 <style>
 .curtime {
 	color: white;
@@ -45,6 +46,50 @@
 
 			</div>
 			<div id="page-inner">
+			<div id="search">
+            		<div class="row">
+            			<form class="form-horizontal" style="border: 1px solid #5bc0de;border-radius: 10px">
+            				<div style="background:#5bc0de; color:white; font-size: 18px; padding: 10px 0; border-radius: 10px"">
+            					<span style="margin-left:10px">查询条件</span>
+            				</div>
+            				<br>
+							<div class="form-group">
+								<label for="antime" class="col-sm-2 control-label">预约时间:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="antime" name="antime" value="">
+								</div>
+								
+								<label for="name" class="col-sm-1 control-label">预约人:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="name" name="name" value=""> 
+								</div>
+								<label for="atele" class="col-sm-1 control-label">手机号:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="atele" name="atele" value=""> 
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="aname" class="col-sm-2 control-label">操作人:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="aname" name="aname" value=""> 
+								</div>
+								
+								<label for="result" class="col-sm-1 control-label">签约:</label>
+								<div class="col-sm-2">
+									<select name="result" id="result" class="form-control">
+										<option value="1">已签约</option>
+										<option value="0">未签约</option>
+									</select> 
+								</div>
+								
+								<div class="col-sm-2 text-right">
+									<input type="button" class="btn btn-info" id="query" value="查询" style="width:100px"> 
+								</div>
+							</div>
+						</form>
+            		</div>
+            	</div>
+            	<br>
 				<div>
 					<h3>看房预约：</h3>
 				</div>
@@ -71,12 +116,21 @@
 	<script src="/renthouse/js/admin/bootstrap-table.min.js"></script>
 	<script src="/renthouse/js/admin/bootstrap-table-zh-CN.min.js"></script>
 	<script src="/renthouse/js/admin/table_appointResult.js"></script>
+	<script type="text/javascript" src="/renthouse/js/jquery.datetimepicker.full.min.js"></script>
 
 	<script>
 		$(function() {
 			setInterval(
 					"curtime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay());",
 					1000);
+			//时间选择器
+			$.datetimepicker.setLocale('ch');
+			$("#antime").datetimepicker({
+				format: "Y-m-d H:i:s",
+			});
+			$("#query").bind("click", function(){
+				$("#table").bootstrapTable('refresh');
+			});
 		})
 	</script>
 </body>

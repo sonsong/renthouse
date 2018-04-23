@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.admins.rental.dao.RentalMapper">
 
+	<!-- 修改租金信息 -->
+	<update id="updateRental" parameterType="rental">
+		update t_rental set
+		mprice = #{mprice}, mstime = #{mstime}, mname = #{mname}, mtele = #{mtele}
+		where cid = #{cid}
+	</update>
 	<!-- 查询所有租金 -->
 	<resultMap type="rental" id="getRentalsResultMap">
 		<id column="mid" property="mid" />
@@ -19,14 +25,15 @@
 		</association>
 	</resultMap>
 	<select id="queryAllRentals" parameterType="bQueryVo" resultMap="getRentalsResultMap">
-		select r.mid, r.mname, r.mtele, 
+		select r.mid, r.mname, r.mtele,
 		r.mptime, r.mstime, r.mtime, r.mntime,
-		r.mprice, u.uid, u.uname from t_rental r 
+		r.mprice, u.uid, u.uname from t_rental r
 		inner join t_user u on r.uid = u.uid
 		order by
 		#{sort}
 		#{sortOrder}
-		limit #{offset}, #{ps}
+		limit
+		#{offset}, #{ps}
 	</select>
 	<!-- 查询租金总数 -->
 	<select id="queryRentalsTotal" resultType="integer">
@@ -41,7 +48,7 @@
 		(
 		#{mid}, #{mname}, #{mtele}, #{mptime}, #{mstime}, #{mtime},
 		#{mntime},
-		#{mprice}, #{uid}
+		#{mprice}, #{uid}, #{cid}
 		)
 	</insert>
 </mapper> 

@@ -32,6 +32,11 @@ $("#table")
 							sort : params.sort,
 							// 排序规则
 							sortOrder : params.order,
+							antime : $.trim($("#antime").val()),
+							name : $.trim($("#name").val()),
+							atele : $.trim($("#atele").val()),
+							aname : $.trim($("#aname").val()),
+							result : $.trim($("#result").val())
 						}
 					},
 					// 要排序的字段
@@ -39,13 +44,6 @@ $("#table")
 					// 排序规则
 					sortOrder : 'desc',
 					columns : [
-							{
-								field : 'rid',
-								title : '编码',
-								align : 'center',
-								valign : 'middle',
-								width: 200
-							},
 							{
 								field : 'name',
 								title : '预约人',
@@ -69,7 +67,7 @@ $("#table")
 							},
 							{
 								field : 'ctime',
-								title : '操作时间',
+								title : '处理时间',
 								align : 'center',
 								valign : 'middle',
 								width: 200
@@ -79,6 +77,21 @@ $("#table")
 								title : '是否联系',
 								align : 'center',
 								valign : 'middle',
+								cellStyle : function(value, row, index){
+									if( value === '未联系'){
+										return {
+											css : {
+												"background-color" : "gold"
+											}
+										};
+									}else{
+										return {
+											css : {
+												
+											}
+										};
+									}
+								},
 								width: 200
 							},
 							{
@@ -86,6 +99,21 @@ $("#table")
 								title : '结果',
 								align : 'center',
 								valign : 'middle',
+								cellStyle : function(value, row, index){
+									if( value === '未签约'){
+										return {
+											css : {
+												"background-color" : "red"
+											}
+										};
+									}else{
+										return {
+											css : {
+												
+											}
+										};
+									}
+								},
 								width: 200
 							},
 							{

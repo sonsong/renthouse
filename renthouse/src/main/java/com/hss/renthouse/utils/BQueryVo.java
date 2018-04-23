@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author hss
  *
  */
-public class BQueryVo implements Serializable{
+public class BQueryVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	// 每页记录数
@@ -23,14 +23,110 @@ public class BQueryVo implements Serializable{
 	private String id;
 	// 用户编码
 	private String uid;
-	
-	//日志查询条件
+
+	// 日志查询条件
 	private String aname;
 	private String ltype;
 	private String lmethod;
 	private String loperateDate;
 	private String ltimeout;
-	
+
+	// 预约结果查询条件
+	private String antime;
+	private String name;
+	private String atele;
+	private String result;
+
+	// 预约查询条件
+	private String hid;
+	private String uname;
+	private String atime;
+
+	// 合同查询条件
+	private String cstime;
+	private String cname;
+	private String ctele;
+
+	public String getCstime() {
+		return cstime;
+	}
+
+	public void setCstime(String cstime) {
+		this.cstime = cstime;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public String getCtele() {
+		return ctele;
+	}
+
+	public void setCtele(String ctele) {
+		this.ctele = ctele;
+	}
+
+	public String getHid() {
+		return hid;
+	}
+
+	public void setHid(String hid) {
+		this.hid = hid;
+	}
+
+	public String getUname() {
+		return uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	public String getAtime() {
+		return atime;
+	}
+
+	public void setAtime(String atime) {
+		this.atime = atime;
+	}
+
+	public String getAntime() {
+		return antime;
+	}
+
+	public void setAntime(String antime) {
+		this.antime = antime;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAtele() {
+		return atele;
+	}
+
+	public void setAtele(String atele) {
+		this.atele = atele;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
 	public String getAname() {
 		return aname;
 	}
@@ -123,6 +219,9 @@ public class BQueryVo implements Serializable{
 	public String toString() {
 		return "BQueryVo [ps=" + ps + ", offset=" + offset + ", sort=" + sort + ", sortOrder=" + sortOrder + ", id="
 				+ id + ", uid=" + uid + ", aname=" + aname + ", ltype=" + ltype + ", lmethod=" + lmethod
-				+ ", loperateDate=" + loperateDate + ", ltimeout=" + ltimeout + "]";
+				+ ", loperateDate=" + loperateDate + ", ltimeout=" + ltimeout + ", antime=" + antime + ", name=" + name
+				+ ", atele=" + atele + ", result=" + result + ", hid=" + hid + ", uname=" + uname + ", atime=" + atime
+				+ "]";
 	}
+
 }

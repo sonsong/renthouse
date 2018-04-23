@@ -1,5 +1,7 @@
 package com.hss.renthouse.admins.contract.controller;
 
+import java.lang.ProcessBuilder.Redirect;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -35,6 +37,31 @@ public class ContractController {
 	private ContractService contractService;
 	@Autowired
 	private HouseService houseService;
+	
+	/**
+	 * 修改合同
+	 * @param contract
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping( value = "/updateContract.action")
+	@SystemControllerAnnotation( value = "修改合同")
+	public String updateContract(Contract contract, RedirectAttributesModelMap model, HttpSession session){
+		String msg = "";
+		
+		Admin admin = (Admin) session.getAttribute("admin");
+		
+		try {
+			//重新设置操作人
+			contract.setAdid(admin.getAid());
+			contractService.updateContract(contract);
+			msg = "修改合同成功";
+		} catch (Exception e) {
+			msg = e.getMessage();
+		}
+		return "redirect:/admin/skipRenterContractPage.action";
+	}
 	
 	/**
 	 * 查询所有的合同
@@ -95,7 +122,7 @@ public class ContractController {
 	 * 跳转到房客合同管理页面
 	 * @return
 	 */
-	@RequestMapping( value="/skipRenterPage.action" )
+	@RequestMapping( value="/skipRenterContractPage.action" )
 	public ModelAndView skipRenterPage(){
 		ModelAndView md = new ModelAndView();
 		

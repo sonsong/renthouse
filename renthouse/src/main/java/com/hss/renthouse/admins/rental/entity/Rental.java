@@ -2,6 +2,7 @@ package com.hss.renthouse.admins.rental.entity;
 
 import java.io.Serializable;
 
+import com.hss.renthouse.admins.contract.entity.Contract;
 import com.hss.renthouse.user.user.entity.User;
 
 /**
@@ -32,8 +33,26 @@ public class Rental implements Serializable {
 	private Double mprice;
 	// 用户编码
 	private String uid;
+	private String cid;
 
+	private Contract contract;
 	private User user;
+
+	public String getCid() {
+		return cid;
+	}
+
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
+
+	public Contract getContract() {
+		return contract;
+	}
+
+	public void setContract(Contract contract) {
+		this.contract = contract;
+	}
 
 	public String getMid() {
 		return mid;

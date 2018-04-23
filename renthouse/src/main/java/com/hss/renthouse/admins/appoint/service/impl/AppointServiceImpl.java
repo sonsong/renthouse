@@ -31,7 +31,7 @@ public class AppointServiceImpl implements AppointService {
 	@Override
 	public BPageBean<Appoint> queryAllAppoints(BQueryVo vo) {
 		// 得到用户的总记录数
-		Integer total = appointMapper.queryAppointTotal();
+		Integer total = appointMapper.queryAppointTotal(vo);
 		// 按条件查询用户
 		List<Appoint> appoints = appointMapper.queryAllAppoints(vo);
 
@@ -44,7 +44,7 @@ public class AppointServiceImpl implements AppointService {
 	@Override
 	public BPageBean<Join> queryAllJoins(BQueryVo vo) {
 		// 得到用户的总记录数
-		Integer total = appointMapper.queryJoinsTotal();
+		Integer total = appointMapper.queryJoinsTotal(vo);
 		// 按条件查询用户
 		List<Join> joins = appointMapper.queryAllJoins(vo);
 
@@ -77,8 +77,8 @@ public class AppointServiceImpl implements AppointService {
 
 	@Override
 	public BPageBean<AppointResult> queryAllAppointResults(BQueryVo vo) {
-		// 得到用户的总记录数
-		Integer total = appointMapper.queryAppointResultsTotal();
+		// 得到预约结果的总记录数
+		Integer total = appointMapper.queryAppointResultsTotal(vo);
 		// 按条件查询用户
 		List<AppointResult> appointResult = appointMapper.queryAllAppointResults(vo);
 

@@ -31,4 +31,11 @@ public interface RentalMapper {
 	 */
 	List<Rental> queryAllRentals(BQueryVo vo);
 
+	/**
+	 * 修改租金信息
+	 * @param rental
+	 * @return 
+	 */
+	int updateRental(Rental rental);
+
 }

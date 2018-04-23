@@ -17,9 +17,10 @@ public interface AppointMapper {
 
 	/**
 	 * 查询预约总数
+	 * @param vo 
 	 * @return
 	 */
-	Integer queryAppointTotal();
+	Integer queryAppointTotal(BQueryVo vo);
 
 	/**
 	 * 查询所有的预约
@@ -37,9 +38,10 @@ public interface AppointMapper {
 
 	/**
 	 * 查询业主加盟总数
+	 * @param vo 
 	 * @return
 	 */
-	Integer queryJoinsTotal();
+	Integer queryJoinsTotal(BQueryVo vo);
 
 	/**
 	 * 删除预约单
@@ -57,9 +59,10 @@ public interface AppointMapper {
 
 	/**
 	 * 查询预约结果总数
+	 * @param vo 
 	 * @return
 	 */
-	Integer queryAppointResultsTotal();
+	Integer queryAppointResultsTotal(BQueryVo vo);
 
 	/**
 	 * 查询所有预约结果

@@ -30,15 +30,15 @@ $("#table").bootstrapTable({
 			// 排序规则
 			sortOrder : params.order,
 			//操作人
-			aname : $("#aname").val(),
+			aname : $.trim($("#aname").val()),
 			//日志类型
-			ltype : $("#ltype").val(),
+			ltype : $.trim($("#ltype").val()),
 			//请求方式
-			lmethod : $("#lmethod").val(),
+			lmethod : $.trim($("#lmethod").val()),
 			//开始时间
-			loperateDate : $("#loperateDate").val(),
+			loperateDate : $.trim($("#loperateDate").val()),
 			//结束时间
-			ltimeout : $("#ltimeout").val()
+			ltimeout : $.trim($("#ltimeout").val())
 		}
 	},
 	// 要排序的字段

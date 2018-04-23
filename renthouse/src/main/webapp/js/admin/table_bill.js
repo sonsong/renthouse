@@ -9,7 +9,6 @@ $("#table")
 					cache : false,
 					// 表格显示条纹，默认为false
 					striped : true,
-					search: true,
 					// 在表格底部显示分页组件，默认false
 					pagination : true,
 					// 设置页面可以显示的数据条数

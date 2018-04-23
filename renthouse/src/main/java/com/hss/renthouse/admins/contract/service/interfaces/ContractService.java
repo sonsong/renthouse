@@ -34,4 +34,10 @@ public interface ContractService {
 	 */
 	List<Contract> queryContractByUid(String uid);
 
+	/**
+	 * 修改合同信息
+	 * @param contract
+	 */
+	void updateContract(Contract contract);
+
 }

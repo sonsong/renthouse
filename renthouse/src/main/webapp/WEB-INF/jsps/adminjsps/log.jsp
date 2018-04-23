@@ -54,22 +54,23 @@
             				<br>
 							<div class="form-group">
 								<label for="loperateDate" class="col-sm-2 control-label">开始时间:</label>
-								<div class="col-sm-3">
+								<div class="col-sm-2">
 									<input type="text" class="form-control" id="loperateDate" name="loperateDate" value=""> 
 								</div>
 								
-								<label for="ltimeout" class="col-sm-2 control-label">结束时间:</label>
-								<div class="col-sm-3">
+								<label for="ltimeout" class="col-sm-1 control-label">结束时间:</label>
+								<div class="col-sm-2">
 									<input type="text" class="form-control" id="ltimeout" name="ltimeout" value=""> 
 								</div>
-							</div>
-							<div class="form-group">
-								<label for="aname" class="col-sm-2 control-label">操作人:</label>
+								
+								<label for="aname" class="col-sm-1 control-label">操作人:</label>
 								<div class="col-sm-2">
 									<input type="text" class="form-control" id="aname" name="aname" value=""> 
 								</div>
+							</div>
+							<div class="form-group">
 								
-								<label for="ltype" class="col-sm-1 control-label">类型:</label>
+								<label for="ltype" class="col-sm-2 control-label">类型:</label>
 								<div class="col-sm-2">
 									<select name="ltype" id="ltype" class="form-control">
 										<option value="">请选择日志类型</option>
@@ -87,7 +88,7 @@
 									</select>  
 								</div>
 								
-								<div class="col-sm-1 text-right">
+								<div class="col-sm-2 text-right">
 									<input type="button" class="btn btn-info" id="query" value="查询" style="width:100px"> 
 								</div>
 							</div>

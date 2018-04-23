@@ -46,6 +46,47 @@
 
 			</div>
 			<div id="page-inner">
+			<div id="search">
+            		<div class="row">
+            			<form class="form-horizontal" style="border: 1px solid #5bc0de;border-radius: 10px">
+            				<div style="background:#5bc0de; color:white; font-size: 18px; padding: 10px 0; border-radius: 10px"">
+            					<span style="margin-left:10px">查询条件</span>
+            				</div>
+            				<br>
+							<div class="form-group">
+								<label for="cstime" class="col-sm-2 control-label">入住时间:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="cstime" name="cstime" value="">
+								</div>
+								
+								<label for="cname" class="col-sm-1 control-label">客户名:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="cname" name="cname" value=""> 
+								</div>
+								
+								<label for="ctele" class="col-sm-1 control-label">手机号:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="ctele" name="ctele" value=""> 
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="hid" class="col-sm-2 control-label">房源编码:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="hid" name="hid" value=""> 
+								</div>
+								<label for="uid" class="col-sm-1 control-label">用户编码:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="uid" name="uid" value=""> 
+								</div>
+								<div class="col-sm-2 text-right">
+									<input type="button" class="btn btn-info" id="query" value="查询" style="width:100px"> 
+								</div>
+							</div>
+						</form>
+            		</div>
+            	</div>
+            	<br>
 				<div id="table"></div>
 				<jsp:include page="/WEB-INF/jsps/adminjsps/footer.jsp" />
 			</div>
@@ -55,57 +96,7 @@
 	</div>
 	<!-- /. WRAPPER  -->
 
-	<!-- 取消预约弹出框 -->
-	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 id="" class="modal-title" id="myModalLabel">取消预约</h4>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col-sm-1"></div>
-					<div class="col-sm-11">
-						<form action="/admin/cancelAppoint.action" method="post" id="form"
-							class="form-horizontal">
-							<input type="hidden" name="aid" id="aid" /> <input type="hidden"
-								name="name" id="name" /> <input type="hidden" name="atele"
-								id="atele" /> <input type="hidden" name="antime" id="antime" />
-							<div class="form-group">
-								<label for=isConnect class="col-sm-2 control-label">是否联系:</label>
-								<div class="col-sm-8">
-									<select name="isConnect" class="form-control"
-										style="width: 40%">
-										<option value="0">未联系</option>
-										<option value="1">已联系</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for=resaon class="col-sm-2 control-label">取消原因:</label>
-								<div class="col-sm-8">
-									<textarea rows="4" cols="75" name="reason" id="reason"
-										class="form-control"></textarea>
-									<span id="error" style="color: red"></span>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<input type="button" class="btn btn-danger" data-dismiss="modal"
-									value="关闭"> <a class="btn btn-danger"
-									id="cancelAppoint">取消预约</a>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
-	<!-- 生成合同弹出框 -->
+	<!-- 修改合同弹出框 -->
 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -113,30 +104,29 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 id="" class="modal-title" id="myModalLabel">生成合同</h4>
+					<h4 id="" class="modal-title" id="myModalLabel">修改合同</h4>
 				</div>
 				<br>
 				<div class="row">
 					<div class="col-sm-1"></div>
 					<div class="col-sm-10">
-						<form action="/admin/addContract.action" method="post" id="form1"
+						<form action="/admin/updateContract.action" method="post" id="form1"
 							class="form-horizontal">
 							
-							<input type="hidden" name="aid" id="appid" />
-							<input type="hidden" name="hid" id="hid" />
-							<input type="hidden" name="uid" id="uid" />
+							<input type="hidden" name="cid" id="cid" />
+							<input type="hidden" name="uid" id="id" />
 							
 							<div class="form-group">
 							
 								<label for="cname" class="col-sm-2 control-label">姓名(乙方):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cname" name="cname" value="${contract.cname }"> 
+									<input type="text" class="form-control" id="name" name="cname" value=""> 
 									<span id="cname_tip" style="color: red"></span>
 								</div>
 								
 								<label for="ctele" class="col-sm-2 control-label">电话(乙方):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ctele" name="ctele" value="${contract.ctele }"> 
+									<input type="text" class="form-control" id="tele" name="ctele" value=""> 
 									<span id="ctele_tip" style="color: red"></span>
 								</div>
 								
@@ -160,13 +150,13 @@
 							
 								<label for="cstime" class="col-sm-2 control-label">签约时间:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cstime" name="cstime" value="${contract.cstime }"> 
+									<input type="text" class="form-control" id="time" name="cstime" value="" readonly="readonly"> 
 									<span id="cstime_tip" style="color: red"></span>
 								</div>
 								
 								<label for="cetime" class="col-sm-2 control-label">到期时间:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cetime" name="cetime" value="${contract.cetime }"> 
+									<input type="text" class="form-control" id="cetime" name="cetime" value=""> 
 									<span id="cetime_tip" style="color: red"></span>
 								</div>
 								
@@ -185,7 +175,7 @@
 								
 								<label for="cpaytime" class="col-sm-2 control-label">交租时间:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cpaytime" name="cpaytime" value="${contract.cpaytime }"> 
+									<input type="text" class="form-control" id="cpaytime" name="cpaytime" value=""> 
 									<span id="cpaytime_tip" style="color: red"></span>
 								</div>
 								
@@ -205,7 +195,7 @@
 								
 								<label for="ccash" class="col-sm-2 control-label">押金:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ccash" name="ccash" value="${contract.ccash}"> 
+									<input type="text" class="form-control" id="ccash" name="ccash" value="" readonly="readonly"> 
 									<span id="ccash_tip" style="color: red"></span>
 								</div>
 								
@@ -221,16 +211,16 @@
 								
 								<label for="crtime" class="col-sm-2 control-label">租期:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="crtime" name="crtime" value="${contract.crtime }"> 
+									<input type="text" class="form-control" id="crtime" name="crtime" value=""> 
 									<span id="crtime_tip" style="color: red"></span>
 								</div>
 								
 							</div>
 							
 							<div class="modal-footer">
-								<input type="button" class="btn btn-danger" data-dismiss="modal"
+								<input type="button" class="btn btn-warning" data-dismiss="modal"
 									value="关闭"> <a class="btn btn-info"
-									id="addContract">生成合同</a>
+									id="updateContract">修改合同</a>
 							</div>
 						</form>
 					</div>
@@ -269,9 +259,6 @@
 			$("#cstime").datetimepicker({
 				format: "Y-m-d H:i",
 			});
-			$("#cetime").datetimepicker({
-				format: "Y-m-d H:i",
-			});
 			//时间
 			setInterval(
 					"curtime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay());",
@@ -279,22 +266,10 @@
 			$(".form-control").focus(function() {
 				$("#error").text("");
 			});
-			//取消预约校验
-			$("#cancelAppoint").bind("click", function() {
-				var bool = true;
-
-				var val = $("#reason");
-				if (val == null || $.trim(val).length == 0) {
-					$("#error").text("取消原因必须填写");
-					bool = false;
-				}
-
-				if (bool) {
-					$("#form").submit();
-				}
+			$("#query").bind("click", function(){
+				$("#table").bootstrapTable('refresh');
 			});
-			//生成合同
-			$("#addContract").bind("click", function(){
+			$("#updateContract").bind("click", function(){
 				$("#form1").submit();
 			});
 		})
