@@ -40,4 +40,10 @@ public interface ContractService {
 	 */
 	void updateContract(Contract contract);
 
+	/**
+	 * 删除合同
+	 * @param con
+	 */
+	void delContractByCid(Contract con);
+
 }

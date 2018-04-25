@@ -47,6 +47,8 @@ public class ContractServiceImpl implements ContractService {
 	private RentalMapper rentalMapper;
 	@Autowired
 	private BillMapper billMapper;
+	@Autowired
+	private HouseMapper houseMapper;
 	
 	@Override
 	@Transactional
@@ -125,6 +127,7 @@ public class ContractServiceImpl implements ContractService {
 			b.setBstate(0);
 			b.setBpaytime("");
 			b.setUid(con.getUid());
+			b.setRid(renter.getRid());
 			billMapper.addBill(b);
 			
 			if(count != 1){
@@ -176,6 +179,35 @@ public class ContractServiceImpl implements ContractService {
 			if(count != 1){
 				throw new RuntimeException("修改合同失败");
 			}
+		}
+	}
+
+	@Override
+	@Transactional
+	public void delContractByCid(Contract con) {
+		
+		//得到该合同下的租客信息
+		Renter renter = renterMapper.queryRenterByCid(con.getCid());
+		if( renter != null ){
+			//查询该租客下是否有没有缴清的账单
+			List<Bill> bills = billMapper.queryBillByRid(renter.getRid());
+			if(bills != null && bills.size() != 0){
+				throw new RuntimeException("删除合同失败, 该合同下还有未缴清的账单");
+			}else{
+				//删除该用户下的所有账单
+				//billMapper.delBillByRid(renter.getRid());
+				//删除该合同的租金
+				rentalMapper.delRentalByCid(con.getCid());
+				//删除该租客信息
+				renterMapper.delRenterByCid(con.getCid());
+				//删除该合同
+				contractMapper.delContractBycid(con.getCid());
+				
+				//修改房源的状态未0
+				houseMapper.updateHouseStateByHid(renter.getHid());
+			}
+		}else{
+			throw new RuntimeException("删除合同失败");
 		}
 	}
 }

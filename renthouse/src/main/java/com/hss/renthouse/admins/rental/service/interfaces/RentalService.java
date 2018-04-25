@@ -18,4 +18,10 @@ public interface RentalService {
 	 */
 	BPageBean<Rental> queryAllRenters(BQueryVo vo);
 
+	/**
+	 * 检查勾选的用户是否已经存在了本月账单
+	 * @param cid 合同编码
+	 */
+	void checkSendBill(String cid);
+
 }

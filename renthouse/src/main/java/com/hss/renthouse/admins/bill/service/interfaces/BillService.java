@@ -34,4 +34,24 @@ public interface BillService {
 	 */
 	void updateStatus(String bid, Integer state);
 
+	/**
+	 * 发送每月账单
+	 * @param mprice 价钱
+	 * @param uid 用户编码
+	 * @param cid 合同编码
+	 */
+	void sendBill(String mprice, String uid, String cid);
+
+	/**
+	 * 删除指定账单
+	 * @param bid
+	 */
+	void delBillByBid(String bid);
+
+	/**
+	 * 修改指定的账单
+	 * @param bill
+	 */
+	void updateBill(Bill bill);
+
 }

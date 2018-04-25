@@ -37,6 +37,7 @@ $("#table")
 							ctele : $.trim($("#ctele").val()),
 							uid : $.trim($("#uid").val()),
 							hid : $.trim($("#hid").val()),
+							cid : $.trim($("#cid").val())
 						}
 					},
 					// 要排序的字段
@@ -49,94 +50,127 @@ $("#table")
 								title : '客户名',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'ctele',
 								title : '联系电话',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'cstime',
 								title : '入住时间',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'cetime',
 								title : '到期时间',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'crtime',
 								title : '租期',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'payType',
 								title : '付款方式',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'cpaytime',
 								title : '付款时间',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'cashType',
 								title : '押金方式',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'ccash',
 								title : '押金',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'house.hposition',
 								title : '房源位置',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								field : 'house.hprice',
 								title : '房价',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
+							},
+							{
+								field : 'cmoney',
+								title : '租金',
+								align : 'center',
+								valign : 'middle',
+								width : 200
 							},
 							{
 								field : 'admin.aname',
 								title : '操作人',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 200
 							},
 							{
 								title : "操作",
 								align : 'center',
 								valign : 'middle',
-								width: 200,
+								width : 200,
 								formatter : function(value, row, index) {
 									return '<button class="btn btn-warning btn-sm update glyphicon glyphicon-list" onclick="update(\''
-											+ row.cid + ',' + row.cname + ',' + row.ctele + ',' + row.cstime + ',' + row.cetime + ',' + row.payType + ',' + row.cpaytime + ',' + row.cashType + ',' + row.ccash + ',' + row.house.hprice + ',' + row.crtime + ',' + row.uid + '\')"></button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm glyphicon glyphicon-remove del" onclick="del(\''
-											+ row.cid + '\')"></button>';
+											+ row.cid
+											+ ','
+											+ row.cname
+											+ ','
+											+ row.ctele
+											+ ','
+											+ row.cstime
+											+ ','
+											+ row.cetime
+											+ ','
+											+ row.payType
+											+ ','
+											+ row.cpaytime
+											+ ','
+											+ row.cashType
+											+ ','
+											+ row.ccash
+											+ ','
+											+ row.cmoney
+											+ ','
+											+ row.crtime
+											+ ','
+											+ row.uid
+											+ '\')"></button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm glyphicon glyphicon-remove del" onclick="del(\''
+											+ row.cid
+											+ ','
+											+ row.uid
+											+ '\')"></button>';
 								}
 							} ],
 					onLoadSuccess : function() { // 加载成功时执行
@@ -146,29 +180,44 @@ $("#table")
 						console.info("加载数据失败");
 					}
 				});
-//删除合同
-function del(cid){
-	
+// 删除合同
+function del(cid) {
+	var obj = cid.split(",");
+	cid = obj[0];
+	var uid = obj[1];
+	$.ajax({
+		url : "/admin/delContractByCid.action",// 要请求的方法
+		data : {
+			cid : cid,
+			uid : uid
+		},// 给服务器的参数
+		type : "GET",
+		dataType : "json",
+		async : false,
+		cache : false,
+		success : function(result) {
+		}
+	})
 }
 
-//修改合同
-function update(row){
+// 修改合同
+function update(row) {
 	$(".update").attr("data-toggle", "modal").attr("data-target", "#myModal2");
 	var obj = row.split(",");
-	$("#cid").val(obj[0]);
+	$("#conid").val(obj[0]);
 	$("#name").val(obj[1]);
 	$("#tele").val(obj[2]);
 	$("#time").val(obj[3]);
 	$("#cetime").val(obj[4]);
-	if(obj[5] === '月付'){
+	if (obj[5] === '月付') {
 		$("#select1 option[value = '" + 0 + "']").attr("selected", "selected");
-	}else{
+	} else {
 		$("#select1 option[value = '" + 1 + "']").attr("selected", "selected");
 	}
 	$("#cpaytime").val(obj[6]);
-	if(obj[7] === '押一付一'){
+	if (obj[7] === '押一付一') {
 		$("#select2 option[value = '" + 0 + "']").attr("selected", "selected");
-	}else{
+	} else {
 		$("#select2 option[value = '" + 1 + "']").attr("selected", "selected");
 	}
 	$("#ccash").val(obj[8]);

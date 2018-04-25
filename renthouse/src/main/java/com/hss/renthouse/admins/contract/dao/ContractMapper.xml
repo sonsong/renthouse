@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.admins.contract.dao.ContractMapper">
-
+	<!-- 删除指定的合同 -->
+	<delete id="delContractBycid" parameterType="string">
+		delete from t_contract where cid = #{cid}
+	</delete>
 	<!-- 修改合同 -->
 	<update id="updateContract" parameterType="contract">
 		update t_contract set
@@ -27,6 +30,7 @@
 		<result column="ccash" property="ccash" />
 		<result column="crtime" property="crtime" />
 		<result column="cpaytime" property="cpaytime" />
+		<result column="cmoney" property="cmoney" />
 		<association property="admin" javaType="admin">
 			<id column="aid" property="aid" />
 			<result column="aname" property="aname" />
@@ -55,12 +59,15 @@
 		'押一付三'
 		END as cashType,
 		c.ccash, c.crtime,
-		cpaytime, h.hid,
+		c.cpaytime,
+		c.cmoney, h.hid,
 		h.hposition, h.hprice, ad.aid, ad.aname
 		from
-		t_contract c
+		t_contract
+		c
 		inner join t_house h on h.hid = c.hid
-		inner join t_admin ad on ad.aid = c.adid
+		inner join t_admin ad on ad.aid
+		= c.adid
 		<where>
 			<if test="cstime != null and cstime != '' ">
 				and c.cstime &lt; #{cstime}
@@ -76,6 +83,9 @@
 			</if>
 			<if test="hid != null and hid != '' ">
 				and h.hid = #{hid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and c.cid = #{cid}
 			</if>
 		</where>
 		order by
@@ -104,6 +114,9 @@
 			</if>
 			<if test="hid != null and hid != '' ">
 				and h.hid = #{hid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and c.cid = #{cid}
 			</if>
 		</where>
 	</select>

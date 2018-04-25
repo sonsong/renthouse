@@ -31,6 +31,12 @@ $("#table")
 							sort : params.sort,
 							// 排序规则
 							sortOrder : params.order,
+							mtime : $.trim($("#btime").val()),
+							uname : $.trim($("#uname").val()),
+							rname : $.trim($("#rname").val()),
+							uid : $.trim($("#uid").val()),
+							cid : $.trim($("#cid").val()),
+							state : $.trim($("#state").val())
 						}
 					},
 					// 要排序的字段
@@ -43,55 +49,89 @@ $("#table")
 								title : '登录名',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 300
 							},
 							{
 								field : 'btime',
 								title : '创建时间',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 300
 							},
 							{
 								field : 'bdue',
 								title : '收款原因',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 300
 							},
 							{
 								field : 'bprice',
 								title : '金额',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								width : 300
 							},
 							{
 								field : 'isPay',
 								title : '是否支付',
 								align : 'center',
 								valign : 'middle',
-								width: 200
+								cellStyle : function(value, row, index) {
+									if (value === '未支付') {
+										return {
+											css : {
+												"background-color" : "red"
+											}
+										};
+									} else {
+										return {
+											"css" : {
+												"background-color" : ""
+											}
+										};
+									}
+								},
+								width : 300
 							},
 							{
 								field : 'bpaytime',
 								title : '支付时间',
 								align : 'center',
 								valign : 'middle',
-								width: 200
-							}/*,
+								width : 300
+							},
 							{
 								title : "操作",
 								align : 'center',
 								valign : 'middle',
-								width: 200,
+								width : 200,
 								formatter : function(value, row, index) {
-											+ row.aid + ',' + row.aname + ',' + row.user.uid + ',' + row.atele + ',' + row.house.hid + "," + row.house.hprice 
-											+ '\')">生成合同</button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm cancel" onclick="cancel(\''
-											+ row.aid + ',' + row.aname + ',' + row.atele + ','+ row.antime + '\')">取消预约</button>';
-									return "";
+									if(row.isPay === '未支付'){
+										
+										return '<button class="btn btn-warning btn-sm update glyphicon glyphicon-list" onclick="update(\''
+												+ row.bid
+												+ ','
+												+ row.bdue
+												+ ','
+												+ row.bprice
+												+ ','
+												+ '\')"></button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm glyphicon glyphicon-remove del" onclick="del(\''
+												+ row.bid
+												+ ','
+												+ row.isPay
+												+ ','
+												+ '\')"></button>';
+									}else{
+										return '<button class="btn btn-danger btn-sm glyphicon glyphicon-remove del" onclick="del(\''
+										+ row.bid
+										+ ','
+										+ row.isPay
+										+ ','
+										+ '\')"></button>';
+									}
 								}
-							}*/ ],
+							} ],
 					onLoadSuccess : function() { // 加载成功时执行
 						console.info("加载成功");
 					},
@@ -99,3 +139,29 @@ $("#table")
 						console.info("加载数据失败");
 					}
 				});
+//修改账单
+function update(row){
+	$(".update").attr("data-toggle", "modal").attr("data-target", "#myModal1")
+	row = row.split(",");
+	var bid = row[0];
+	var bdue = row[1];
+	var bprice = row[2];
+	
+	$("#bid").val(bid);
+	$("#bdue").val(bdue);
+	$("#bprice").val(bprice);
+}
+//删除账单
+function del(row){
+	row = row.split(",");
+	var bid = row[0];
+	var isPay = row[1];
+	
+	if(isPay === '未支付'){
+		if(confirm("该账单还未支付，你确认要删除嘛？")){
+			$.post("/admin/delBillByBid.action", {"bid":bid});
+		}
+	}else{
+		$.post("/admin/delBillByBid.action", {"bid":bid});
+	}
+}

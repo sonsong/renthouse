@@ -1,5 +1,7 @@
 package com.hss.renthouse.user.user.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hss.renthouse.user.user.dao.UserMapper;
 import com.hss.renthouse.user.user.entity.User;
 import com.hss.renthouse.user.user.service.interfaces.UserService;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 import com.hss.renthouse.utils.UUIDUtil;
 
 /**
@@ -71,5 +75,18 @@ public class UserServiceImpl implements UserService {
 		if(count != 1){
 			throw new RuntimeException("更新用户信息失败");
 		}
+	}
+
+	@Override
+	public BPageBean<User> queryUsers(BQueryVo vo) {
+		//得到用户的总记录数
+		Integer total = userMapper.queryUsersTotal(vo);
+		//按条件查询用户
+		List<User> users = userMapper.queryUsers(vo);
+		
+		BPageBean<User> pb = new BPageBean<>();
+		pb.setTotal(total);
+		pb.setRows(users);
+		return pb;
 	}
 }

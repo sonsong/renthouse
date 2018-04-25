@@ -43,7 +43,8 @@
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li><a href="/admin/skipSysLogPage.action">日志管理</a></li>
-					<li><a href="/admin/skipAdminManagePage.action">用户管理</a></li>
+					<li><a href="/admin/skipUserManagePage.action">用户管理</a></li>
+					<li><a href="/admin/skipAdminManagePage.action">管理员管理</a></li>
 				</ul>
 			</li>
 		</ul>

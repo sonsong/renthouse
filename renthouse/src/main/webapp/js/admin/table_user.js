@@ -1,18 +1,18 @@
 // 对应table标签的id
 $("#table").bootstrapTable({
 	// 获取表格数据的url
-	url : "/admin/queryAllRentals.action",
-	toolbar : '#toolbar',
+	url : "/admin/queryUsers.action",
 	// 设置为 false 禁用 AJAX 数据缓存， 默认为true
 	cache : false,
 	// 表格显示条纹，默认为false
-	striped : true,
+	/* striped : true, */
+	/* showRefresh : true, */
 	// 在表格底部显示分页组件，默认false
 	pagination : true,
 	// 设置页面可以显示的数据条数
 	pageList : [ 5, 10, 20 ],
 	// 页面数据条数
-	pageSize : 5,
+	pageSize : 10,
 	// 首页页码
 	pageNumber : 1,
 	// 设置为服务器端分页
@@ -20,7 +20,6 @@ $("#table").bootstrapTable({
 	sidePagination : 'server',
 	// 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
 	queryParams : function(params) {
-
 		return {
 			// 每页要显示的数据条数
 			ps : params.limit,
@@ -30,66 +29,67 @@ $("#table").bootstrapTable({
 			sort : params.sort,
 			// 排序规则
 			sortOrder : params.order,
-			mtime : $.trim($("#mtime").val()),
-			cname : $.trim($("#mname").val()),
-			cid : $.trim($("#cid").val()),
 			uname : $.trim($("#uname").val()),
-			uid : $.trim($("#uid").val()),
-			state : $.trim($("#state").val()),
+			cname : $.trim($("#cname").val()),
+			ctele : $.trim($("#ctele").val()),
+			cid : $.trim($("#cid").val()),
+			hid : $.trim($("#hid").val()),
+			rid : $.trim($("#rid").val()),
 		}
 	},
 	// 要排序的字段
-	sortName : 'mntime',
+	sortName : 'uid',
 	// 排序规则
 	sortOrder : 'desc',
 	columns : [ {
-		// 显示一个勾选框
-		checkbox : true,
-		// 居中显示
-		align : 'center'
+		field : 'uid',
+		title : '用户编码',
+		align : 'center',
+		valign : 'middle',
+		width : 300
 	}, {
-		field : 'user.uname',
+		field : 'uname',
 		title : '登录名',
 		align : 'center',
 		valign : 'middle',
 		width : 300
 	}, {
-		field : 'mname',
-		title : '客户名',
+		field : 'cname',
+		title : '签约名',
+		align : 'center',
+		valign : 'middle',
+		width : 300
+	},{
+		field : 'utele',
+		title : '联系方式',
 		align : 'center',
 		valign : 'middle',
 		width : 300
 	}, {
-		field : 'mprice',
-		title : '租金',
+		field : 'uemail',
+		title : '电子邮件',
+		align : 'center',
+		valign : 'middle',
+		width : 300
+	},{
+		field : 'contracts.cid',
+		title : '合同编码',
 		align : 'center',
 		valign : 'middle',
 		width : 300
 	}, {
-		field : 'mptime',
-		title : '上次交租时间',
+		field : 'renters.rid',
+		title : '租客编码',
 		align : 'center',
 		valign : 'middle',
 		width : 300
 	}, {
-		field : 'mstime',
-		title : '本月应交租时间',
+		field : 'houses.hid',
+		title : '房源编码',
 		align : 'center',
 		valign : 'middle',
 		width : 300
-	}, {
-		field : 'mtime',
-		title : '本月实际交租时间',
-		align : 'center',
-		valign : 'middle',
-		width : 300
-	}, {
-		field : 'mntime',
-		title : '下次交租时间',
-		align : 'center',
-		valign : 'middle',
-		width : 300
-	} ],
+	}],
 	onLoadSuccess : function() { // 加载成功时执行
 		console.info("加载成功");
 	},

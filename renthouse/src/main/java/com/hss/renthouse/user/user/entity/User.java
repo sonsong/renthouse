@@ -1,6 +1,11 @@
 package com.hss.renthouse.user.user.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.hss.renthouse.admins.contract.entity.Contract;
+import com.hss.renthouse.admins.renter.entity.Renter;
+import com.hss.renthouse.user.house.entity.House;
 
 /**
  * 用户实体类
@@ -22,6 +27,34 @@ public class User implements Serializable {
 	private String utele;
 	// 邮件
 	private String uemail;
+
+	private List<Contract> contracts;
+	private List<Renter> renters;
+	private List<House> houses;
+
+	public List<House> getHouses() {
+		return houses;
+	}
+
+	public void setHouses(List<House> houses) {
+		this.houses = houses;
+	}
+
+	public List<Contract> getContracts() {
+		return contracts;
+	}
+
+	public void setContracts(List<Contract> contracts) {
+		this.contracts = contracts;
+	}
+
+	public List<Renter> getRenters() {
+		return renters;
+	}
+
+	public void setRenters(List<Renter> renters) {
+		this.renters = renters;
+	}
 
 	public String getUid() {
 		return uid;
@@ -66,7 +99,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [uid=" + uid + ", uname=" + uname + ", upasswd=" + upasswd + ", utele=" + utele + ", uemail="
-				+ uemail + "]";
+				+ uemail + ", contracts=" + contracts + ", renters=" + renters + ", houses=" + houses + "]";
 	}
 
 }

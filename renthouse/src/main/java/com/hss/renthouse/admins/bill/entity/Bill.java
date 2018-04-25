@@ -2,6 +2,7 @@ package com.hss.renthouse.admins.bill.entity;
 
 import java.io.Serializable;
 
+import com.hss.renthouse.admins.renter.entity.Renter;
 import com.hss.renthouse.user.user.entity.User;
 
 /**
@@ -28,9 +29,27 @@ public class Bill implements Serializable {
 	private String bpaytime;
 	// 用户编码
 	private String uid;
+	private String rid;
 
+	private Renter renter;
 	private User user;
 	private String isPay;
+
+	public String getRid() {
+		return rid;
+	}
+
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
+
+	public Renter getRenter() {
+		return renter;
+	}
+
+	public void setRenter(Renter renter) {
+		this.renter = renter;
+	}
 
 	public String getBid() {
 		return bid;

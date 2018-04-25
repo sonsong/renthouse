@@ -81,8 +81,14 @@
 										<option value="0">未签约</option>
 									</select> 
 								</div>
-								
-								<div class="col-sm-2 text-right">
+								<label for="state" class="col-sm-1 control-label">联系:</label>
+								<div class="col-sm-2">
+									<select name="state" id="state" class="form-control">
+										<option value="1">已联系</option>
+										<option value="0">未联系</option>
+									</select> 
+								</div>
+								<div class="col-sm-2 text-left">
 									<input type="button" class="btn btn-info" id="query" value="查询" style="width:100px"> 
 								</div>
 							</div>

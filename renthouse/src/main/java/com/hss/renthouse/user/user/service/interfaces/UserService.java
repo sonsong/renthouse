@@ -1,6 +1,8 @@
 package com.hss.renthouse.user.user.service.interfaces;
 
 import com.hss.renthouse.user.user.entity.User;
+import com.hss.renthouse.utils.BPageBean;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 用户模块service层
@@ -39,4 +41,11 @@ public interface UserService {
 	 * @param user
 	 */
 	void updateUser(User user);
+
+	/**
+	 * 查询所有用户
+	 * @param vo
+	 * @return
+	 */
+	BPageBean<User> queryUsers(BQueryVo vo);
 }

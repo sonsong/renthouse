@@ -60,7 +60,8 @@ public class UserController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "user/payment.action")
-	public String payment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String payment(HttpServletRequest req, HttpServletResponse resp, RedirectAttributesModelMap model)
+			throws ServletException, IOException {
 		Properties props = new Properties();
 		props.load(this.getClass().getClassLoader().getResourceAsStream("payment.properties"));
 		/*
@@ -79,6 +80,11 @@ public class UserController {
 		String pa_MP = "";// 扩展信息
 		String pd_FrpId = req.getParameter("yh");// 支付通道
 		String pr_NeedResponse = "1";// 应答机制，固定值1
+
+		if (p2_Order == null || StringUtils.isEmpty(p2_Order)) {
+			model.addFlashAttribute("msg", "账单不存在，请确认");
+			return "redirect:/user/skipPersonInfoPage.action";
+		}
 
 		/*
 		 * 2. 计算hmac 需要13个参数 需要keyValue 需要加密算法
@@ -121,7 +127,8 @@ public class UserController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/user/back.action")
-	public String back(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public String back(HttpServletRequest req, HttpServletResponse resp, RedirectAttributesModelMap model)
+			throws ServletException, IOException {
 		/*
 		 * 1. 获取12个参数
 		 */
@@ -153,23 +160,23 @@ public class UserController {
 		boolean bool = PaymentUtil.verifyCallback(hmac, p1_MerId, r0_Cmd, r1_Code, r2_TrxId, r3_Amt, r4_Cur, r5_Pid,
 				r6_Order, r7_Uid, r8_MP, r9_BType, keyValue);
 		if (!bool) {
-			req.setAttribute("msgs", "啊哦,支付失败!,请重试");
-			return "forward:/user/skipPersonInfoPage.action";
+			model.addFlashAttribute("msg", "啊哦,支付失败!,请重试");
+			return "redirect:/user/skipPersonInfoPage.action";
 		}
 		if (r1_Code.equals("1")) {
-			// 修改账单状态为已支付
+			// 修改账单状态为已支付, 同时修改租金的本月支付时间，以及计算下次支付时间
 			billService.updateStatus(r6_Order, 1);
 			if (r9_BType.equals("1")) {
-				req.setAttribute("msgs", "恭喜，支付成功！");
+				model.addFlashAttribute("msg", "恭喜，支付成功！");
 				// 重定向到个人中心
-				return "forward:/user/skipPersonInfoPage.action";
+				return "redirect:/user/skipPersonInfoPage.action";
 			} else if (r9_BType.equals("2")) {
 				resp.getWriter().print("success");
 			}
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 更新用户信息
 	 * 
@@ -180,8 +187,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/user/updateUser.action")
-	public String updateUser(String newPasswd, User user, 
-			HttpSession session, RedirectAttributesModelMap model) {
+	public String updateUser(String newPasswd, User user, HttpSession session, RedirectAttributesModelMap model) {
 
 		String msg = null;
 		if (newPasswd != null && newPasswd.trim().length() > 0) {
@@ -263,8 +269,8 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login.action")
-	public String login(User user, HttpSession session, String requri,
-			HttpServletResponse resp, RedirectAttributesModelMap model) {
+	public String login(User user, HttpSession session, String requri, HttpServletResponse resp,
+			RedirectAttributesModelMap model) {
 
 		String msgErr = "";
 		String url = "";
@@ -293,9 +299,9 @@ public class UserController {
 				c.setMaxAge(60 * 60 * 24);
 				resp.addCookie(c);
 
-				if(requri != null && !StringUtils.isEmpty(requri)){
+				if (requri != null && !StringUtils.isEmpty(requri)) {
 					url = "redirect:" + requri;
-				}else{
+				} else {
 					url = "redirect:/skipIndexPage.action";
 				}
 				// 重定向到url
@@ -420,11 +426,11 @@ public class UserController {
 		ModelAndView md = new ModelAndView();
 
 		User user = (User) session.getAttribute("user");
-		//查询我的合同
+		// 查询我的合同
 		List<Contract> cons = contractService.queryContractByUid(user.getUid());
-		//查询我的账单 本月未支付账单
+		// 查询我的账单 本月未支付账单
 		List<Bill> bills = billService.queryBillByUid(user.getUid());
-		
+
 		md.addObject("cons", cons);
 		md.addObject("bills", bills);
 		md.setViewName("userjsps/personInfo");
@@ -453,9 +459,9 @@ public class UserController {
 	public ModelAndView skipIndexPage() {
 		ModelAndView md = new ModelAndView();
 
-		//获得展示房源
+		// 获得展示房源
 		List<House> hs = houseService.queryHouses();
-		
+
 		md.addObject("hs", hs);
 		md.setViewName("userjsps/index");
 		return md;

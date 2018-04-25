@@ -31,4 +31,17 @@ public interface RenterMapper {
 	 */
 	List<Renter> queryAllRenters(BQueryVo vo);
 
+	/**
+	 * 查询租客信息
+	 * @param cid
+	 * @return
+	 */
+	Renter queryRenterByCid(String cid);
+
+	/**
+	 * 删除指定租客
+	 * @param cid
+	 */
+	void delRenterByCid(String cid);
+
 }

@@ -26,8 +26,13 @@
 <style>
 .curtime {
 	color: white;
-	margin-right: 50px;
+	margin-right: 630px;
 	font-size: 18px;
+}
+
+.curtime:hover {
+	cursor: pointer;
+	color: yellow;
 }
 </style>
 </head>
@@ -46,7 +51,61 @@
 
 			</div>
 			<div id="page-inner">
-				<div id="table" style=""></div>
+				<div id="search">
+					<div class="row">
+						<form class="form-horizontal"
+							style="border: 1px solid #5bc0de; border-radius: 10px">
+							<div
+								style="background: #5bc0de; color: white; font-size: 18px; padding: 10px 0; border-radius: 10px"">
+								<span style="margin-left: 10px">查询条件</span>
+							</div>
+							<br>
+							<div class="form-group">
+								<label for="cstime" class="col-sm-2 control-label">签约时间:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="cstime"
+										name="cstime" value="">
+								</div>
+
+								<label for="cname" class="col-sm-1 control-label">客户名:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="cname" name="cname"
+										value="">
+								</div>
+
+								<label for="ctele" class="col-sm-1 control-label">手机号:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="ctele" name="ctele"
+										value="">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="hposition" class="col-sm-2 control-label">房源位置:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="hposition"
+										name="hposition" value="">
+								</div>
+								<label for="cid" class="col-sm-1 control-label">合同编码:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="cid" name="cid"
+										value="">
+								</div>
+								<label for="uname" class="col-sm-1 control-label">登录名:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="uname" name="uname"
+										value="">
+								</div>
+								<div class="col-sm-2 text-left">
+									<input type="button" class="btn btn-info" id="query" value="查询"
+										style="width: 100px">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<br>
+				<div id="table"></div>
 				<jsp:include page="/WEB-INF/jsps/adminjsps/footer.jsp" />
 			</div>
 			<!-- /. PAGE INNER  -->
@@ -66,15 +125,25 @@
 	<script src="/renthouse/ht/assets/js/jquery.metisMenu.js"></script>
 	<!-- Custom Js -->
 	<script src="/renthouse/ht/assets/js/custom-scripts.js"></script>
-	
-	<script type="text/javascript" src="/renthouse/js/jquery.datetimepicker.full.min.js"></script>
+
+	<script type="text/javascript"
+		src="/renthouse/js/jquery.datetimepicker.full.min.js"></script>
 	<script src="/renthouse/js/admin/bootstrap-table.min.js"></script>
 	<script src="/renthouse/js/admin/bootstrap-table-zh-CN.min.js"></script>
 	<script src="/renthouse/js/admin/table_renter.js"></script>
 	<script type="text/javascript" src="/renthouse/js/modalMsg.js"></script>
 
 	<script>
-		$(function(){
+		$(function() {
+			//时间选择器
+			$.datetimepicker.setLocale('ch');
+			$("#cstime").datetimepicker({
+				format : "Y-m-d H:i",
+			});
+			//table从新发送请求
+			$("#query").bind("click", function() {
+				$("#table").bootstrapTable('refresh');
+			});
 			//时间
 			setInterval(
 					"curtime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay());",

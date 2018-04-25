@@ -38,4 +38,17 @@ public interface RentalMapper {
 	 */
 	int updateRental(Rental rental);
 
+	/**
+	 * 删除指定租金
+	 * @param cid
+	 */
+	void delRentalByCid(String cid);
+
+	/**
+	 * 根据账单编码查找对应的租金信息
+	 * @param bid 账单编码
+	 * @return
+	 */
+	Rental queryRentalByBId(String bid);
+
 }

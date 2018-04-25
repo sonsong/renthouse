@@ -1,9 +1,8 @@
-
 // 对应table标签的id
 $("#table").bootstrapTable({
 	// 获取表格数据的url
 	url : "/admin/queryAdmins.action",
-	toolbar:'#toolbar',
+	toolbar : '#toolbar',
 	// 设置为 false 禁用 AJAX 数据缓存， 默认为true
 	cache : false,
 	// 表格显示条纹，默认为false
@@ -47,15 +46,14 @@ $("#table").bootstrapTable({
 		title : '用户名',
 		align : 'center',
 		valign : 'middle',
-		width: 200
+		width : 200
 	}, {
 		field : 'arole',
 		title : '角色',
 		align : 'center',
 		valign : 'middle',
-		width: 200
-	}
-	],
+		width : 200
+	} ],
 	onLoadSuccess : function() { // 加载成功时执行
 		console.info("加载成功");
 	},

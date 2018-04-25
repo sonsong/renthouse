@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.admins.bill.dao.BillMapper">
-
+	<!-- 修改账单 -->
+	<update id="updateBill" parameterType="bill">
+		update t_bill 
+		set
+		btime = #{btime}, bdue = #{bdue}, bprice = #{bprice}
+		where bid = #{bid}
+	</update>
+	<!-- 删除指定账单 -->
+	<delete id="delBillByBid" parameterType="string">
+		delete from t_bill where
+		bid = #{bid}
+	</delete>
+	<!-- 检查勾选的用户是否已经存在了本月账单 -->
+	<select id="checkSendBill" parameterType="string" resultType="bill">
+		select b.* from t_bill b inner join t_renter r on r.rid = b.rid
+		where DATE_FORMAT(btime, "%Y-%m") = DATE_FORMAT(NOW(),"%Y-%m") and r.cid =
+		#{cid}
+	</select>
+	<!-- 查询指定租客下所有未缴清的账单 -->
+	<select id="queryBillByRid" parameterType="string" resultType="bill">
+		select * from t_bill where rid = #{rid} and bstate = 0
+	</select>
 	<!-- 更新账单状态 -->
-	<update id="updateStatus" parameterType="bill">
+	<update id="updateStatus" parameterType="string">
 		update t_bill set
-		bstate = #{bstate}, bpaytime = #{bpaytime}
+		bstate
+		= #{bstate}, bpaytime = #{bpaytime}
 		where bid = #{bid}
 	</update>
 	<!-- 查询用户本月账单 -->
@@ -39,6 +61,29 @@
 		from t_bill
 		b
 		inner join t_user u on b.uid = u.uid
+		inner join t_renter r on r.rid =
+		b.rid
+		<where>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="rname != null and rname != '' ">
+				and r.rname = #{rname}
+			</if>
+			<if test="uid != null and uid != '' ">
+				and u.uid = #{uid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and r.cid = #{cid}
+			</if>
+			<if test="state != null and state != ''">
+				and b.bstate = #{state}
+			</if>
+			<if test="mtime != null and mtime != ''">
+				and DATE_FORMAT(b.btime, "%Y-%m") = DATE_FORMAT(#{mtime},
+				"%Y-%m")
+			</if>
+		</where>
 		order by
 		#{sort}
 		#{sortOrder}
@@ -46,9 +91,31 @@
 		#{offset}, #{ps}
 	</select>
 	<!-- 查询账单总数 -->
-	<select id="queryBillsTotal" resultType="integer">
-		select count(*) from
-		t_bill
+	<select id="queryBillsTotal" resultType="integer" parameterType="bQueryVo">
+		select count(*) from t_bill b
+		inner join t_user u on b.uid = u.uid
+		inner join t_renter r on r.rid = b.rid
+		<where>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="rname != null and rname != '' ">
+				and r.rname = #{rname}
+			</if>
+			<if test="uid != null and uid != '' ">
+				and u.uid = #{uid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and r.cid = #{cid}
+			</if>
+			<if test="state != null and state != ''">
+				and b.bstate = #{state}
+			</if>
+			<if test="mtime != null and mtime != ''">
+				and DATE_FORMAT(b.btime, "%Y-%m") = DATE_FORMAT(#{mtime},
+				"%Y-%m")
+			</if>
+		</where>
 	</select>
 
 	<!-- 新增账单记录 -->
@@ -56,7 +123,8 @@
 		insert into t_bill
 		values
 		(
-		#{bid}, #{btime}, #{bprice}, #{bdue}, #{uid}, #{bstate}, #{bpaytime}
+		#{bid}, #{btime}, #{bprice}, #{bdue}, #{uid}, #{bstate}, #{bpaytime},
+		#{rid}
 		)
 	</insert>
 </mapper> 

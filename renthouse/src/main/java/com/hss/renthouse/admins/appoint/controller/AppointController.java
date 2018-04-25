@@ -19,7 +19,6 @@ import com.hss.renthouse.admins.appoint.entity.Join;
 import com.hss.renthouse.admins.appoint.service.interfaces.AppointService;
 import com.hss.renthouse.utils.BPageBean;
 import com.hss.renthouse.utils.BQueryVo;
-import com.hss.renthouse.utils.DateUtil;
 
 /**
  * 预约管理控制层
@@ -57,9 +56,6 @@ public class AppointController {
 		try {
 			//设置操作人
 			appointResult.setAdid(admin.getAid());
-			//设置操作时间
-			String date = DateUtil.getNowTime();
-			appointResult.setCtime(date);
 			appointService.cancelByAid(appointResult, aid);
 			msg = "取消预约[" + aid + "]成功";
 			//跳转到预约结果页面

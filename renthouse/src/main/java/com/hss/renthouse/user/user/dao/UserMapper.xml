@@ -1,13 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.user.user.dao.UserMapper">
-
+	<!-- 查询用户总数 -->
+	<select id="queryUsersTotal" parameterType="bQueryVo"
+		resultType="integer">
+		select count(*) from t_user u
+		left join t_contract c on u.uid = c.cid
+		left join t_renter r on u.uid = r.uid
+		<where>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and c.ctele = #{ctele}
+			</if>
+			<if test="cname != null and cname != '' ">
+				and c.cname = #{cname}
+			</if>
+			<if test="hid != null and hid != '' ">
+				and r.hid = #{hid}
+			</if>
+			<if test="rid != null and rid != '' ">
+				and r.rid = #{rid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and c.cid = #{cid}
+			</if>
+		</where>
+	</select>
+	<!-- 查询所有用户 -->
+	<resultMap type="user" id="getUsersResultMap">
+		<id column="uid" property="uid"/>
+		<result column="uname" property="uname"/>
+		<result column="utele" property="utele"/>
+		<result column="uemail" property="uemail"/>
+		<collection property="contracts" javaType="list" ofType="contract" >
+			<id column="cid" property="cid"/>
+			<result column="cname" property="cname"/>
+			<result column="ctele" property="ctele"/>
+		</collection>
+		<collection property="houses" javaType="list" ofType="house" >
+			<id column="hid" property="hid"/>
+		</collection>
+		<collection property="renters" javaType="list" ofType="renter" >
+			<id column="rid" property="rid"/>
+		</collection>
+	</resultMap>
+	<select id="queryUsers" parameterType="bQueryVo" resultMap="getUsersResultMap">
+		select u.*, c.cid, c.cname, c.ctele, r.rid, r.hid from t_user u
+		left join t_contract c on u.uid = c.cid
+		left join t_renter r on u.uid = r.uid
+		<where>
+			<if test="uname != null and uname != '' ">
+				and u.uname = #{uname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and c.utele = #{ctele}
+			</if>
+			<if test="cname != null and cname != '' ">
+				and c.cname = #{cname}
+			</if>
+			<if test="hid != null and hid != '' ">
+				and r.hid = #{hid}
+			</if>
+			<if test="rid != null and rid != '' ">
+				and r.rid = #{rid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and c.cid = #{cid}
+			</if>
+		</where>
+		order by
+		#{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
 	<!-- 更新用户信息 -->
 	<update id="updateUser" parameterType="user">
-		update t_user 
-		set 
-			uname = #{uname}, utele = #{utele}, 
-			upasswd = #{upasswd}, uemail = #{uemail}
+		update t_user
+		set
+		uname =
+		#{uname}, utele = #{utele},
+		upasswd = #{upasswd}, uemail = #{uemail}
 		where uid = #{uid}
 	</update>
 	<!-- 用户注册 -->

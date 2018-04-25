@@ -1,6 +1,9 @@
 package com.hss.renthouse.user.user.dao;
 
+import java.util.List;
+
 import com.hss.renthouse.user.user.entity.User;
+import com.hss.renthouse.utils.BQueryVo;
 
 /**
  * 用户模块dao层接口
@@ -36,5 +39,19 @@ public interface UserMapper {
 	 * @return
 	 */
 	int updateUser(User user);
+
+	/**
+	 * 查询用户总数
+	 * @param vo
+	 * @return
+	 */
+	Integer queryUsersTotal(BQueryVo vo);
+
+	/**
+	 * 查询所有用户
+	 * @param vo
+	 * @return
+	 */
+	List<User> queryUsers(BQueryVo vo);
 
 }

@@ -5,8 +5,8 @@ $("#table").bootstrapTable({
 	// 设置为 false 禁用 AJAX 数据缓存， 默认为true
 	cache : false,
 	// 表格显示条纹，默认为false
-	/*striped : true,*/
-	/*showRefresh : true,*/
+	/* striped : true, */
+	/* showRefresh : true, */
 	// 在表格底部显示分页组件，默认false
 	pagination : true,
 	// 设置页面可以显示的数据条数
@@ -19,7 +19,7 @@ $("#table").bootstrapTable({
 	// 后台页面需要进行分页，返回total（总数）和rows（条件下的记录数）
 	sidePagination : 'server',
 	// 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
-	queryParams : function(params){
+	queryParams : function(params) {
 		return {
 			// 每页要显示的数据条数
 			ps : params.limit,
@@ -29,15 +29,15 @@ $("#table").bootstrapTable({
 			sort : params.sort,
 			// 排序规则
 			sortOrder : params.order,
-			//操作人
+			// 操作人
 			aname : $.trim($("#aname").val()),
-			//日志类型
+			// 日志类型
 			ltype : $.trim($("#ltype").val()),
-			//请求方式
+			// 请求方式
 			lmethod : $.trim($("#lmethod").val()),
-			//开始时间
+			// 开始时间
 			loperateDate : $.trim($("#loperateDate").val()),
-			//结束时间
+			// 结束时间
 			ltimeout : $.trim($("#ltimeout").val())
 		}
 	},
@@ -50,17 +50,17 @@ $("#table").bootstrapTable({
 		title : '类型',
 		align : 'center',
 		valign : 'middle',
-		cellStyle : function(value, row, index){
-			if(value === 'error'){
+		cellStyle : function(value, row, index) {
+			if (value === 'error') {
 				return {
 					css : {
 						"background-color" : "red"
 					}
 				};
-			}else{
+			} else {
 				return {
 					css : {
-						
+
 					}
 				};
 			}
@@ -90,13 +90,10 @@ $("#table").bootstrapTable({
 		align : 'center',
 		valign : 'middle',
 		width : 200
-	}, /*{
-		field : 'lparams',
-		title : '请求参数',
-		align : 'center',
-		valign : 'middle',
-		width : 200
-	}, */{
+	}, /*
+		 * { field : 'lparams', title : '请求参数', align : 'center', valign :
+		 * 'middle', width : 200 },
+		 */{
 		field : 'lexception',
 		title : '异常',
 		align : 'center',

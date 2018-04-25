@@ -25,9 +25,14 @@
 <link href="/renthouse/js/jquery.datetimepicker.css" rel="stylesheet">
 <style>
 .curtime {
-	color: white;
-	margin-right: 50px;
-	font-size: 18px;
+  color: white;
+  margin-right: 630px;
+  font-size: 18px;
+}
+
+.curtime:hover {
+  cursor: pointer;
+  color: yellow;
 }
 </style>
 </head>
@@ -46,47 +51,60 @@
 
 			</div>
 			<div id="page-inner">
-			<div id="search">
-            		<div class="row">
-            			<form class="form-horizontal" style="border: 1px solid #5bc0de;border-radius: 10px">
-            				<div style="background:#5bc0de; color:white; font-size: 18px; padding: 10px 0; border-radius: 10px"">
-            					<span style="margin-left:10px">查询条件</span>
-            				</div>
-            				<br>
+				<div id="search">
+					<div class="row">
+						<form class="form-horizontal"
+							style="border: 1px solid #5bc0de; border-radius: 10px">
+							<div
+								style="background: #5bc0de; color: white; font-size: 18px; padding: 10px 0; border-radius: 10px"">
+								<span style="margin-left: 10px">查询条件</span>
+							</div>
+							<br>
 							<div class="form-group">
 								<label for="cstime" class="col-sm-2 control-label">入住时间:</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cstime" name="cstime" value="">
+									<input type="text" class="form-control" id="cstime"
+										name="cstime" value="">
 								</div>
-								
+
 								<label for="cname" class="col-sm-1 control-label">客户名:</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cname" name="cname" value=""> 
+									<input type="text" class="form-control" id="cname" name="cname"
+										value="">
 								</div>
-								
+
 								<label for="ctele" class="col-sm-1 control-label">手机号:</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="ctele" name="ctele" value=""> 
+									<input type="text" class="form-control" id="ctele" name="ctele"
+										value="">
 								</div>
 							</div>
-							
+
 							<div class="form-group">
 								<label for="hid" class="col-sm-2 control-label">房源编码:</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="hid" name="hid" value=""> 
+									<input type="text" class="form-control" id="hid" name="hid"
+										value="">
 								</div>
 								<label for="uid" class="col-sm-1 control-label">用户编码:</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="uid" name="uid" value=""> 
+									<input type="text" class="form-control" id="uid" name="uid"
+										value="">
 								</div>
-								<div class="col-sm-2 text-right">
-									<input type="button" class="btn btn-info" id="query" value="查询" style="width:100px"> 
+								<label for="cid" class="col-sm-1 control-label">合同编码:</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="cid" name="cid"
+										value="">
+								</div>
+								<div class="col-sm-2 text-left">
+									<input type="button" class="btn btn-info" id="query" value="查询"
+										style="width: 100px">
 								</div>
 							</div>
 						</form>
-            		</div>
-            	</div>
-            	<br>
+					</div>
+				</div>
+				<br>
 				<div id="table"></div>
 				<jsp:include page="/WEB-INF/jsps/adminjsps/footer.jsp" />
 			</div>
@@ -110,117 +128,124 @@
 				<div class="row">
 					<div class="col-sm-1"></div>
 					<div class="col-sm-10">
-						<form action="/admin/updateContract.action" method="post" id="form1"
-							class="form-horizontal">
-							
-							<input type="hidden" name="cid" id="cid" />
+						<form action="/admin/updateContract.action" method="post"
+							id="form1" class="form-horizontal">
+
+							<input type="hidden" name="cid" id="conid" />
 							<input type="hidden" name="uid" id="id" />
-							
+							<input type="hidden" name="hid" id="hid" />
+
 							<div class="form-group">
-							
+
 								<label for="cname" class="col-sm-2 control-label">姓名(乙方):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="name" name="cname" value=""> 
-									<span id="cname_tip" style="color: red"></span>
+									<input type="text" class="form-control" id="name" name="cname"
+										value=""> <span id="cname_tip" style="color: red"></span>
 								</div>
-								
+
 								<label for="ctele" class="col-sm-2 control-label">电话(乙方):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="tele" name="ctele" value=""> 
-									<span id="ctele_tip" style="color: red"></span>
+									<input type="text" class="form-control" id="tele" name="ctele"
+										value=""> <span id="ctele_tip" style="color: red"></span>
 								</div>
-								
+
 							</div>
-							
+
 							<div class="form-group">
-							
+
 								<label for="ccompany" class="col-sm-2 control-label">公司(甲方):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ccompany" name="ccompany" value="松子直租" readonly="readonly"> 
+									<input type="text" class="form-control" id="ccompany"
+										name="ccompany" value="松子直租" readonly="readonly">
 								</div>
-								
+
 								<label for="ccompanytele" class="col-sm-2 control-label">电话(甲方):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ccompanytele" name="ccompanytele" value="18279185736" readonly="readonly"> 
+									<input type="text" class="form-control" id="ccompanytele"
+										name="ccompanytele" value="18279185736" readonly="readonly">
 								</div>
-								
+
 							</div>
-							
+
 							<div class="form-group">
-							
+
 								<label for="cstime" class="col-sm-2 control-label">签约时间:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="time" name="cstime" value="" readonly="readonly"> 
-									<span id="cstime_tip" style="color: red"></span>
+									<input type="text" class="form-control" id="time" name="cstime"
+										value="" readonly="readonly"> <span id="cstime_tip"
+										style="color: red"></span>
 								</div>
-								
+
 								<label for="cetime" class="col-sm-2 control-label">到期时间:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cetime" name="cetime" value=""> 
-									<span id="cetime_tip" style="color: red"></span>
+									<input type="text" class="form-control" id="cetime"
+										name="cetime" value=""> <span id="cetime_tip"
+										style="color: red"></span>
 								</div>
-								
+
 							</div>
-							
+
 							<div class="form-group">
-							
+
 								<label for="cpaytype" class="col-sm-2 control-label">付款方式:</label>
 								<div class="col-sm-4">
 									<select id="select1" class="form-control" name="cpaytype">
 										<option value="2">请选择付款方式</option>
 										<option value="0">月付</option>
-									</select>
-									<span id="cpaytype_tip" style="color: red"></span>
+									</select> <span id="cpaytype_tip" style="color: red"></span>
 								</div>
-								
+
 								<label for="cpaytime" class="col-sm-2 control-label">交租时间:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cpaytime" name="cpaytime" value=""> 
-									<span id="cpaytime_tip" style="color: red"></span>
+									<input type="text" class="form-control" id="cpaytime"
+										name="cpaytime" value=""> <span id="cpaytime_tip"
+										style="color: red"></span>
 								</div>
-								
+
 							</div>
-						
+
 							<div class="form-group">
-							
+
 								<label for="ccashtype" class="col-sm-2 control-label">押金方式:</label>
 								<div class="col-sm-4">
 									<select id="select2" class="form-control" name="ccashtype">
 										<option value="2">请选择押金方式</option>
 										<option value="0">押一付一</option>
 										<option value="1">押一付三</option>
-									</select>
-									<span id="cpaytype_tip" style="color: red"></span>
+									</select> <span id="ccashtype_tip" style="color: red"></span>
 								</div>
-								
+
 								<label for="ccash" class="col-sm-2 control-label">押金:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ccash" name="ccash" value="" readonly="readonly"> 
-									<span id="ccash_tip" style="color: red"></span>
+									<input type="text" class="form-control" id="ccash" name="ccash"
+										value="" readonly="readonly"> <span id="ccash_tip"
+										style="color: red"></span>
 								</div>
-								
+
 							</div>
-							
+
 							<div class="form-group">
-							
+
 								<label for="cmoney" class="col-sm-2 control-label">租金:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cmoney" name="cmoney" value="${contract.cmoney }"> 
-									<span id="cmoney_tip" style="color: red"></span>
+									<input type="text" class="form-control" id="cmoney"
+										name="cmoney" value="${contract.cmoney }"> <span
+										id="cmoney_tip" style="color: red"></span>
 								</div>
-								
+
 								<label for="crtime" class="col-sm-2 control-label">租期:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="crtime" name="crtime" value=""> 
-									<span id="crtime_tip" style="color: red"></span>
+									<input type="text" class="form-control" id="crtime"
+										name="crtime" value=""> <span id="crtime_tip"
+										style="color: red"></span>
 								</div>
-								
+
 							</div>
-							
+
 							<div class="modal-footer">
-								<input type="button" class="btn btn-warning" data-dismiss="modal"
-									value="关闭"> <a class="btn btn-info"
-									id="updateContract">修改合同</a>
+								<input type="button" class="btn btn-warning"
+									data-dismiss="modal" value="关闭"> <a
+									class="btn btn-info" id="updateContract">修改合同</a>
 							</div>
 						</form>
 					</div>
@@ -233,7 +258,7 @@
 	</div>
 
 	<jsp:include page="/WEB-INF/jsps/modal.jsp" />
-	
+
 	<!-- JS Scripts-->
 	<!-- jQuery Js -->
 	<script src="/renthouse/ht/assets/js/jquery-1.10.2.js"></script>
@@ -244,36 +269,76 @@
 	<script src="/renthouse/ht/assets/js/jquery.metisMenu.js"></script>
 	<!-- Custom Js -->
 	<script src="/renthouse/ht/assets/js/custom-scripts.js"></script>
-	
-	<script type="text/javascript" src="/renthouse/js/jquery.datetimepicker.full.min.js"></script>
+
+	<script type="text/javascript"
+		src="/renthouse/js/jquery.datetimepicker.full.min.js"></script>
 	<script src="/renthouse/js/admin/bootstrap-table.min.js"></script>
 	<script src="/renthouse/js/admin/bootstrap-table-zh-CN.min.js"></script>
 	<script src="/renthouse/js/admin/table_contract.js"></script>
 	<script type="text/javascript" src="/renthouse/js/modalMsg.js"></script>
 
 	<script>
-		$("#reason").val("");
-		$(function() {
-			//时间选择器
-			$.datetimepicker.setLocale('ch');
-			$("#cstime").datetimepicker({
-				format: "Y-m-d H:i",
-			});
-			//时间
-			setInterval(
-					"curtime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay());",
-					1000);
-			$(".form-control").focus(function() {
-				$("#error").text("");
-			});
-			$("#query").bind("click", function(){
-				$("#table").bootstrapTable('refresh');
-			});
-			$("#updateContract").bind("click", function(){
-				$("#form1").submit();
-			});
-		})
-	</script>
+
+$(function() {
+  //时间选择器
+  $.datetimepicker.setLocale("ch");
+  $("#cstime").datetimepicker({
+    format: "Y-m-d H:i"
+  });
+  //时间
+  setInterval(
+    "curtime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay());",
+    1000
+  );
+  $(".form-control").focus(function() {
+    $("#error").text("");
+  });
+  //table从新发送请求
+  $("#query").bind("click", function() {
+    $("#table").bootstrapTable("refresh");
+  });
+
+  $("#form1 .form-control").focus(function() {
+    $("#" + $(this).attr("name") + "_tip").text("");
+    $(this).css("border", "null");
+  });
+  $("#updateContract").bind("click", function() {
+    var bool = true;
+
+    $("#form1 .form-control").each(function() {
+      if ($(this).val() === null || $.trim($(this).val()).length == 0) {
+        bool = false;
+        var id = $(this).attr("id");
+        $(this).css("border", "1px solid red");
+        $("#" + id + "_tip").text("该项信息是必填项");
+      } else {
+        //不是空，校验押金必须是数字
+        if ($(this).attr("id") === "ccash") {
+          //必须都为数字
+          if (!/^[0-9]*[1-9][0-9]*$/.test($("#" + $(this).attr("id")).val())) {
+            bool = false;
+            $(this).css("border", "1px solid red");
+            $("#" + $(this).attr("id") + "_tip").text("押金必须填写数字");
+          }
+        }
+      }
+      if (
+        $(this).attr("id") === "select1" ||
+        $(this).attr("id") === "select2"
+      ) {
+        if ($(this).val() === "2") {
+          bool = false;
+          $("#" + $(this).attr("name") + "_tip").text("该项信息是必填项");
+          $(this).css("border", "1px solid red");
+        }
+      }
+    });
+    if (bool) {
+      $("#form1").submit();
+    }
+  });
+});
+</script>
 </body>
 
 </html>

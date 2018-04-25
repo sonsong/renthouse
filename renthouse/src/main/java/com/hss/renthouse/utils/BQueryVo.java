@@ -36,6 +36,7 @@ public class BQueryVo implements Serializable {
 	private String name;
 	private String atele;
 	private String result;
+	private String state;
 
 	// 预约查询条件
 	private String hid;
@@ -46,6 +47,65 @@ public class BQueryVo implements Serializable {
 	private String cstime;
 	private String cname;
 	private String ctele;
+	private String cid;
+
+	// 租客查询条件
+	private String hposition;
+
+	// 租金查询条件
+	private String mtime;
+
+	// 账单查询你条件
+	private String rname;
+	private String rid;
+
+	public String getRid() {
+		return rid;
+	}
+
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
+
+	public String getRname() {
+		return rname;
+	}
+
+	public void setRname(String rname) {
+		this.rname = rname;
+	}
+
+	public String getMtime() {
+		return mtime;
+	}
+
+	public void setMtime(String mtime) {
+		this.mtime = mtime;
+	}
+
+	public String getHposition() {
+		return hposition;
+	}
+
+	public void setHposition(String hposition) {
+		this.hposition = hposition;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCid() {
+		return cid;
+	}
+
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
 
 	public String getCstime() {
 		return cstime;
@@ -220,8 +280,8 @@ public class BQueryVo implements Serializable {
 		return "BQueryVo [ps=" + ps + ", offset=" + offset + ", sort=" + sort + ", sortOrder=" + sortOrder + ", id="
 				+ id + ", uid=" + uid + ", aname=" + aname + ", ltype=" + ltype + ", lmethod=" + lmethod
 				+ ", loperateDate=" + loperateDate + ", ltimeout=" + ltimeout + ", antime=" + antime + ", name=" + name
-				+ ", atele=" + atele + ", result=" + result + ", hid=" + hid + ", uname=" + uname + ", atime=" + atime
-				+ "]";
+				+ ", atele=" + atele + ", result=" + result + ", state=" + state + ", hid=" + hid + ", uname=" + uname
+				+ ", atime=" + atime + ", cstime=" + cstime + ", cname=" + cname + ", ctele=" + ctele + ", cid=" + cid
+				+ ", hposition=" + hposition + ", mtime=" + mtime + "]";
 	}
-
 }

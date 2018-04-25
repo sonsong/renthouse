@@ -47,4 +47,10 @@ public interface ContractMapper {
 	 */
 	public int updateContract(Contract contract);
 
+	/**
+	 * 删除指定合同
+	 * @param cid
+	 */
+	public void delContractBycid(String cid);
+
 }

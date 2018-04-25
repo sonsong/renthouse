@@ -15,14 +15,16 @@ public interface BillMapper {
 	/**
 	 * 添加账单信息
 	 * @param b
+	 * @return 
 	 */
-	void addBill(Bill b);
+	int addBill(Bill b);
 
 	/**
 	 * 统计账单总数
+	 * @param vo 
 	 * @return
 	 */
-	Integer queryBillsTotal();
+	Integer queryBillsTotal(BQueryVo vo);
 
 	/**
 	 * 查询所有账单
@@ -41,7 +43,43 @@ public interface BillMapper {
 	/**
 	 * 更新账单
 	 * @param bill
+	 * @return 
 	 */
-	void updateStatus(Bill bill);
+	int updateStatus(Bill bill);
+
+	/**
+	 * 查询指定租客的账单
+	 * @param rid
+	 * @return
+	 */
+	List<Bill> queryBillByRid(String rid);
+
+	/**
+	 * 删除指定账单
+	 * @param bid
+	 * @return 
+	 */
+	void delBillByRid(String rid);
+
+	/**
+	 * 检查勾选的用户是否已经存在了本月账单
+	 * @param cid 合同编码
+	 * @return
+	 */
+	Bill checkSendBill(String cid);
+
+	/**
+	 * 删除指定账单
+	 * @param bid
+	 * @return
+	 */
+	int delBillByBid(String bid);
+
+	/**
+	 * 修改账单
+	 * @param bill
+	 * @return
+	 */
+	int updateBill(Bill bill);
 
 }

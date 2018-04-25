@@ -16,6 +16,8 @@ import com.hss.renthouse.admins.Log.entity.Log;
 import com.hss.renthouse.admins.Log.service.interfaces.LogService;
 import com.hss.renthouse.admins.admin.entity.Admin;
 import com.hss.renthouse.admins.admin.service.interfaces.AdminService;
+import com.hss.renthouse.user.user.entity.User;
+import com.hss.renthouse.user.user.service.interfaces.UserService;
 import com.hss.renthouse.utils.BPageBean;
 import com.hss.renthouse.utils.BQueryVo;
 import com.hss.renthouse.utils.Message;
@@ -32,11 +34,24 @@ public class AdminController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
-	@Autowired
+	@Autowired(required = true)
 	private AdminService adminService;
-	@Autowired
+	@Autowired(required = true)
 	private LogService logService;
+	@Autowired
+	private UserService userService;
 
+	/**
+	 * 查询用户
+	 * 
+	 * @param vo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/queryUsers.action")
+	public BPageBean<User> queryUsers(BQueryVo vo) {
+		return userService.queryUsers(vo);
+	}
 	/**
 	 * 删除指定的数据
 	 * @param ids
@@ -106,7 +121,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 查询用户
+	 * 查询管理员
 	 * 
 	 * @param vo
 	 * @return
@@ -196,6 +211,18 @@ public class AdminController {
 
 	/**
 	 * 跳转到用户管理页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/admin/skipUserManagePage.action")
+	public ModelAndView skipUserManagePage() {
+		ModelAndView md = new ModelAndView();
+
+		md.setViewName("adminjsps/user");
+		return md;
+	}
+	/**
+	 * 跳转到管理员管理页面
 	 * 
 	 * @return
 	 */

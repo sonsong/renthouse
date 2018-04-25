@@ -13,6 +13,7 @@ import com.hss.renthouse.admins.appoint.entity.Join;
 import com.hss.renthouse.admins.appoint.service.interfaces.AppointService;
 import com.hss.renthouse.utils.BPageBean;
 import com.hss.renthouse.utils.BQueryVo;
+import com.hss.renthouse.utils.DateUtil;
 import com.hss.renthouse.utils.UUIDUtil;
 
 /**
@@ -61,6 +62,9 @@ public class AppointServiceImpl implements AppointService {
 		appointResult.setRid(UUIDUtil.getUuid());
 		//设置结果
 		appointResult.setResult(0);
+		//设置操作时间
+		String date = DateUtil.getNowTime();
+		appointResult.setCtime(date);
 		
 		//删除预约单
 		int count = appointMapper.delAppointByAid(aid);

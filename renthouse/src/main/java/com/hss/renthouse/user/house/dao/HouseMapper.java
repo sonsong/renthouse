@@ -102,7 +102,4 @@ public interface HouseMapper {
 	 * @param hid
 	 */
 	void updateHouseStateByHid(String hid);
-
-
-
 }
