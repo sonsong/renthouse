@@ -122,7 +122,7 @@ public class AppointController {
 	public ModelAndView skipJoinAppointPage(){
 		ModelAndView md = new ModelAndView();
 		
-		md.setViewName("adminjsps/join");
+		md.setViewName("adminjsps/joins");
 		return md;
 	}
 	

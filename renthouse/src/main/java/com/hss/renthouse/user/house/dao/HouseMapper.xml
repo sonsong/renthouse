@@ -60,11 +60,12 @@
 	<insert id="joinHouse" parameterType="join">
 		insert into t_join
 		set
-		jid =
-		#{jid},
+		jid = #{jid},
 		jname = #{jname},
 		jtele = #{jtele},
 		jposition = #{jposition},
+		state = #{state},
+		jtime = #{jtime}
 	</insert>
 	<!-- 查询满足条件的房源 -->
 	<select id="queryHousesByCondition" parameterType="queryVo"

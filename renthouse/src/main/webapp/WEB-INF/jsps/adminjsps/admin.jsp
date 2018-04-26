@@ -25,7 +25,7 @@
 <style>
 .curtime {
 	color: white;
-	margin-right: 300px;
+	margin-right: 630px;
 	font-size: 18px;
 }
 </style>

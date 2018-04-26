@@ -29,7 +29,8 @@
 		"未联系"
 		ELSE
 		"已联系"
-		END as isConnect,
+		END as
+		isConnect,
 		CASE r.result
 		WHEN 0 THEN
 		"未签约"
@@ -50,8 +51,9 @@
 			<if test="atele != null and atele != '' ">
 				and r.atele = #{atele}
 			</if>
-			<if test="result != null and result != '' " >
-				and r.result = #{result}
+			<if test="result != null and result != '' ">
+				and r.result =
+				#{result}
 			</if>
 			<if test="aname != null and aname != '' ">
 				and a.aname = #{aname}
@@ -66,9 +68,11 @@
 		limit #{offset}, #{ps}
 	</select>
 	<!-- 查询预约结果 -->
-	<select id="queryAppointResultsTotal" parameterType="bQueryVo" resultType="integer">
+	<select id="queryAppointResultsTotal" parameterType="bQueryVo"
+		resultType="integer">
 		select count(*)
-		from t_appoint_result r inner join t_admin a on a.aid = r.adid
+		from t_appoint_result r inner join t_admin a on a.aid =
+		r.adid
 		<where>
 			<if test="antime != null and antime != '' ">
 				and r.antime &lt; #{antime}
@@ -79,8 +83,9 @@
 			<if test="atele != null and atele != '' ">
 				and r.atele = #{atele}
 			</if>
-			<if test="result != null and result != '' " >
-				and r.result = #{result}
+			<if test="result != null and result != '' ">
+				and r.result =
+				#{result}
 			</if>
 			<if test="state != null and state != '' ">
 				and r.state = #{state}
@@ -105,9 +110,10 @@
 		#{name}, #{atele}, #{antime},#{adid},#{ctime}
 		)
 	</insert>
-	
+
 	<!-- 查询所有预约总数 -->
-	<select id="queryAppointTotal" parameterType="bQueryVo" resultType="integer">
+	<select id="queryAppointTotal" parameterType="bQueryVo"
+		resultType="integer">
 		select count(*) from
 		t_appoint a
 		INNER JOIN t_house h
@@ -124,13 +130,13 @@
 			<if test="atele != null and atele != '' ">
 				and a.atele = #{atele}
 			</if>
-			<if test="uid != null and uid != '' " >
+			<if test="uid != null and uid != '' ">
 				and u.uid = #{uid}
 			</if>
 			<if test="hid != null and hid != '' ">
 				and h.hid = #{hid}
 			</if>
-			<if test="atime != null and atime != '' " >
+			<if test="atime != null and atime != '' ">
 				and a.atime = #{atime}
 			</if>
 			<if test="uname != null and uname != '' ">
@@ -138,13 +144,45 @@
 			</if>
 		</where>
 	</select>
-	
+
 	<!-- 查询所有加盟 总数 -->
-	<select id="queryJoinsTotal" resultType="integer">
+	<select id="queryJoinsTotal" resultType="integer" parameterType="bQueryVo">
 		select count(*) from
 		t_join
+		<where>
+			<if test="atime != null and atime != '' ">
+				and jtime &lt; #{atime}
+			</if>
+			<if test="aname != null and aname != '' ">
+				and jname = #{aname}
+			</if>
+			<if test="atele != null and atele != '' ">
+				and jtele = #{atele}
+			</if>
+		</where>
 	</select>
-
+	<!-- 查询所有得加盟 -->
+	<select id="queryAllJoins" parameterType="bQueryVo" resultType="join">
+		select jid, jname, jtele, jposition, jtime,
+		case state
+		when 0 then '未联系'
+		else '已联系' end as isConnect
+		from t_join
+		<where>
+			<if test="atime != null and atime != '' ">
+				and jtime &lt; #{atime}
+			</if>
+			<if test="aname != null and aname != '' ">
+				and jname = #{aname}
+			</if>
+			<if test="atele != null and atele != '' ">
+				and jtele = #{atele}
+			</if>
+		</where>
+		order by #{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
 	<!-- 查询所有的预约 -->
 	<resultMap type="appoint" id="getAllAppointsMap">
 		<id column="aid" property="aid" />
@@ -168,7 +206,8 @@
 		select a.aid, a.aname, a.atele, a.antime, a.atime,
 		CASE
 		a.state
-		when 0 then '等待联系'
+		when 0
+		then '等待联系'
 		else '已联系' END as isConnect,
 		h.hid,
 		h.hposition, h.hprice,
@@ -189,13 +228,13 @@
 			<if test="atele != null and atele != '' ">
 				and a.atele = #{atele}
 			</if>
-			<if test="uid != null and uid != '' " >
+			<if test="uid != null and uid != '' ">
 				and u.uid = #{uid}
 			</if>
 			<if test="hid != null and hid != '' ">
 				and h.hid = #{hid}
 			</if>
-			<if test="atime != null and atime != '' " >
+			<if test="atime != null and atime != '' ">
 				and a.atime = #{atime}
 			</if>
 			<if test="uname != null and uname != '' ">

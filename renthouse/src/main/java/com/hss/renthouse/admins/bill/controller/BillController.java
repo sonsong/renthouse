@@ -82,7 +82,7 @@ public class BillController {
 	}
 
 	/**
-	 * 查询所有的租客
+	 * 查询账单
 	 * 
 	 * @param vo
 	 * @return

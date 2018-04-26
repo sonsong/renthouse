@@ -191,6 +191,7 @@ function checkUemail() {
 		}
 	}
 	
+	changeColor("blur", id, true);
 	return true;
 };
 

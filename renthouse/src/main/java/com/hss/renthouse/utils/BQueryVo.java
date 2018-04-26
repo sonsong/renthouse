@@ -59,6 +59,16 @@ public class BQueryVo implements Serializable {
 	private String rname;
 	private String rid;
 
+	private String search;
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
 	public String getRid() {
 		return rid;
 	}
@@ -282,6 +292,7 @@ public class BQueryVo implements Serializable {
 				+ ", loperateDate=" + loperateDate + ", ltimeout=" + ltimeout + ", antime=" + antime + ", name=" + name
 				+ ", atele=" + atele + ", result=" + result + ", state=" + state + ", hid=" + hid + ", uname=" + uname
 				+ ", atime=" + atime + ", cstime=" + cstime + ", cname=" + cname + ", ctele=" + ctele + ", cid=" + cid
-				+ ", hposition=" + hposition + ", mtime=" + mtime + "]";
+				+ ", hposition=" + hposition + ", mtime=" + mtime + ", rname=" + rname + ", rid=" + rid + ", search="
+				+ search + "]";
 	}
 }

@@ -62,36 +62,15 @@
 									<input type="text" class="form-control" id="uname" name="uname" value=""> 
 								</div>
 								
-								<label for="cname" class="col-sm-1 control-label">签约名:</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cname" name="cname" value=""> 
-								</div>
-								
 								<label for="ctele" class="col-sm-1 control-label">联系方式:</label>
 								<div class="col-sm-2">
 									<input type="text" class="form-control" id="ctele" name="ctele" value=""> 
 								</div>
-							</div>
-							<div class="form-group">
 								
-								<label for="cid" class="col-sm-2 control-label">合同编码:</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cid" name="cid" value=""> 
-								</div>
-								
-								<label for="rid" class="col-sm-1 control-label">租客编码:</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="rid" name="rid" value=""> 
-								</div>
-								
-								<label for="hid" class="col-sm-1 control-label">房源编码:</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="hid" name="hid" value=""> 
-								</div>
-								
-								<div class="col-sm-2 text-left">
+								<div class="col-sm-2 text-right">
 									<input type="button" class="btn btn-info" id="query" value="查询" style="width:100px"> 
 								</div>
+								
 							</div>
 						</form>
             		</div>

@@ -15,6 +15,7 @@ import com.hss.renthouse.admins.Log.annotation.SystemControllerAnnotation;
 import com.hss.renthouse.admins.Log.entity.Log;
 import com.hss.renthouse.admins.Log.service.interfaces.LogService;
 import com.hss.renthouse.admins.admin.entity.Admin;
+import com.hss.renthouse.admins.admin.entity.ContractsAndHouseAndRenter;
 import com.hss.renthouse.admins.admin.service.interfaces.AdminService;
 import com.hss.renthouse.user.user.entity.User;
 import com.hss.renthouse.user.user.service.interfaces.UserService;
@@ -41,6 +42,17 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 
+	/**
+	 * 查询用户对应得房源合同租客
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/getUserSubMenuByUId.action")
+	public BPageBean<ContractsAndHouseAndRenter> getUserSubMenuByUId(BQueryVo vo) {
+		return userService.getUserSubMenuByUId(vo);
+	}
 	/**
 	 * 查询用户
 	 * 

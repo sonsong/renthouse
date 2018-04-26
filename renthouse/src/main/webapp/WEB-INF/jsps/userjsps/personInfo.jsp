@@ -19,6 +19,7 @@
 <link href="/renthouse/css/user/common.css" rel="stylesheet">
 
 <link rel="icon" href="/renthouse/img/songzi.png" type="image/x-icon"/>
+<link href="/renthouse/css/admin/bootstrap-table.min.css" rel="stylesheet" />
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,84 +36,41 @@
 
 	<!--内容区-->
 	<div class="container" style="background-color: #f8f8f8">
+		<input type="hidden" id="uid" value="${sessionScope.user.uid}">
 		<div class="row">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-8 text-center" style="background-color: white">
+			<div class="col-sm-12 text-center" style="background-color: white">
 				<img src="/renthouse/img/user/user_pic" class="user_img">
 				<br>
 				<h3 class="tele">${sessionScope.user.utele }</h3>
 				<a href="#" class="update" data-toggle="modal"
 					data-target="#myModal1">修改资料 ></a>
+				<br><br>
 			</div>
-			<div class="col-sm-2"></div>
 		</div>
-
 		<div class="row" style="margin-top:10px">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-8" style="background-color: white">
+			<div class="col-sm-12" style="background-color: white">
 				<h3>我的合同</h3>
-				<c:choose>
-					<c:when test="${cons eq null } || ${cons eq '' }">
-						<div class="contract-no text-center">
-							<h4>您还没有生效的合同，快去预约吧~</h4>
-							<br>
-							<a href="#" class="btn btn-info btn-lg">去找房</a>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="c" items="${cons }">
-							<div class="contract">
-								<div class="col-sm-8">
-									${c.cstime }租房合同
-								</div>
-								<div class="col-sm-2 text-center">
-									<a>查看详情</a>
-								</div>
-							</div>
-							<br>
-							<br>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+				<div id="table_contract"></div>
 			</div>
-			<div class="col-sm-2"></div>
 		</div>
 		
 		<div class="row" style="margin-top:10px">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-8" style="background-color: white">
-				<h3>未支付账单</h3>
-				<c:choose>
-					<c:when test="${bills eq null } || ${bills eq '' }">
-						<div class="contract-no text-center">
-							<h4>您还没有未支付的账单</h4>
-							<br>
+			<div class="col-sm-12" style="background-color: white">
+				<h3>账单列表</h3>
+				<div id="toolbar">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<select id="bstate" name="state" class="form-control">
+								<option value="0"> 未支付</option>
+								<option value="1"> 已支付</option>
+							</select>
 						</div>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="b" items="${bills }">
-							<div class="contract">
-								<div class="col-sm-3">
-									<span>${b.btime }</span>
-								</div>
-								<div class="col-sm-3">
-									<span>${b.bdue }</span>
-								</div>
-								<div class="col-sm-2">
-									<span>${b.bprice }</span>
-								</div>
-								<div class="col-sm-2 text-center">
-									<a id="${b.bid }" class="pay">立即支付</a>
-								</div>
-							</div>
-							<br>
-							<br>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+					</form>
+				</div>
+				<div id="table_bill"></div>
 			</div>
-			<div class="col-sm-2"></div>
 		</div>
+		<br>
 	</div>
 	<!--底部-->
 	<jsp:include page="/WEB-INF/jsps/userjsps/bottom.jsp"/>
@@ -316,8 +274,16 @@
 <script src="/renthouse/js/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/renthouse/js/modalMsg.js"></script>
 <script type="text/javascript" src="/renthouse/js/user/updateUser.js"></script>
+<script src="/renthouse/js/admin/bootstrap-table.min.js"></script>
+<script src="/renthouse/js/admin/bootstrap-table-zh-CN.min.js"></script>
+<script src="/renthouse/js/user/table_contract.js"></script>
+<script src="/renthouse/js/user/table_bill.js"></script>
+
 <script>
 $(function(){
+	$("#bstate").bind("change", function(){
+		$("#table_bill").bootstrapTable('refresh');
+	});
 	$(".pay").bind("click", function(){
 		$(this).attr("data-toggle", "modal").attr("data-target", "#myModal2");
 		$("#bid").val($(this).attr("id"));

@@ -3,7 +3,7 @@ $("#table")
 		.bootstrapTable(
 				{
 					// 获取表格数据的url
-					url : "/admin/queryAllAppoints.action",
+					url : "/admin/queryAllJoins.action",
 					toolbar : '#toolbar',
 					// 设置为 false 禁用 AJAX 数据缓存， 默认为true
 					cache : false,
@@ -43,92 +43,63 @@ $("#table")
 						}
 					},
 					// 要排序的字段
-					sortName : 'aid',
+					sortName : 'jid',
 					// 排序规则
 					sortOrder : 'desc',
 					columns : [
 							{
-								field : 'aname',
+								field : 'jname',
 								title : '预约人',
 								align : 'center',
 								valign : 'middle',
-								width : 200
+								width : 400
 							},
 							{
-								field : 'atele',
+								field : 'jtele',
 								title : '联系电话',
 								align : 'center',
 								valign : 'middle',
-								width : 200
+								width : 400
 							},
 							{
-								field : 'antime',
+								field : 'jtime',
 								title : '预约时间',
 								align : 'center',
 								valign : 'middle',
-								width : 200
+								width : 400
 							},
 							{
-								field : 'atime',
-								title : '看房时间',
-								align : 'center',
-								valign : 'middle',
-								width : 200
-							},
-							{
-								field : 'house.hposition',
+								field : 'jposition',
 								title : '房源位置',
 								align : 'center',
 								valign : 'middle',
-								width : 200
-							},
-							{
-								field : 'house.hprice',
-								title : '房价',
-								align : 'center',
-								valign : 'middle',
-								width : 200
+								width : 400
 							},
 							{
 								field : 'isConnect',
 								title : '状态',
 								align : 'center',
 								valign : 'middle',
-								width : 200
-							},
-							{
-								field : 'user.uname',
-								title : '登陆名',
-								align : 'center',
-								valign : 'middle',
-								width : 200
+								width : 400
 							},
 							{
 								title : "操作",
 								align : 'center',
 								valign : 'middle',
-								width : 200,
+								width : 400,
 								formatter : function(value, row, index) {
 									return '<button class="btn btn-warning btn-sm sign" onclick="sign(\''
-											+ row.aid
+											+ row.jid
 											+ ','
-											+ row.aname
+											+ row.jname
 											+ ','
-											+ row.user.uid
-											+ ','
-											+ row.atele
-											+ ','
-											+ row.house.hid
-											+ ","
-											+ row.house.hprice
+											+ row.jtele
 											+ '\')">生成合同</button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm cancel" onclick="cancel(\''
-											+ row.aid
+											+ row.jid
 											+ ','
-											+ row.aname
+											+ row.jname
 											+ ','
-											+ row.atele
-											+ ','
-											+ row.antime
+											+ row.jtele
 											+ '\')">取消预约</button>';
 								}
 							} ],
@@ -143,24 +114,19 @@ $("#table")
 // 签约
 function sign(aid) {
 	$(".sign").attr("data-toggle", "modal").attr("data-target", "#myModal2");
-	var params = aid.split(",");
+	/*var params = aid.split(",");
 	$("#appid").val(params[0]);
 	// 预约人
-	$("#cname").val(params[1]);
-	// 登录用户编码
-	$("#uid").val(params[2]);
+	$("#jname").val(params[1]);
 	// 联系方式
-	$("#ctele").val(params[3]);
-	// 房源信息
-	$("#houseid").val(params[4]);
-	$("#cmoney").val(params[5]);
+	$("#jtele").val(params[3]);*/
 }
 // 取消预约
 function cancel(aid) {
 	$(".cancel").attr("data-toggle", "modal").attr("data-target", "#myModal1");
-	var params = aid.split(",");
+	/*var params = aid.split(",");
 	$("#aaid").val(params[0]);
 	$("#naame").val(params[1]);
 	$("#aatele").val(params[2]);
-	$("#aantime").val(params[3]);
+	$("#aantime").val(params[3]);*/
 }

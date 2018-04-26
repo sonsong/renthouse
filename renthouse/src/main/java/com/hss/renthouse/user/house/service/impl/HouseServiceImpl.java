@@ -1,5 +1,6 @@
 package com.hss.renthouse.user.house.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hss.renthouse.user.house.dao.HouseMapper;
 import com.hss.renthouse.user.house.entity.HAppoint;
+import com.hss.renthouse.user.house.entity.HJoin;
 import com.hss.renthouse.user.house.entity.House;
 import com.hss.renthouse.user.house.entity.Imgs;
-import com.hss.renthouse.user.house.entity.HJoin;
 import com.hss.renthouse.user.house.entity.QueryVo;
 import com.hss.renthouse.user.house.service.interfaces.HouseService;
+import com.hss.renthouse.utils.DateUtils;
 import com.hss.renthouse.utils.PageBean;
 import com.hss.renthouse.utils.PageEnum;
 import com.hss.renthouse.utils.UUIDUtil;
@@ -94,6 +96,7 @@ public class HouseServiceImpl implements HouseService {
 		String jid = UUIDUtil.getUuid();
 		join.setJid(jid);
 		join.setState(0);
+		join.setJtime(DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		int count = houseMapper.joinHouse(join);
 		if(count != 1){
 			throw new RuntimeException("不好意思，委托失败，请您稍后再试");

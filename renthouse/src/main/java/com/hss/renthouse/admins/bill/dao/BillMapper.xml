@@ -34,7 +34,7 @@
 	<select id="queryBillByUid" parameterType="string" resultType="bill">
 		select * from t_bill where DATE_FORMAT(btime, '%Y-%m') =
 		DATE_FORMAT(NOW(),
-		'%Y-%m') and bstate = '0'
+		'%Y-%m') and bstate = '0' and uid = #{uid}
 	</select>
 	<!-- 查询所有租金 -->
 	<resultMap type="bill" id="getbillsResultMap">

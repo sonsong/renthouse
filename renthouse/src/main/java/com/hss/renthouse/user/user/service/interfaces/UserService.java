@@ -1,5 +1,6 @@
 package com.hss.renthouse.user.user.service.interfaces;
 
+import com.hss.renthouse.admins.admin.entity.ContractsAndHouseAndRenter;
 import com.hss.renthouse.user.user.entity.User;
 import com.hss.renthouse.utils.BPageBean;
 import com.hss.renthouse.utils.BQueryVo;
@@ -48,4 +49,11 @@ public interface UserService {
 	 * @return
 	 */
 	BPageBean<User> queryUsers(BQueryVo vo);
+
+	/**
+	 * 查询用户对应得房源合同租客
+	 * @param vo
+	 * @return
+	 */
+	BPageBean<ContractsAndHouseAndRenter> getUserSubMenuByUId(BQueryVo vo);
 }

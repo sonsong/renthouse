@@ -20,10 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
-import com.hss.renthouse.admins.bill.entity.Bill;
 import com.hss.renthouse.admins.bill.service.interfaces.BillService;
-import com.hss.renthouse.admins.contract.entity.Contract;
-import com.hss.renthouse.admins.contract.service.interfaces.ContractService;
 import com.hss.renthouse.user.house.entity.House;
 import com.hss.renthouse.user.house.service.interfaces.HouseService;
 import com.hss.renthouse.user.user.entity.User;
@@ -45,8 +42,6 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private HouseService houseService;
-	@Autowired
-	private ContractService contractService;
 	@Autowired
 	private BillService billService;
 
@@ -424,15 +419,7 @@ public class UserController {
 	@RequestMapping(value = "/user/skipPersonInfoPage.action")
 	public ModelAndView skipPersonInfoPage(HttpSession session) {
 		ModelAndView md = new ModelAndView();
-
-		User user = (User) session.getAttribute("user");
-		// 查询我的合同
-		List<Contract> cons = contractService.queryContractByUid(user.getUid());
-		// 查询我的账单 本月未支付账单
-		List<Bill> bills = billService.queryBillByUid(user.getUid());
-
-		md.addObject("cons", cons);
-		md.addObject("bills", bills);
+		
 		md.setViewName("userjsps/personInfo");
 		return md;
 	}

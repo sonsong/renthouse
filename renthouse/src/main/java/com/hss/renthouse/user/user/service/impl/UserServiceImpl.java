@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hss.renthouse.admins.admin.entity.ContractsAndHouseAndRenter;
 import com.hss.renthouse.user.user.dao.UserMapper;
 import com.hss.renthouse.user.user.entity.User;
 import com.hss.renthouse.user.user.service.interfaces.UserService;
@@ -87,6 +88,19 @@ public class UserServiceImpl implements UserService {
 		BPageBean<User> pb = new BPageBean<>();
 		pb.setTotal(total);
 		pb.setRows(users);
+		return pb;
+	}
+
+	@Override
+	public BPageBean<ContractsAndHouseAndRenter> getUserSubMenuByUId(BQueryVo vo) {
+		//得到用户的总记录数
+		Integer total = userMapper.queryContractsAndHouseAndRenterTotal(vo);
+		//按条件查询用户
+		List<ContractsAndHouseAndRenter> usermenus = userMapper.queryContractsAndHouseAndRenters(vo);
+		
+		BPageBean<ContractsAndHouseAndRenter> pb = new BPageBean<>();
+		pb.setTotal(total);
+		pb.setRows(usermenus);
 		return pb;
 	}
 }

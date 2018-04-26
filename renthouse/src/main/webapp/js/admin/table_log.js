@@ -5,14 +5,14 @@ $("#table").bootstrapTable({
 	// 设置为 false 禁用 AJAX 数据缓存， 默认为true
 	cache : false,
 	// 表格显示条纹，默认为false
-	/* striped : true, */
-	/* showRefresh : true, */
+	 striped : true, 
+	 showRefresh : true, 
 	// 在表格底部显示分页组件，默认false
 	pagination : true,
 	// 设置页面可以显示的数据条数
 	pageList : [ 5, 10, 20 ],
 	// 页面数据条数
-	pageSize : 10,
+	pageSize : 20,
 	// 首页页码
 	pageNumber : 1,
 	// 设置为服务器端分页

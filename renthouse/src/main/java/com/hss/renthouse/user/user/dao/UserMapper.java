@@ -2,6 +2,7 @@ package com.hss.renthouse.user.user.dao;
 
 import java.util.List;
 
+import com.hss.renthouse.admins.admin.entity.ContractsAndHouseAndRenter;
 import com.hss.renthouse.user.user.entity.User;
 import com.hss.renthouse.utils.BQueryVo;
 
@@ -53,5 +54,19 @@ public interface UserMapper {
 	 * @return
 	 */
 	List<User> queryUsers(BQueryVo vo);
+
+	/**
+	 * 查询用户对应得房源合同租客总数
+	 * @param vo
+	 * @return
+	 */
+	Integer queryContractsAndHouseAndRenterTotal(BQueryVo vo);
+
+	/**
+	 * 查询用户对应得房源合同租客
+	 * @param vo
+	 * @return
+	 */
+	List<ContractsAndHouseAndRenter> queryContractsAndHouseAndRenters(BQueryVo vo);
 
 }

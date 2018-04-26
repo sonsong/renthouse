@@ -1,5 +1,5 @@
 // 对应table标签的id
-$("#table")
+$("#table_bill")
 		.bootstrapTable(
 				{
 					// 获取表格数据的url
@@ -10,6 +10,7 @@ $("#table")
 					// 表格显示条纹，默认为false
 					striped : true,
 					showRefresh : true,
+					toolbarAlign : "right",
 					// 在表格底部显示分页组件，默认false
 					pagination : true,
 					// 设置页面可以显示的数据条数
@@ -32,12 +33,8 @@ $("#table")
 							sort : params.sort,
 							// 排序规则
 							sortOrder : params.order,
-							mtime : $.trim($("#btime").val()),
-							uname : $.trim($("#uname").val()),
-							rname : $.trim($("#rname").val()),
 							uid : $.trim($("#uid").val()),
-							cid : $.trim($("#cid").val()),
-							state : $.trim($("#state").val())
+							state : $("#bstate").val()
 						}
 					},
 					// 要排序的字段
@@ -78,21 +75,6 @@ $("#table")
 								title : '是否支付',
 								align : 'center',
 								valign : 'middle',
-								cellStyle : function(value, row, index) {
-									if (value === '未支付') {
-										return {
-											css : {
-												"background-color" : "red"
-											}
-										};
-									} else {
-										return {
-											"css" : {
-												"background-color" : ""
-											}
-										};
-									}
-								},
 								width : 300
 							},
 							{
@@ -101,8 +83,7 @@ $("#table")
 								align : 'center',
 								valign : 'middle',
 								width : 300
-							},
-							{
+							},{
 								title : "操作",
 								align : 'center',
 								valign : 'middle',
@@ -110,29 +91,14 @@ $("#table")
 								formatter : function(value, row, index) {
 									if(row.isPay === '未支付'){
 										
-										return '<button class="btn btn-warning btn-sm update glyphicon glyphicon-list" onclick="update(\''
+										return '<button class="btn btn-danger btn-sm pay" onclick="pay(\''
 												+ row.bid
-												+ ','
-												+ row.bdue
-												+ ','
-												+ row.bprice
-												+ ','
-												+ '\')"></button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm glyphicon glyphicon-remove del" onclick="del(\''
-												+ row.bid
-												+ ','
-												+ row.isPay
-												+ ','
-												+ '\')"></button>';
+												+ '\')">立即支付</button>';
 									}else{
-										return '<button class="btn btn-danger btn-sm glyphicon glyphicon-remove del" onclick="del(\''
-										+ row.bid
-										+ ','
-										+ row.isPay
-										+ ','
-										+ '\')"></button>';
 									}
 								}
-							} ],
+							}
+							],
 					onLoadSuccess : function() { // 加载成功时执行
 						console.info("加载成功");
 					},
@@ -140,29 +106,7 @@ $("#table")
 						console.info("加载数据失败");
 					}
 				});
-//修改账单
-function update(row){
-	$(".update").attr("data-toggle", "modal").attr("data-target", "#myModal1")
-	row = row.split(",");
-	var bid = row[0];
-	var bdue = row[1];
-	var bprice = row[2];
-	
+function pay(bid){
+	$(".pay").attr("data-toggle", "modal").attr("data-target", "#myModal2");
 	$("#bid").val(bid);
-	$("#bdue").val(bdue);
-	$("#bprice").val(bprice);
-}
-//删除账单
-function del(row){
-	row = row.split(",");
-	var bid = row[0];
-	var isPay = row[1];
-	
-	if(isPay === '未支付'){
-		if(confirm("该账单还未支付，你确认要删除嘛？")){
-			$.post("/admin/delBillByBid.action", {"bid":bid});
-		}
-	}else{
-		$.post("/admin/delBillByBid.action", {"bid":bid});
-	}
 }
