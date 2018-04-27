@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import com.hss.renthouse.admins.Log.annotation.SystemControllerAnnotation;
 import com.hss.renthouse.admins.admin.entity.Admin;
 import com.hss.renthouse.admins.contract.entity.Contract;
+import com.hss.renthouse.admins.contract.entity.OwnerContract;
 import com.hss.renthouse.admins.contract.service.interfaces.ContractService;
 import com.hss.renthouse.user.house.entity.House;
 import com.hss.renthouse.user.house.service.interfaces.HouseService;
@@ -37,6 +38,59 @@ public class ContractController {
 	@Autowired
 	private HouseService houseService;
 
+	/**
+	 * 生成房东合同
+	 * @param con
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/addOwnerContract.action")
+	@SystemControllerAnnotation(value = "生成房东合同")
+	public String addOwnerContract(String oid, OwnerContract con, RedirectAttributesModelMap model, HttpSession session) {
+		String msg = "";
+		String returnUrl = "";
+		Admin admin = (Admin) session.getAttribute("admin");
+		
+		try {
+			con.setAdid(admin.getAid());
+			contractService.addOwnerContract(oid, con);
+			msg = "生成合同成功";
+			returnUrl = "redirect:/admin/skipOwnerContractPage.action";
+		} catch (Exception e) {
+			msg = e.getMessage();
+			returnUrl = "redirect:/admin/skipOwnerManagePage.action";
+		}
+		
+		model.addFlashAttribute("msg", msg);
+		logger.info("{}" + msg + "!", admin.getAname());
+		return returnUrl;
+	}
+	/**
+	 * 删除房东合同
+	 * @param con
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/delOwnerContractByCid.action")
+	@SystemControllerAnnotation(value = "删除房东合同")
+	public String delOwnerContractByCid(OwnerContract con, RedirectAttributesModelMap model, HttpSession session) {
+		String msg = "";
+		Admin admin = (Admin) session.getAttribute("admin");
+
+		try {
+			contractService.delOwnerContractByCid(con);
+			msg = "删除房东合同成功";
+		} catch (Exception e) {
+			msg = e.getMessage();
+		} 
+		
+		model.addFlashAttribute("msg", msg);
+		logger.info("{}" + msg + "!", admin.getAname());
+		return "redirect:/admin/skipOwnerContractPage.action";
+	}
+	
 	/**
 	 * 删除合同
 	 * @param con
@@ -62,6 +116,35 @@ public class ContractController {
 		return "redirect:/admin/skipRenterContractPage.action";
 	}
 
+	/**
+	 * 修改房东合同
+	 * 
+	 * @param contract
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/updateOwnerContract.action")
+	@SystemControllerAnnotation(value = "修改房东合同")
+	public String updateOwnerContract(OwnerContract contract, RedirectAttributesModelMap model, HttpSession session) {
+		String msg = "";
+
+		Admin admin = (Admin) session.getAttribute("admin");
+
+		try {
+			// 重新设置操作人
+			contract.setAdid(admin.getAid());
+			contractService.updateOwnerContract(contract);
+			msg = "修改房东合同成功";
+		} catch (Exception e) {
+			msg = e.getMessage();
+		}
+
+		model.addFlashAttribute("msg", msg);
+		logger.info("{}" + msg + "!", admin.getAname());
+		return "redirect:/admin/skipOwnerContractPage.action";
+	}
+	
 	/**
 	 * 修改合同
 	 * 
@@ -89,6 +172,18 @@ public class ContractController {
 		model.addFlashAttribute("msg", msg);
 		logger.info("{}" + msg + "!", admin.getAname());
 		return "redirect:/admin/skipRenterContractPage.action";
+	}
+
+	/**
+	 * 查询所有的房东合同
+	 * 
+	 * @param vo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/queryAllOwnerContract.action")
+	public BPageBean<OwnerContract> queryAllOwnerContract(BQueryVo vo) {
+		return contractService.queryAllOwnerContract(vo);
 	}
 
 	/**
@@ -149,6 +244,18 @@ public class ContractController {
 		return returnUrl;
 	}
 
+	/**
+	 * 跳转到房东合同管理页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/skipOwnerContractPage.action")
+	public ModelAndView skipOwnerContractPage() {
+		ModelAndView md = new ModelAndView();
+
+		md.setViewName("adminjsps/ownerContract");
+		return md;
+	}
 	/**
 	 * 跳转到房客合同管理页面
 	 * 

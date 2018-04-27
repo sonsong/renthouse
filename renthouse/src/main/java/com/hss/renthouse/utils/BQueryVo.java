@@ -60,6 +60,15 @@ public class BQueryVo implements Serializable {
 	private String rid;
 
 	private String search;
+	private Integer rtype;
+
+	public Integer getRtype() {
+		return rtype;
+	}
+
+	public void setRtype(Integer rtype) {
+		this.rtype = rtype;
+	}
 
 	public String getSearch() {
 		return search;
@@ -293,6 +302,6 @@ public class BQueryVo implements Serializable {
 				+ ", atele=" + atele + ", result=" + result + ", state=" + state + ", hid=" + hid + ", uname=" + uname
 				+ ", atime=" + atime + ", cstime=" + cstime + ", cname=" + cname + ", ctele=" + ctele + ", cid=" + cid
 				+ ", hposition=" + hposition + ", mtime=" + mtime + ", rname=" + rname + ", rid=" + rid + ", search="
-				+ search + "]";
+				+ search + ", rtype=" + rtype + "]";
 	}
 }

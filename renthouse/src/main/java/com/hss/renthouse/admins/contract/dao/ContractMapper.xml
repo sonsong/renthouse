@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.admins.contract.dao.ContractMapper">
+
+	<!-- 删除指定的房东合同 -->
+	<delete id="delOwnerConByCid" parameterType="string">
+		delete from t_contract_owner where cid = #{cid}
+	</delete>
+	
 	<!-- 删除指定的合同 -->
 	<delete id="delContractBycid" parameterType="string">
 		delete from t_contract where cid = #{cid}
 	</delete>
+	<!-- 修改房东合同 -->
+	<update id="updateOwnerContract" parameterType="ownerContract">
+		update t_contract_owner set
+		cname = #{cname}, ctele = ${ctele}, cetime = #{cetime},
+		crtime = #{crtime}, cmoney = #{cmoney}
+		where cid = #{cid}
+	</update>
 	<!-- 修改合同 -->
 	<update id="updateContract" parameterType="contract">
 		update t_contract set
@@ -16,6 +29,80 @@
 	<select id="queryContractByUid" parameterType="string"
 		resultType="contract">
 		select * from t_contract where uid = #{uid}
+	</select>
+		<!-- 查询所有合同 -->
+	<resultMap type="ownerContract" id="getOwnerContractsResultMap">
+		<id column="cid" property="cid" />
+		<result column="cname" property="cname" />
+		<result column="ctele" property="ctele" />
+		<result column="cstime" property="cstime" />
+		<result column="cetime" property="cetime" />
+		<result column="crtime" property="crtime" />
+		<result column="cmoney" property="cmoney" />
+		<association property="admin" javaType="admin">
+			<id column="aid" property="aid" />
+			<result column="aname" property="aname" />
+		</association>
+		<association property="house" javaType="house">
+			<id column="hid" property="hid" />
+			<result column="hposition" property="hposition" />
+			<result column="hprice" property="hprice" />
+		</association>
+	</resultMap>
+	<select id="queryAllOwnerContracts" parameterType="bQueryVo"
+		resultMap="getOwnerContractsResultMap">
+		select c.cid, c.cname, c.ctele, c.cstime, 
+		c.cetime, c.crtime, c.cmoney, h.hid,
+		h.hposition, h.hprice, ad.aid, ad.aname
+		from t_contract_owner c
+		inner join t_house h on h.hid = c.hid
+		inner join t_admin ad on ad.aid = c.adid
+		<where>
+			<if test="cstime != null and cstime != '' ">
+				and c.cstime &lt; #{cstime}
+			</if>
+			<if test="cname != null and cname != '' ">
+				and c.cname = #{cname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and c.ctele = #{ctele}
+			</if>
+			<if test="uid != null and uid != '' ">
+				and c.uid = #{uid}
+			</if>
+			<if test="hid != null and hid != '' ">
+				and h.hid = #{hid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and c.cid = #{cid}
+			</if>
+		</where>
+		order by
+		#{sort}
+		#{sortOrder}
+		limit #{offset}, #{ps}
+	</select>
+	<!-- 查询房东合同总数 -->
+	<select id="queryOwnerContractsTotal" resultType="integer">
+		select count(*) from
+		t_contract_owner c 
+		inner join t_house h on h.hid = c.hid
+		inner join t_admin
+		ad on ad.aid = c.adid
+		<where>
+			<if test="cname != null and cname != '' ">
+				and c.cname = #{cname}
+			</if>
+			<if test="ctele != null and ctele != '' ">
+				and c.ctele = #{ctele}
+			</if>
+			<if test="hid != null and hid != '' ">
+				and h.hid = #{hid}
+			</if>
+			<if test="cid != null and cid != '' ">
+				and c.cid = #{cid}
+			</if>
+		</where>
 	</select>
 	<!-- 查询所有合同 -->
 	<resultMap type="contract" id="getContractsResultMap">
@@ -120,6 +207,15 @@
 			</if>
 		</where>
 	</select>
+	<!-- 新增房东合同 -->
+	<insert id="addOwnerContract" parameterType="ownerContract">
+		insert into t_contract_owner
+		values
+		(
+		#{cid}, #{cname}, #{ctele}, #{ccompany}, #{ccompanytele},
+		#{cstime}, #{cetime}, #{cmoney},#{crtime}, #{adid}, #{hid}
+		)
+	</insert>
 	<!-- 生成合同 -->
 	<insert id="addContract" parameterType="contract">
 		insert into t_contract

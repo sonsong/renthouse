@@ -32,11 +32,21 @@ public class AppointResult implements Serializable {
 	private String antime;
 	// 操作时间
 	private String ctime;
+	// 预约类型
+	private Integer rtype;
 
 	private String isConnect;
 	private String isSuccess;
 
 	private Admin admin;
+
+	public Integer getRtype() {
+		return rtype;
+	}
+
+	public void setRtype(Integer rtype) {
+		this.rtype = rtype;
+	}
 
 	public String getRid() {
 		return rid;

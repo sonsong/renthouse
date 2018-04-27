@@ -133,8 +133,7 @@
 					</div>
 					<div class="col-sm-3"></div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 				<div class="row">
 					<div class="col-sm-1 col-xs-1"></div>
 					<div class="col-sm-10 col-xs-10">
@@ -148,16 +147,12 @@
 								</div>
 
 								<div class="col-sm-6">
-									<br>
-									<br>
-									<br> <span class="h_price"><span class="price">${h.hprice }</span>元/月</span>
-									<br> <br>
-									<span class="h_position"><span>${h.hposition }</span>&nbsp;&nbsp;<span>${h.hmodel }</span></span>
-									<br> <br>
-									<span class="h_tran"><span>${h.hsubway}</span>/<span>${h.harea }</span>/<span
+									<br> <br> <br> <span class="h_price"><span
+										class="price">${h.hprice }</span>元/月</span> <br> <br> <span
+										class="h_position"><span>${h.hposition }</span>&nbsp;&nbsp;<span>${h.hmodel }</span></span>
+									<br> <br> <span class="h_tran"><span>${h.hsubway}</span>/<span>${h.harea }</span>/<span
 										style="color: red"><c:if test="${h.hpaytype eq 0}">月付</c:if>
-											<c:if test="${h.hpaytype eq 1}">年付</c:if></span></span> <br>
-									<br>
+											<c:if test="${h.hpaytype eq 1}">年付</c:if></span></span> <br> <br>
 									<c:choose>
 										<c:when test="${h.hstate eq 0 }">
 											<span id="ustate">未出租</span>
@@ -202,7 +197,7 @@
 				<div class="row">
 					<div class="col-sm-1"></div>
 					<div class="col-sm-10">
-						<form action="/admin/addHouse.action" method="post" id="form"
+						<form action="/admin/addHouse.action" method="post" id="form1"
 							class="form-horizontal" enctype="multipart/form-data">
 
 							<div class="form-group">
@@ -268,8 +263,9 @@
 
 								<label for="hpaytype" class="col-sm-2 control-label">付款方式:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="hpaytype"
-										name="hpaytype" value="${house.hpaytype }">
+									<select name="hpaytype" id="select5" class="form-control">
+										<option value="0">月付</option>
+									</select>
 								</div>
 
 								<label for="htoward" class="col-sm-2 control-label">朝向:</label>
@@ -368,6 +364,7 @@
 	<!-- Custom Js -->
 	<script src="/renthouse/ht/assets/js/custom-scripts.js"></script>
 	<script type="text/javascript" src="/renthouse/js/modalMsg.js"></script>
+	<script type="text/javascript" src="/renthouse/js/admin/house.js"></script>
 
 	<script>
 		$(function() {
@@ -375,84 +372,85 @@
 					"curtime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay());",
 					1000);
 
-			$(function() {
-				$(".form-control").focus(function() {
-					var name = $(this).attr("name");
-					$("#" + name + "_tip").text("");
-				});
-
-				$("#addHouse").bind(
-						"click",
-						function() {
-							var bool = true;
-
-							//标题
-							var hname = $("#hname").val();
-							if (hname === null || $.trim(hname).length == 0) {
-								$("#hname" + "_tip").text("标题不能为空");
-								bool = false;
-							}
-							//月租金额
-							var hprice = $("#hprice").val();
-							if (hprice === null || $.trim(hprice).length == 0) {
-								$("#hprice" + "_tip").text("请输入月租金额");
-								bool = false;
-							}
-							//地理位置
-							var hposition = $("#hposition").val();
-							if (hposition === null
-									|| $.trim(hposition).length == 0) {
-								$("#hposition" + "_tip").text("房源位置不能为空");
-								bool = false;
-							}
-
-							//居住类型
-							var hmethod = Number($("#select1").find(
-									"option:selected").val());
-							if (hmethod > 1) {
-								$("#hmethod" + "_tip").text("请选择居住类型");
-								bool = false;
-							}
-							//出租类型
-							var htype = Number($("#select2").find(
-									"option:selected").val());
-							if (htype > 2) {
-								$("#htype" + "_tip").text("请选择出租类型");
-								bool = false;
-							}
-							//房源归属
-							var hbelong = Number($("#select4").find(
-									"option:selected").val());
-							if (hbelong > 1) {
-								$("#hbelong" + "_tip").text("请选择房源归属");
-								bool = false;
-							}
-
-							if (bool) {
-								$("#form").submit();
-							}
-						});
-
-				//给搜索框绑定单击时间
-				$(".search").bind(
-						"click",
-						function() {
-							//得到输入框的值
-							var searchVal = $(".searchVal").val();
-
-							if (searchVal === null
-									|| $.trim(searchVal).length == 0) {
-								$(".searchVal").focus();
-								$(".searchVal").css("border-color", "red");
-							} else {
-								$(".search").attr(
-										"href",
-										"/admin/skipHouseManagePage.action?searchVal="
-												+ searchVal);
-							}
-						});
+			$("#form1 .form-control").focus(function() {
+				var name = $(this).attr("name");
+				$("#" + name + "_tip").text("");
 			});
-		})
+
+			$("#form1 #addHouse")
+					.bind(
+							"click",
+							function() {
+								var bool = true;
+
+								//标题
+								var hname = $("#hname").val();
+								if (hname === null || $.trim(hname).length == 0) {
+									$("#hname" + "_tip").text("标题不能为空");
+									bool = false;
+								}
+								//月租金额
+								var hprice = $("#hprice").val();
+								if (hprice === null
+										|| $.trim(hprice).length == 0) {
+									$("#hprice" + "_tip").text("请输入月租金额");
+									bool = false;
+								}
+								//地理位置
+								var hposition = $("#hposition").val();
+								if (hposition === null
+										|| $.trim(hposition).length == 0) {
+									$("#hposition" + "_tip").text("房源位置不能为空");
+									bool = false;
+								}
+
+								//居住类型
+								var hmethod = Number($("#select1").find(
+										"option:selected").val());
+								if (hmethod > 1) {
+									$("#hmethod" + "_tip").text("请选择居住类型");
+									bool = false;
+								}
+								//出租类型
+								var htype = Number($("#select2").find(
+										"option:selected").val());
+								if (htype > 2) {
+									$("#htype" + "_tip").text("请选择出租类型");
+									bool = false;
+								}
+								//房源归属
+								var hbelong = Number($("#select4").find(
+										"option:selected").val());
+								if (hbelong > 1) {
+									$("#hbelong" + "_tip").text("请选择房源归属");
+									bool = false;
+								}
+
+								if (bool) {
+									$("#form").submit();
+								}
+							});
+
+			//给搜索框绑定单击时间
+			$(".search")
+					.bind(
+							"click",
+							function() {
+								//得到输入框的值
+								var searchVal = $(".searchVal").val();
+
+								if (searchVal === null
+										|| $.trim(searchVal).length == 0) {
+									$(".searchVal").focus();
+									$(".searchVal").css("border-color", "red");
+								} else {
+									$(".search").attr(
+											"href",
+											"/admin/skipHouseManagePage.action?searchVal="
+													+ searchVal);
+								}
+							});
+		});
 	</script>
 </body>
 

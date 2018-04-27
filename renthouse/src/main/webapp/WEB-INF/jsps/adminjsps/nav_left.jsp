@@ -26,7 +26,7 @@
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
 					<li><a href="/admin/skipRenterContractPage.action">租客合同</a></li>
-					<li><a href="">房东合同</a></li>
+					<li><a href="/admin/skipOwnerContractPage.action">房东合同</a></li>
 				</ul>
 			</li>
 			<li><a href="#"><i class="glyphicon glyphicon-tag"></i> 预约管理<span

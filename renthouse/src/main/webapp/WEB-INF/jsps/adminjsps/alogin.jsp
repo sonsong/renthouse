@@ -99,6 +99,7 @@
 <script>
 
 	$(function(){
+		$("#aname").focus();
 		$("#btn").bind("click", function(){
 			var bool = true;
 			

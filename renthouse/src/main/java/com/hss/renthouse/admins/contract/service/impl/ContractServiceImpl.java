@@ -14,10 +14,13 @@ import com.hss.renthouse.admins.bill.dao.BillMapper;
 import com.hss.renthouse.admins.bill.entity.Bill;
 import com.hss.renthouse.admins.contract.dao.ContractMapper;
 import com.hss.renthouse.admins.contract.entity.Contract;
+import com.hss.renthouse.admins.contract.entity.OwnerContract;
 import com.hss.renthouse.admins.contract.service.interfaces.ContractService;
 import com.hss.renthouse.admins.rental.dao.RentalMapper;
 import com.hss.renthouse.admins.rental.entity.Rental;
+import com.hss.renthouse.admins.renter.dao.OwnerMapper;
 import com.hss.renthouse.admins.renter.dao.RenterMapper;
+import com.hss.renthouse.admins.renter.entity.Owner;
 import com.hss.renthouse.admins.renter.entity.Renter;
 import com.hss.renthouse.user.house.dao.HouseMapper;
 import com.hss.renthouse.utils.BPageBean;
@@ -49,6 +52,8 @@ public class ContractServiceImpl implements ContractService {
 	private BillMapper billMapper;
 	@Autowired
 	private HouseMapper houseMapper;
+	@Autowired
+	private OwnerMapper ownerMapper;
 	
 	@Override
 	@Transactional
@@ -208,6 +213,55 @@ public class ContractServiceImpl implements ContractService {
 			}
 		}else{
 			throw new RuntimeException("删除合同失败");
+		}
+	}
+
+	@Override
+	public void addOwnerContract(String oid, OwnerContract con) {
+		//设置房东合同编码
+		con.setCid(UUIDUtil.getUuid());
+		//生成合同
+		int count = contractMapper.addOwnerContract(con);
+		if(count != 1){
+			throw new RuntimeException("生成房东合同失败");
+		}else{
+			//修改房东信息
+			Owner o = new Owner();
+			o.setOid(oid);
+			o.setCid(con.getCid());
+			ownerMapper.updateOwnerByOid(o);
+		}
+	}
+
+	@Override
+	public BPageBean<OwnerContract> queryAllOwnerContract(BQueryVo vo) {
+		// 得到合同的总记录数
+		Integer total = contractMapper.queryOwnerContractsTotal(vo);
+		// 按条件查询用户
+		List<OwnerContract> cons = contractMapper.queryAllOwnerContracts(vo);
+
+		BPageBean<OwnerContract> pb = new BPageBean<>();
+		pb.setTotal(total);
+		pb.setRows(cons);
+		return pb;
+	}
+
+	@Override
+	public void updateOwnerContract(OwnerContract contract) {
+		int count = contractMapper.updateOwnerContract(contract);
+		if(count != 1){
+			throw new RuntimeException("修改房东合同失败");
+		}
+	}
+
+	@Override
+	public void delOwnerContractByCid(OwnerContract con) {
+		int count = contractMapper.delOwnerConByCid(con.getCid());
+		if(count != 1){
+			throw new RuntimeException("删除房东合同失败");
+		}else{
+			//删除房东信息
+			ownerMapper.delOwnerByCid(con.getCid());
 		}
 	}
 }

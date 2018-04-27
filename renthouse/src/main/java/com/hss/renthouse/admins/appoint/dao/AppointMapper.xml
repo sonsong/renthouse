@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.admins.appoint.dao.AppointMapper">
-
+	<!-- 删除加盟单 -->
+	<delete id="delJoinByJid" parameterType="string">
+		delete from t_join where
+		jid = #{jid}
+	</delete>
 	<!-- 查询预约单 -->
 	<select id="getAppointByAid" parameterType="string" resultType="appoint">
 		select * from t_appoint where aid = #{aid}
@@ -52,14 +56,16 @@
 				and r.atele = #{atele}
 			</if>
 			<if test="result != null and result != '' ">
-				and r.result =
-				#{result}
+				and r.result = #{result}
 			</if>
 			<if test="aname != null and aname != '' ">
 				and a.aname = #{aname}
 			</if>
 			<if test="state != null and state != '' ">
 				and r.state = #{state}
+			</if>
+			<if test="rtype != null and rtype != '' ">
+				and r.rtype = #{rtype}
 			</if>
 		</where>
 		order by
@@ -93,12 +99,21 @@
 			<if test="aname != null and aname != '' ">
 				and a.aname = #{aname}
 			</if>
+			<if test="rtype != null and rtype != '' ">
+				and r.rtype = #{rtype}
+			</if>
 		</where>
 	</select>
 	<!-- 删除预约单 -->
 	<delete id="delAppointByAid" parameterType="string">
 		delete from t_appoint
 		where aid = #{aid}
+	</delete>
+	<!-- 删除业主加盟预约单 -->
+	<delete id="delJoinAppointByAid" parameterType="string">
+		delete from
+		t_join
+		where jid = #{jid}
 	</delete>
 	<!-- 新增预约结果 -->
 	<insert id="addAppointResult" parameterType="appointResult">
@@ -107,7 +122,7 @@
 		values
 		(
 		#{rid}, #{state}, #{result}, #{reason},
-		#{name}, #{atele}, #{antime},#{adid},#{ctime}
+		#{name}, #{atele}, #{antime},#{adid},#{ctime}, #{rtype}
 		)
 	</insert>
 

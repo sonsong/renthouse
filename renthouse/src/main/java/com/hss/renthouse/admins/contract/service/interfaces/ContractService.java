@@ -3,6 +3,7 @@ package com.hss.renthouse.admins.contract.service.interfaces;
 import java.util.List;
 
 import com.hss.renthouse.admins.contract.entity.Contract;
+import com.hss.renthouse.admins.contract.entity.OwnerContract;
 import com.hss.renthouse.utils.BPageBean;
 import com.hss.renthouse.utils.BQueryVo;
 
@@ -45,5 +46,31 @@ public interface ContractService {
 	 * @param con
 	 */
 	void delContractByCid(Contract con);
+
+	/**
+	 * 生成房东合同
+	 * @param oid
+	 * @param con
+	 */
+	void addOwnerContract(String oid, OwnerContract con);
+
+	/**
+	 * 查询所有得房东合同
+	 * @param vo
+	 * @return
+	 */
+	BPageBean<OwnerContract> queryAllOwnerContract(BQueryVo vo);
+
+	/**
+	 * 修改房东合同
+	 * @param contract
+	 */
+	void updateOwnerContract(OwnerContract contract);
+
+	/**
+	 * 删除房东合同
+	 * @param con
+	 */
+	void delOwnerContractByCid(OwnerContract con);
 
 }

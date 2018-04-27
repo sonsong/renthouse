@@ -1,7 +1,7 @@
 // 对应table标签的id
 $("#table").bootstrapTable({
 	// 获取表格数据的url
-	url : "/admin/queryAllAppointResults.action",
+	url : "/admin/queryAllOwners.action",
 	toolbar : '#toolbar',
 	// 设置为 false 禁用 AJAX 数据缓存， 默认为true
 	cache : false,
@@ -31,98 +31,60 @@ $("#table").bootstrapTable({
 			sort : params.sort,
 			// 排序规则
 			sortOrder : params.order,
-			antime : $.trim($("#antime").val()),
-			name : $.trim($("#name").val()),
-			atele : $.trim($("#atele").val()),
-			aname : $.trim($("#aname").val()),
-			result : $.trim($("#result").val()),
-			state : $.trim($("#state").val()),
-			rtype : $.trim($("#rtype").val())
+
+			cname : $.trim($("#oname").val()),
+			ctele : $.trim($("#otele").val()),
 		}
 	},
 	// 要排序的字段
-	sortName : 'ctime',
+	sortName : 'oid',
 	// 排序规则
 	sortOrder : 'desc',
 	columns : [ {
-		field : 'name',
-		title : '预约人',
+		field : 'oname',
+		title : '房东名',
 		align : 'center',
 		valign : 'middle',
-		width : 200
+		width : 500
 	}, {
-		field : 'atele',
+		field : 'otele',
 		title : '联系方式',
 		align : 'center',
 		valign : 'middle',
-		width : 200
+		width : 500
 	}, {
-		field : 'antime',
-		title : '预约时间',
+		field : 'hid',
+		title : '房源编码',
 		align : 'center',
 		valign : 'middle',
-		width : 200
+		width : 500
 	}, {
-		field : 'ctime',
-		title : '处理时间',
+		field : 'cid',
+		title : '合同编码',
 		align : 'center',
 		valign : 'middle',
-		width : 200
+		width : 500
 	}, {
-		field : 'isConnect',
-		title : '是否联系',
+		title : "操作",
 		align : 'center',
 		valign : 'middle',
-		cellStyle : function(value, row, index) {
-			if (value === '未联系') {
-				return {
-					css : {
-						"background-color" : "gold"
-					}
-				};
-			} else {
-				return {
-					css : {
-
-					}
-				};
+		width : 200,
+		formatter : function(value, row, index) {
+			if(row.cid === null || row.cid === ''){
+				return '<button class="btn btn-warning btn-sm sign" onclick="sign(\''
+				+ row.oid
+				+ ","
+				+ row.oname
+				+ ","
+				+ row.otele
+				+ ","
+				+ row.hid
+				+ '\')">生成合同</button>';
+			}else{
+				return "";
 			}
-		},
-		width : 200
-	}, {
-		field : 'isSuccess',
-		title : '结果',
-		align : 'center',
-		valign : 'middle',
-		cellStyle : function(value, row, index) {
-			if (value === '未签约') {
-				return {
-					css : {
-						"background-color" : "red"
-					}
-				};
-			} else {
-				return {
-					css : {
-
-					}
-				};
-			}
-		},
-		width : 200
-	}, {
-		field : 'admin.aname',
-		title : '操作人',
-		align : 'center',
-		valign : 'middle',
-		width : 200
-	}, {
-		field : 'reason',
-		title : '原因',
-		align : 'center',
-		valign : 'middle',
-		width : 200
-	} ],
+		}
+	}],
 	onLoadSuccess : function() { // 加载成功时执行
 		console.info("加载成功");
 	},
@@ -130,3 +92,12 @@ $("#table").bootstrapTable({
 		console.info("加载数据失败");
 	}
 });
+//生成合同
+function sign(row){
+	$(".sign").attr("data-toggle", "modal").attr("data-target", "#myModal1");
+	row = row.split(",");
+	$("#form1 #oid").val(row[0]);
+	$("#form1 #cname").val(row[1]);
+	$("#form1 #ctele").val(row[2]);
+	$("#form1 #hid").val(row[3]);
+}

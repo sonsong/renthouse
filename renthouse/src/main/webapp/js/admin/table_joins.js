@@ -33,13 +33,9 @@ $("#table")
 							sort : params.sort,
 							// 排序规则
 							sortOrder : params.order,
-							antime : $.trim($("#antime").val()),
-							atime : $.trim($("#atime").val()),
-							hid : $.trim($("#hid").val()),
-							uid : $.trim($("#uid").val()),
-							aname : $.trim($("#aname").val()),
-							atele : $.trim($("#atele").val()),
-							uname : $.trim($("#uname").val()),
+							atime : $.trim($("#jtime").val()),
+							aname : $.trim($("#jname").val()),
+							atele : $.trim($("#jtele").val()),
 						}
 					},
 					// 要排序的字段
@@ -88,18 +84,22 @@ $("#table")
 								valign : 'middle',
 								width : 400,
 								formatter : function(value, row, index) {
-									return '<button class="btn btn-warning btn-sm sign" onclick="sign(\''
+									return '<button class="btn btn-warning btn-sm addHouse" onclick="addHouse(\''
 											+ row.jid
 											+ ','
 											+ row.jname
 											+ ','
 											+ row.jtele
-											+ '\')">生成合同</button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm cancel" onclick="cancel(\''
+											+ ','
+											+ row.jtime
+											+ '\')">录入房源信息</button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm cancel" onclick="cancel(\''
 											+ row.jid
 											+ ','
 											+ row.jname
 											+ ','
 											+ row.jtele
+											+ ','
+											+ row.jtime
 											+ '\')">取消预约</button>';
 								}
 							} ],
@@ -111,22 +111,23 @@ $("#table")
 					}
 				});
 
-// 签约
-function sign(aid) {
-	$(".sign").attr("data-toggle", "modal").attr("data-target", "#myModal2");
-	/*var params = aid.split(",");
-	$("#appid").val(params[0]);
+// 录入房源信息
+function addHouse(aid) {
+	$(".addHouse").attr("data-toggle", "modal").attr("data-target", "#myModal2");
+	var params = aid.split(",");
+	$("#form1 #jid").val(params[0]);
 	// 预约人
-	$("#jname").val(params[1]);
+	$("#form1 #jname").val(params[1]);
 	// 联系方式
-	$("#jtele").val(params[3]);*/
+	$("#form1 #jtele").val(params[2]);
+	$("#form1 #jtime").val(params[3]);
 }
 // 取消预约
-function cancel(aid) {
+function cancel(jid) {
 	$(".cancel").attr("data-toggle", "modal").attr("data-target", "#myModal1");
-	/*var params = aid.split(",");
-	$("#aaid").val(params[0]);
-	$("#naame").val(params[1]);
-	$("#aatele").val(params[2]);
-	$("#aantime").val(params[3]);*/
+	var params = jid.split(",");
+	$("#form #jid").val(params[0]);
+	$("#form #jname").val(params[1]);
+	$("#form #jtele").val(params[2]);
+	$("#form #jtime").val(params[3]);
 }

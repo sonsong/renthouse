@@ -69,14 +69,19 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="aname" class="col-sm-2 control-label">操作人:</label>
+								<label for="rtype" class="col-sm-2 control-label">预约类型:</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="aname" name="aname" value=""> 
+									<select name="rtype" id="rtype" class="form-control">
+										<option value="">请选择预约类型</option>
+										<option value="1">业主加盟</option>
+										<option value="0">看房预约</option>
+									</select> 
 								</div>
 								
 								<label for="result" class="col-sm-1 control-label">签约:</label>
 								<div class="col-sm-2">
 									<select name="result" id="result" class="form-control">
+										<option value="">请选择签约状态</option>
 										<option value="1">已签约</option>
 										<option value="0">未签约</option>
 									</select> 
@@ -84,6 +89,7 @@
 								<label for="state" class="col-sm-1 control-label">联系:</label>
 								<div class="col-sm-2">
 									<select name="state" id="state" class="form-control">
+										<option value="">请选择联系状态</option>
 										<option value="1">已联系</option>
 										<option value="0">未联系</option>
 									</select> 
@@ -96,9 +102,6 @@
             		</div>
             	</div>
             	<br>
-				<div>
-					<h3>看房预约：</h3>
-				</div>
 				<div id="table"></div>
 				<jsp:include page="/WEB-INF/jsps/adminjsps/footer.jsp" />
 			</div>

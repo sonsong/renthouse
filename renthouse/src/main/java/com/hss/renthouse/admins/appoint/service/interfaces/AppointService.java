@@ -32,7 +32,7 @@ public interface AppointService {
 	 * @param appointResult
 	 * @param aid 正在取消的预约
 	 */
-	void cancelByAid(AppointResult appointResult, String aid);
+	void cancelAppiontByAid(AppointResult appointResult, String aid);
 
 	/**
 	 * 查询所有预约结果
@@ -40,5 +40,12 @@ public interface AppointService {
 	 * @return
 	 */
 	BPageBean<AppointResult> queryAllAppointResults(BQueryVo vo);
+
+	/**
+	 * 取消业主加盟预约
+	 * @param appointResult
+	 * @param aid
+	 */
+	void cancelJoinAppoint(AppointResult appointResult, String aid);
 
 }

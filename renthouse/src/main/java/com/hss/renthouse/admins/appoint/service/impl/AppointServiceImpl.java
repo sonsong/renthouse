@@ -57,7 +57,7 @@ public class AppointServiceImpl implements AppointService {
 
 	@Override
 	@Transactional
-	public void cancelByAid(AppointResult appointResult, String aid) {
+	public void cancelAppiontByAid(AppointResult appointResult, String aid) {
 		//设置编码
 		appointResult.setRid(UUIDUtil.getUuid());
 		//设置结果
@@ -72,6 +72,8 @@ public class AppointServiceImpl implements AppointService {
 			throw new RuntimeException("删除预约单[" + aid + "]失败");
 		}
 		
+		//设置结果类型
+		appointResult.setRtype(0);
 		//新增预约结果
 		count = appointMapper.addAppointResult(appointResult);
 		if(count != 1){
@@ -90,5 +92,31 @@ public class AppointServiceImpl implements AppointService {
 		pb.setTotal(total);
 		pb.setRows(appointResult);
 		return pb;
+	}
+
+	@Override
+	@Transactional
+	public void cancelJoinAppoint(AppointResult appointResult, String jid) {
+		//设置编码
+		appointResult.setRid(UUIDUtil.getUuid());
+		//设置结果
+		appointResult.setResult(0);
+		//设置操作时间
+		String date = DateUtil.getNowTime();
+		appointResult.setCtime(date);
+		
+		//删除加盟预约单
+		int count = appointMapper.delJoinAppointByAid(jid);
+		if(count != 1){
+			throw new RuntimeException("删除预约单[" + jid + "]失败");
+		}
+		
+		//设置结果类型
+		appointResult.setRtype(1);
+		//新增预约结果
+		count = appointMapper.addAppointResult(appointResult);
+		if(count != 1){
+			throw new RuntimeException("增加预约结果失败");
+		}
 	}
 }

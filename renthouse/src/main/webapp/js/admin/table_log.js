@@ -44,7 +44,7 @@ $("#table").bootstrapTable({
 	// 要排序的字段
 	sortName : 'loperateDate',
 	// 排序规则
-	sortOrder : 'desc',
+	sortOrder : 'asc',
 	columns : [ {
 		field : 'ltype',
 		title : '类型',

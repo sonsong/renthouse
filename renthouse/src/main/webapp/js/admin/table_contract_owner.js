@@ -3,7 +3,7 @@ $("#table")
 		.bootstrapTable(
 				{
 					// 获取表格数据的url
-					url : "/admin/queryAllContract.action",
+					url : "/admin/queryAllOwnerContract.action",
 					toolbar : '#toolbar',
 					// 设置为 false 禁用 AJAX 数据缓存， 默认为true
 					cache : false,
@@ -33,10 +33,8 @@ $("#table")
 							sort : params.sort,
 							// 排序规则
 							sortOrder : params.order,
-							cstime : $.trim($("#cstime").val()),
 							cname : $.trim($("#cname").val()),
 							ctele : $.trim($("#ctele").val()),
-							uid : $.trim($("#uid").val()),
 							hid : $.trim($("#hid").val()),
 							cid : $.trim($("#cid").val())
 						}
@@ -62,7 +60,7 @@ $("#table")
 							},
 							{
 								field : 'cstime',
-								title : '入住时间',
+								title : '签约时间',
 								align : 'center',
 								valign : 'middle',
 								width : 200
@@ -77,34 +75,6 @@ $("#table")
 							{
 								field : 'crtime',
 								title : '租期',
-								align : 'center',
-								valign : 'middle',
-								width : 200
-							},
-							{
-								field : 'payType',
-								title : '付款方式',
-								align : 'center',
-								valign : 'middle',
-								width : 200
-							},
-							{
-								field : 'cpaytime',
-								title : '付款时间',
-								align : 'center',
-								valign : 'middle',
-								width : 200
-							},
-							{
-								field : 'cashType',
-								title : '押金方式',
-								align : 'center',
-								valign : 'middle',
-								width : 200
-							},
-							{
-								field : 'ccash',
-								title : '押金',
 								align : 'center',
 								valign : 'middle',
 								width : 200
@@ -154,23 +124,11 @@ $("#table")
 											+ ','
 											+ row.cetime
 											+ ','
-											+ row.payType
-											+ ','
-											+ row.cpaytime
-											+ ','
-											+ row.cashType
-											+ ','
-											+ row.ccash
-											+ ','
 											+ row.cmoney
 											+ ','
 											+ row.crtime
-											+ ','
-											+ row.uid
 											+ '\')"></button>&nbsp;&nbsp;<button class="btn btn-danger btn-sm glyphicon glyphicon-remove del" onclick="del(\''
 											+ row.cid
-											+ ','
-											+ row.uid
 											+ '\')"></button>';
 								}
 							} ],
@@ -185,13 +143,11 @@ $("#table")
 function del(cid) {
 	var obj = cid.split(",");
 	cid = obj[0];
-	var uid = obj[1];
-	if(confirm("确定删除该合同嘛？")){
+	if(confirm("确定要删除该房东合同嘛？")){
 		$.ajax({
-			url : "/admin/delContractByCid.action",// 要请求的方法
+			url : "/admin/delOwnerContractByCid.action",// 要请求的方法
 			data : {
 				cid : cid,
-				uid : uid
 			},// 给服务器的参数
 			type : "GET",
 			dataType : "json",
@@ -205,26 +161,13 @@ function del(cid) {
 
 // 修改合同
 function update(row) {
-	$(".update").attr("data-toggle", "modal").attr("data-target", "#myModal2");
+	$(".update").attr("data-toggle", "modal").attr("data-target", "#myModal1");
 	var obj = row.split(",");
-	$("#conid").val(obj[0]);
-	$("#name").val(obj[1]);
-	$("#tele").val(obj[2]);
-	$("#time").val(obj[3]);
-	$("#cetime").val(obj[4]);
-	if (obj[5] === '月付') {
-		$("#select1 option[value = '" + 0 + "']").attr("selected", "selected");
-	} else {
-		$("#select1 option[value = '" + 1 + "']").attr("selected", "selected");
-	}
-	$("#cpaytime").val(obj[6]);
-	if (obj[7] === '押一付一') {
-		$("#select2 option[value = '" + 0 + "']").attr("selected", "selected");
-	} else {
-		$("#select2 option[value = '" + 1 + "']").attr("selected", "selected");
-	}
-	$("#ccash").val(obj[8]);
-	$("#cmoney").val(obj[9]);
-	$("#crtime").val(obj[10]);
-	$("#id").val(obj[11]);
+	$("#form1 #cid").val(obj[0]);
+	$("#form1 #cname").val(obj[1]);
+	$("#form1 #ctele").val(obj[2]);
+	$("#form1 #cstime").val(obj[3]);
+	$("#form1 #cetime").val(obj[4]);
+	$("#form1 #cmoney").val(obj[5]);
+	$("#form1 #crtime").val(obj[6]);
 }
