@@ -2,19 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hss.renthouse.admins.contract.dao.ContractMapper">
 
+	<select id="queryEndContractsTotal" resultType="integer">
+		select count(*)
+		from t_contract where DATE_FORMAT(cetime,'%Y-%m') =
+		DATE_FORMAT(now(),'%Y-%m')
+	</select>
+	<select id="queryEndContracts" resultType="contract">
+		select cid, cname, ctele, cstime, cetime, crtime
+		from t_contract where DATE_FORMAT(cetime,'%Y-%m') =
+		DATE_FORMAT(now(),'%Y-%m')
+	</select>
 	<!-- 删除指定的房东合同 -->
 	<delete id="delOwnerConByCid" parameterType="string">
-		delete from t_contract_owner where cid = #{cid}
+		delete from
+		t_contract_owner where cid = #{cid}
 	</delete>
-	
+
 	<!-- 删除指定的合同 -->
 	<delete id="delContractBycid" parameterType="string">
-		delete from t_contract where cid = #{cid}
+		delete from
+		t_contract where cid = #{cid}
 	</delete>
 	<!-- 修改房东合同 -->
 	<update id="updateOwnerContract" parameterType="ownerContract">
-		update t_contract_owner set
-		cname = #{cname}, ctele = ${ctele}, cetime = #{cetime},
+		update
+		t_contract_owner set
+		cname = #{cname}, ctele = ${ctele}, cetime =
+		#{cetime},
 		crtime = #{crtime}, cmoney = #{cmoney}
 		where cid = #{cid}
 	</update>
@@ -30,7 +44,7 @@
 		resultType="contract">
 		select * from t_contract where uid = #{uid}
 	</select>
-		<!-- 查询所有合同 -->
+	<!-- 查询所有合同 -->
 	<resultMap type="ownerContract" id="getOwnerContractsResultMap">
 		<id column="cid" property="cid" />
 		<result column="cname" property="cname" />
@@ -51,12 +65,13 @@
 	</resultMap>
 	<select id="queryAllOwnerContracts" parameterType="bQueryVo"
 		resultMap="getOwnerContractsResultMap">
-		select c.cid, c.cname, c.ctele, c.cstime, 
+		select c.cid, c.cname, c.ctele, c.cstime,
 		c.cetime, c.crtime, c.cmoney, h.hid,
 		h.hposition, h.hprice, ad.aid, ad.aname
 		from t_contract_owner c
 		inner join t_house h on h.hid = c.hid
-		inner join t_admin ad on ad.aid = c.adid
+		inner join
+		t_admin ad on ad.aid = c.adid
 		<where>
 			<if test="cstime != null and cstime != '' ">
 				and c.cstime &lt; #{cstime}
@@ -85,10 +100,11 @@
 	<!-- 查询房东合同总数 -->
 	<select id="queryOwnerContractsTotal" resultType="integer">
 		select count(*) from
-		t_contract_owner c 
+		t_contract_owner c
 		inner join t_house h on h.hid = c.hid
 		inner join t_admin
-		ad on ad.aid = c.adid
+		ad on ad.aid =
+		c.adid
 		<where>
 			<if test="cname != null and cname != '' ">
 				and c.cname = #{cname}
@@ -209,11 +225,14 @@
 	</select>
 	<!-- 新增房东合同 -->
 	<insert id="addOwnerContract" parameterType="ownerContract">
-		insert into t_contract_owner
+		insert into
+		t_contract_owner
 		values
 		(
-		#{cid}, #{cname}, #{ctele}, #{ccompany}, #{ccompanytele},
-		#{cstime}, #{cetime}, #{cmoney},#{crtime}, #{adid}, #{hid}
+		#{cid}, #{cname}, #{ctele}, #{ccompany},
+		#{ccompanytele},
+		#{cstime}, #{cetime}, #{cmoney},#{crtime}, #{adid},
+		#{hid}
 		)
 	</insert>
 	<!-- 生成合同 -->

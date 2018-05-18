@@ -89,4 +89,18 @@ public interface ContractMapper {
 	 */
 	public int delOwnerConByCid(String cid);
 
+	/**
+	 * 查询即将到期合同总数
+	 * @param vo
+	 * @return
+	 */
+	public Integer queryEndContractsTotal(BQueryVo vo);
+
+	/**
+	 * 查询所有到期合同
+	 * @param vo
+	 * @return
+	 */
+	public List<Contract> queryEndContracts(BQueryVo vo);
+
 }

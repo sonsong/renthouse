@@ -78,7 +78,7 @@ public class AppointController {
 				for (int i= 0; i < picFile.length; i++) {
 					// 更换名字
 					String newName = UUIDUtil.getUuid() + "_" + picFile[i].getOriginalFilename();
-					String savePath = "C:\\img\\";
+					String savePath = "D:\\img\\";
 					// 保存图片前先判断保存图片的文件夹是否存在
 					File f = new File(savePath);
 					if (!f.exists()) {

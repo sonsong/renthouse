@@ -26,7 +26,7 @@
 <style>
 .curtime {
   color: white;
-  margin-right: 630px;
+  margin-right:330px;
   font-size: 18px;
 }
 
@@ -336,13 +336,13 @@ $(function() {
   //时间选择器
   $.datetimepicker.setLocale("ch");
   $("#cstime").datetimepicker({
-    format: "Y-m-d h:i"
+    format: "Y-m-d H:i"
   });
   $("#cetime").datetimepicker({
-    format: "Y-m-d h:i"
+    format: "Y-m-d H:i"
   });
   $("#antime").datetimepicker({
-    format: "Y-m-d h:i"
+    format: "Y-m-d H:i"
   });
   //时间
   setInterval(

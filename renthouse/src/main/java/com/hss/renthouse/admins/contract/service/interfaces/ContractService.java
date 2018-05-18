@@ -73,4 +73,11 @@ public interface ContractService {
 	 */
 	void delOwnerContractByCid(OwnerContract con);
 
+	/**
+	 * 查询所有的即将到期合同
+	 * @param vo
+	 * @return
+	 */
+	BPageBean<Contract> queryEndContract(BQueryVo vo);
+
 }

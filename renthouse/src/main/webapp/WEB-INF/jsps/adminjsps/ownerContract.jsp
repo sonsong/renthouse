@@ -26,7 +26,7 @@
 <style>
 .curtime {
   color: white;
-  margin-right: 630px;
+  margin-right: 330px;
   font-size: 18px;
 }
 
@@ -230,11 +230,6 @@
 	<script>
 
 $(function() {
-  //时间选择器
-  /* $.datetimepicker.setLocale("ch");
-  $("#cstime").datetimepicker({
-    format: "Y-m-d H:i"
-  }); */
   //时间
   setInterval(
     "curtime.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt (new Date().getDay());",

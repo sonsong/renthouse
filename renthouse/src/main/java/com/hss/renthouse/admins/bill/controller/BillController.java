@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import com.hss.renthouse.admins.Log.annotation.SystemControllerAnnotation;
 import com.hss.renthouse.admins.admin.entity.Admin;
 import com.hss.renthouse.admins.bill.entity.Bill;
+import com.hss.renthouse.admins.bill.entity.RenterBill;
 import com.hss.renthouse.admins.bill.service.interfaces.BillService;
 import com.hss.renthouse.utils.BPageBean;
 import com.hss.renthouse.utils.BQueryVo;
@@ -33,6 +34,17 @@ public class BillController {
 	@Autowired
 	private BillService billService;
 
+	/**
+	 * 查询账单
+	 * 
+	 * @param vo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/queryUnPayRenters.action")
+	public BPageBean<RenterBill> queryUnPayRenters(BQueryVo vo) {
+		return billService.queryUnPayRenters(vo);
+	}
 	/**
 	 * 修改账单
 	 * @param bill

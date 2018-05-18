@@ -3,6 +3,7 @@ package com.hss.renthouse.admins.bill.service.interfaces;
 import java.util.List;
 
 import com.hss.renthouse.admins.bill.entity.Bill;
+import com.hss.renthouse.admins.bill.entity.RenterBill;
 import com.hss.renthouse.utils.BPageBean;
 import com.hss.renthouse.utils.BQueryVo;
 
@@ -53,5 +54,12 @@ public interface BillService {
 	 * @param bill
 	 */
 	void updateBill(Bill bill);
+
+	/**
+	 * 查询本月未支付账单记录
+	 * @param vo
+	 * @return
+	 */
+	BPageBean<RenterBill> queryUnPayRenters(BQueryVo vo);
 
 }

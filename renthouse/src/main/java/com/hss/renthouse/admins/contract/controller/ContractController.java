@@ -39,6 +39,17 @@ public class ContractController {
 	private HouseService houseService;
 
 	/**
+	 * 查询所有的即将到期合同
+	 * 
+	 * @param vo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/queryEndContract.action")
+	public BPageBean<Contract> queryEndContract(BQueryVo vo) {
+		return contractService.queryEndContract(vo);
+	}
+	/**
 	 * 生成房东合同
 	 * @param con
 	 * @param model

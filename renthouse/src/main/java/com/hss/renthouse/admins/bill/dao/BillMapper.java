@@ -3,6 +3,7 @@ package com.hss.renthouse.admins.bill.dao;
 import java.util.List;
 
 import com.hss.renthouse.admins.bill.entity.Bill;
+import com.hss.renthouse.admins.bill.entity.RenterBill;
 import com.hss.renthouse.utils.BQueryVo;
 
 /**
@@ -81,5 +82,19 @@ public interface BillMapper {
 	 * @return
 	 */
 	int updateBill(Bill bill);
+
+	/**
+	 * 查询本月未支付人数
+	 * @param vo
+	 * @return
+	 */
+	Integer queryRenterBillsTotal(BQueryVo vo);
+
+	/**
+	 * 查询所有未支付的记录
+	 * @param vo
+	 * @return
+	 */
+	List<RenterBill> queryUnPayRenters(BQueryVo vo);
 
 }

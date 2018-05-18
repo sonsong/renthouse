@@ -14,6 +14,12 @@
 		delete from t_rental where cid = #{cid}
 	</delete>
 	<!-- 修改租金信息 -->
+	<update id="updateRentalByMid" parameterType="rental">
+		update t_rental set
+		mptime = #{mptime}, mtime = #{mtime}, mntime = #{mntime}
+		where mid = #{mid}
+	</update>
+	<!-- 修改租金信息 -->
 	<update id="updateRental" parameterType="rental">
 		update t_rental set
 		mprice = #{mprice}, mstime = #{mstime}, mname = #{mname}, mtele =

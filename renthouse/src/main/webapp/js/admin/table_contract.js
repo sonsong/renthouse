@@ -187,19 +187,7 @@ function del(cid) {
 	cid = obj[0];
 	var uid = obj[1];
 	if(confirm("确定删除该合同嘛？")){
-		$.ajax({
-			url : "/admin/delContractByCid.action",// 要请求的方法
-			data : {
-				cid : cid,
-				uid : uid
-			},// 给服务器的参数
-			type : "GET",
-			dataType : "json",
-			async : false,
-			cache : false,
-			success : function(result) {
-			}
-		})
+		$.post("/admin/delContractByCid.action", {cid : cid, uid : uid});
 	}
 }
 

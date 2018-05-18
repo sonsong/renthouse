@@ -264,4 +264,17 @@ public class ContractServiceImpl implements ContractService {
 			ownerMapper.delOwnerByCid(con.getCid());
 		}
 	}
+
+	@Override
+	public BPageBean<Contract> queryEndContract(BQueryVo vo) {
+		// 得到合同的总记录数
+		Integer total = contractMapper.queryEndContractsTotal(vo);
+		// 按条件查询用户
+		List<Contract> cons = contractMapper.queryEndContracts(vo);
+
+		BPageBean<Contract> pb = new BPageBean<>();
+		pb.setTotal(total);
+		pb.setRows(cons);
+		return pb;
+	}
 }

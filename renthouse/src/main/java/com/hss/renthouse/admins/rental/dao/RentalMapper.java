@@ -51,4 +51,10 @@ public interface RentalMapper {
 	 */
 	Rental queryRentalByBId(String bid);
 
+	/**
+	 * 修改租金的支付状态
+	 * @param rental
+	 */
+	void updateRentalByMid(Rental rental);
+
 }
