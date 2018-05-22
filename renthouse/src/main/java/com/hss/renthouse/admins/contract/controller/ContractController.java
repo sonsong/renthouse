@@ -20,6 +20,7 @@ import com.hss.renthouse.user.house.entity.House;
 import com.hss.renthouse.user.house.service.interfaces.HouseService;
 import com.hss.renthouse.utils.BPageBean;
 import com.hss.renthouse.utils.BQueryVo;
+import com.hss.renthouse.utils.Message;
 
 /**
  * 合同controller层
@@ -111,20 +112,23 @@ public class ContractController {
 	 */
 	@RequestMapping(value = "/delContractByCid.action")
 	@SystemControllerAnnotation(value = "删除合同")
-	public String delContractByCid(Contract con, RedirectAttributesModelMap model, HttpSession session) {
+	public Message delContractByCid(Contract con, RedirectAttributesModelMap model, HttpSession session) {
+		
+		Message mess = null;
 		String msg = "";
 		Admin admin = (Admin) session.getAttribute("admin");
 
 		try {
 			contractService.delContractByCid(con);
 			msg = "删除合同成功";
+			mess = new Message(msg, "true");
 		} catch (Exception e) {
 			msg = e.getMessage();
+			mess = new Message(msg, "false");
 		} 
 		
-		model.addFlashAttribute("msg", msg);
 		logger.info("{}" + msg + "!", admin.getAname());
-		return "redirect:/admin/skipRenterContractPage.action";
+		return mess;
 	}
 
 	/**

@@ -45,6 +45,7 @@ public class BillController {
 	public BPageBean<RenterBill> queryUnPayRenters(BQueryVo vo) {
 		return billService.queryUnPayRenters(vo);
 	}
+	
 	/**
 	 * 修改账单
 	 * @param bill
@@ -69,6 +70,7 @@ public class BillController {
 		logger.info("{}" + msg + "!", admin.getAname());
 		return "redirect:/admin/skipBillManagePage.action";
 	}
+	
 	/**
 	 * 删除指定的账单
 	 * 
@@ -90,7 +92,7 @@ public class BillController {
 		}
 		model.addFlashAttribute("msg", msg);
 		logger.info("{}" + msg + "!", admin.getAname());
-		return "redirect:/admin/skipBillManagePage.action";
+		return "redirect:admin/skipBillManagePage.action";
 	}
 
 	/**

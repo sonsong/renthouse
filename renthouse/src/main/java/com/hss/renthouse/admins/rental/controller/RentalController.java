@@ -45,7 +45,6 @@ public class RentalController {
 	 *            合同编码
 	 * @return
 	 */
-
 	@RequestMapping(value = "/sendBill.action")
 	@SystemControllerAnnotation(value = "发送账单")
 	public String sendBill(String mprice, String uid, String cid, RedirectAttributesModelMap model,
